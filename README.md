@@ -2,13 +2,6 @@
   <img src="img/framezilla_green.png" alt="Framezilla"/>
 </p>
 
-[![Build Status](https://travis-ci.org/Otbivnoe/Framezilla.svg?branch=master)](https://travis-ci.org/Otbivnoe/Framezilla)
-[![Version](https://img.shields.io/cocoapods/v/Framezilla.svg?style=flat)](http://cocoadocs.org/docsets/Framezilla)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Platform](https://img.shields.io/cocoapods/p/Framezilla.svg?style=flat)](http://cocoadocs.org/docsets/Framezilla)
-![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg)
-[![License](https://img.shields.io/cocoapods/l/Framezilla.svg?style=flat)](http://cocoadocs.org/docsets/Framezilla)
-
 **Everyone wants to see smooth scrolling, that tableview or collectionview scrolls without any lags and it's right choice. But the constraints do not give it for us. Therefore, we have to choose manual calculation frames, but sometimes, when cell has a complex structure, code has not elegant, beautiful structure.**
 
 **So, it's library for those, who want to see smooth scrolling with elegant code under the hood!**
@@ -18,26 +11,6 @@
 **Framezilla** is the child of [Framer](https://github.com/Otbivnoe/Framer) (analog of great layout framework which wraps manually calculation frames with a nice-chaining syntax), but only for Swift.
 
 # Installation :fire:
-
-### CocoaPods
-
-[CocoaPods](http://cocoapods.org) is a dependency manager for Swift and Objective-C Cocoa projects. It has over eighteen thousand libraries and can help you scale your projects elegantly. You can install it with the following command:
-
-```bash
-$ sudo gem install cocoapods
-```
-
-To integrate Framezilla, simply add the following line to your `Podfile`:
-
-```ruby
-pod "Framezilla"
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
 
 ### Carthage
 
@@ -52,7 +25,7 @@ $ brew install carthage
 To integrate Framezilla into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "Otbivnoe/Framezilla"
+github "rosberry/Framezilla"
 ```
 
 Run `carthage update` to build the framework and drag the built `Framezilla.framework` into your Xcode project.
