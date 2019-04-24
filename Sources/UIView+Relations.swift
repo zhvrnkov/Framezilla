@@ -22,7 +22,7 @@ public final class RelationView<Relation> {
 
     unowned var view: UIView
     var relationType: RelationType
-    
+
     init(view: UIView, relation: RelationType) {
         self.view = view
         self.relationType = relation
@@ -50,13 +50,13 @@ enum RelationType {
     case safeArea(SafeAreaType)
 }
 
-public struct SafeAreaRelationCollection {
+public final class SafeAreaRelationCollection {
     unowned var view: UIView
 
-    lazy var top = RelationView<VerticalRelation>(view: view, relation: .safeArea(.top))
-    lazy var left = RelationView<VerticalRelation>(view: view, relation: .safeArea(.left))
-    lazy var right = RelationView<VerticalRelation>(view: view, relation: .safeArea(.right))
-    lazy var bottom = RelationView<VerticalRelation>(view: view, relation: .safeArea(.bottom))
+    public lazy var top: RelationView<VerticalRelation> = .init(view: view, relation: .safeArea(.top))
+    public lazy var left: RelationView<HorizontalRelation> = .init(view: view, relation: .safeArea(.left))
+    public lazy var right: RelationView<HorizontalRelation> = .init(view: view, relation: .safeArea(.right))
+    public lazy var bottom: RelationView<VerticalRelation> = .init(view: view, relation: .safeArea(.bottom))
 
     init(view: UIView) {
         self.view = view
@@ -64,58 +64,58 @@ public struct SafeAreaRelationCollection {
 }
 
 public extension UIView {
-    
+
     /// Width relation of current view.
-    
-    public var nui_width: RelationView<SizeRelation> {
+
+    var nui_width: RelationView<SizeRelation> {
         return RelationView(view: self, relation: .width)
     }
-    
+
     /// Height relation of current view.
-    
-    public var nui_height: RelationView<SizeRelation> {
+
+    var nui_height: RelationView<SizeRelation> {
         return RelationView<SizeRelation>(view: self, relation: .height)
     }
-    
+
     /// Left relation of current view.
 
-    public var nui_left: RelationView<HorizontalRelation> {
+    var nui_left: RelationView<HorizontalRelation> {
         return RelationView<HorizontalRelation>(view: self, relation: .left)
     }
-    
+
     /// Right relation of current view.
-    
-    public var nui_right: RelationView<HorizontalRelation> {
+
+    var nui_right: RelationView<HorizontalRelation> {
         return RelationView<HorizontalRelation>(view: self, relation: .right)
     }
-    
+
     /// Top relation of current view.
-    
-    public var nui_top: RelationView<VerticalRelation> {
+
+    var nui_top: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: self, relation: .top)
     }
-    
+
     /// Bottom relation of current view.
-    
-    public var nui_bottom: RelationView<VerticalRelation> {
+
+    var nui_bottom: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: self, relation: .bottom)
     }
-    
+
     /// CenterX relation of current view.
-    
-    public var nui_centerX: RelationView<HorizontalRelation> {
+
+    var nui_centerX: RelationView<HorizontalRelation> {
         return RelationView<HorizontalRelation>(view: self, relation: .centerX)
     }
-    
+
     /// CenterY relation of current view.
-    
-    public var nui_centerY: RelationView<VerticalRelation> {
+
+    var nui_centerY: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: self, relation: .centerY)
     }
 
     /// Safe area
 
-    public var nui_safeArea: SafeAreaRelationCollection {
+    var nui_safeArea: SafeAreaRelationCollection {
         return SafeAreaRelationCollection(view: self)
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 fileprivate extension UIView {
-    
+
     func contains(_ view: UIView) -> Bool {
         if subviews.contains(view) {
             return true
@@ -85,7 +85,7 @@ extension Maker {
             return 0
         }
     }
-    
+
     func relationSize(view: UIView, for type: RelationType) -> CGFloat {
         switch type {
         case .width:  return view.bounds.width
@@ -96,7 +96,7 @@ extension Maker {
 }
 
 extension CGRect {
-    
+
     mutating func setValue(_ value: CGFloat, for type: RelationType) {
         var frame = self
         switch type {
