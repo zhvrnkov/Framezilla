@@ -39,7 +39,7 @@ class MakerSafeAreaTests: XCTestCase {
         viewController.view.addSubview(view)
         
         view.configureFrame { maker in
-            maker.top(to: nui_safeArea)
+            maker.top(to: viewController.view.nui_safeArea.top)
             maker.left()
             maker.size(width: 20, height: 20)
         }
@@ -62,7 +62,7 @@ class MakerSafeAreaTests: XCTestCase {
         
         let inset: CGFloat = 5
         view.configureFrame { maker in
-            maker.top(to: nui_safeArea, inset: inset)
+            maker.top(to: viewController.view.nui_safeArea.top, inset: inset)
             maker.left()
             maker.size(width: 20, height: 20)
         }
@@ -87,7 +87,7 @@ class MakerSafeAreaTests: XCTestCase {
         
         view.configureFrame { maker in
             maker.top()
-            maker.left(to: nui_safeArea)
+            maker.left(to: viewController.view.nui_safeArea.left)
             maker.size(width: 20, height: 20)
         }
         
@@ -110,7 +110,7 @@ class MakerSafeAreaTests: XCTestCase {
         let inset: CGFloat = 5
         view.configureFrame { maker in
             maker.top()
-            maker.left(to: nui_safeArea, inset: inset)
+            maker.left(to: viewController.view.nui_safeArea.left, inset: inset)
             maker.size(width: 20, height: 20)
         }
         
@@ -139,7 +139,7 @@ class MakerSafeAreaTests: XCTestCase {
         viewController.view.addSubview(view)
         
         view.configureFrame { maker in
-            maker.bottom(to: nui_safeArea)
+            maker.bottom(to: viewController.view.nui_safeArea.bottom)
             maker.left()
             maker.size(width: 20, height: 20)
         }
@@ -168,7 +168,7 @@ class MakerSafeAreaTests: XCTestCase {
         
         let inset: CGFloat = 5
         view.configureFrame { maker in
-            maker.bottom(to: nui_safeArea, inset: inset)
+            maker.bottom(to: viewController.view.nui_safeArea.bottom, inset: inset)
             maker.left()
             maker.size(width: 20, height: 20)
         }
@@ -198,7 +198,7 @@ class MakerSafeAreaTests: XCTestCase {
         viewController.view.addSubview(view)
         
         view.configureFrame { maker in
-            maker.right(to: nui_safeArea)
+            maker.right(to: viewController.view.nui_safeArea.right)
             maker.bottom()
             maker.size(width: 20, height: 20)
         }
@@ -227,7 +227,7 @@ class MakerSafeAreaTests: XCTestCase {
         
         let inset: CGFloat = 5
         view.configureFrame { maker in
-            maker.right(to: nui_safeArea, inset: inset)
+            maker.right(to: viewController.view.nui_safeArea.right, inset: inset)
             maker.bottom()
             maker.size(width: 20, height: 20)
         }
