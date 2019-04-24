@@ -50,7 +50,6 @@
 		11FB41421D844F8F00700A40 /* MakerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakerHelper.swift; sourceTree = "<group>"; };
 		11FB41431D844F8F00700A40 /* UIView+Installer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Installer.swift"; sourceTree = "<group>"; };
 		11FB41441D844F8F00700A40 /* UIView+Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Relations.swift"; sourceTree = "<group>"; };
-		11FB414A1D844FFA00700A40 /* Framezilla.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Framezilla.podspec; sourceTree = "<group>"; };
 		11FB414B1D844FFA00700A40 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		11FB414C1D844FFA00700A40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		841192DC1FF205DC00AB255D /* ContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTests.swift; sourceTree = "<group>"; };
@@ -93,7 +92,6 @@
 		11FB41261D844CD800700A40 = {
 			isa = PBXGroup;
 			children = (
-				11FB414A1D844FFA00700A40 /* Framezilla.podspec */,
 				11FB414B1D844FFA00700A40 /* LICENSE */,
 				11FB414C1D844FFA00700A40 /* README.md */,
 				11FB413B1D844D5A00700A40 /* Sources */,
