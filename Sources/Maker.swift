@@ -265,6 +265,7 @@ public final class Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
+    @available(*, deprecated, message: "Use `left(to: view.nui_safeArea.left, inset: ...)` instead")
     @discardableResult public func left(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
         if #available(iOS 11.0, *) {
             guard let superview = view.superview else {
@@ -329,6 +330,7 @@ public final class Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
+    @available(*, deprecated, message: "Use `top(to: view.nui_safeArea.top, inset: ...)` instead")
     @discardableResult public func top(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
         if #available(iOS 11.0, *) {
             guard let superview = view.superview else {
@@ -592,6 +594,7 @@ public final class Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
+    @available(*, deprecated, message: "Use `bottom(to: view.nui_safeArea.bottom, inset: ...)` instead")
     @discardableResult public func bottom(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
         if #available(iOS 11.0, *) {
             guard let superview = view.superview else {
@@ -662,6 +665,7 @@ public final class Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
+    @available(*, deprecated, message: "Use `right(to: view.nui_safeArea.right, inset: ...)` instead")
     @discardableResult public func right(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
         if #available(iOS 11.0, *) {
             guard let superview = view.superview else {

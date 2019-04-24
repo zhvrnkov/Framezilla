@@ -14,7 +14,7 @@ public protocol HorizontalRelation {}
 
 public protocol VerticalRelation {}
 
-/// Phantom type for `nui_height`, `nui_widht` relations.
+/// Phantom type for `nui_height`, `nui_width` relations.
 
 public protocol SizeRelation {}
 
@@ -29,6 +29,13 @@ public final class RelationView<Relation> {
     }
 }
 
+enum SafeAreaType {
+    case top
+    case left
+    case right
+    case bottom
+}
+
 enum RelationType {
     case bottom
     case top
@@ -40,6 +47,20 @@ enum RelationType {
     case heightTo
     case centerX
     case centerY
+    case safeArea(SafeAreaType)
+}
+
+public struct SafeAreaRelationCollection {
+    unowned var view: UIView
+
+    lazy var top = RelationView<VerticalRelation>(view: view, relation: .safeArea(.top))
+    lazy var left = RelationView<VerticalRelation>(view: view, relation: .safeArea(.left))
+    lazy var right = RelationView<VerticalRelation>(view: view, relation: .safeArea(.right))
+    lazy var bottom = RelationView<VerticalRelation>(view: view, relation: .safeArea(.bottom))
+
+    init(view: UIView) {
+        self.view = view
+    }
 }
 
 public extension UIView {
@@ -90,5 +111,11 @@ public extension UIView {
     
     public var nui_centerY: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: self, relation: .centerY)
+    }
+
+    /// Safe area
+
+    public var nui_safeArea: SafeAreaRelationCollection {
+        return SafeAreaRelationCollection(view: self)
     }
 }
