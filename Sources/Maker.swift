@@ -594,9 +594,9 @@ public final class Maker {
             case .top:
                 top(inset: insets.top)
             case .horizontal:
-                top(inset: insets.top).bottom(inset: insets.bottom)
-            case .vertical:
                 left(inset: insets.left).right(inset: insets.right)
+            case .vertical:
+                top(inset: insets.top).bottom(inset: insets.bottom)
             }
         }
         return self
