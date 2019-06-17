@@ -24,13 +24,16 @@ public var nui_safeArea: SafeArea {
     return SafeArea()
 }
 
+/// Sides enum.
+/// Used for choosing which side should be used for frame configuration from UIEdgeInsets.
+
 public enum Sides {
     case top
     case bottom
     case left
     case right
-    case vertical
-    case horizontal
+    case vertical // combine both of top and bottom
+    case horizontal // combine both of left and right
 }
 
 public final class Maker {

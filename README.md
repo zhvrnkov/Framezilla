@@ -126,6 +126,15 @@ view.configureFrame { maker in
 ```
 the second method has optional parameters, so ```maker.edges(top: 5, left: 5, bottom: 5)``` also works correct, but does not create ```right``` relation, that in some cases is very useful.
 
+Also if you have `UIEdgeInsets` property and you want to use cup of them you can use
+
+```swift
+let insets: UIEdgeInsets = .init(top: 15, left: 10, bottom: 20, right: 10)
+view.configureFrame { maker in
+    maker.edges(insets: insets, sides: .left, .bottom)
+}
+```
+
 ## Side relations (Top, left, bottom, right)
 
 You can create edge relation, as shown above, but only use side relations.
