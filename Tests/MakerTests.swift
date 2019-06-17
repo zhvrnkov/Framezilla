@@ -361,6 +361,16 @@ class MakerTests: BaseTest {
         }
         XCTAssertEqual(testingView.frame, CGRect(x: 20, y: 10, width: 420, height: 450))
     }
+
+    func testThatCorrectlyConfiguresSliceOf_edge_insets_toSuperview() {
+
+        let insets: UIEdgeInsets = .init(top: 20, left: 10, bottom: 15, right: 10)
+        testingView.configureFrame { maker in
+            maker.edges(insets: insets, sides: .top, .left)
+            maker.size(width: 40, height: 40)
+        }
+        XCTAssertEqual(testingView.frame, CGRect(x: 10, y: 20, width: 40, height: 40))
+    }
     
     func testThatCorrectlyConfigures_edge_toSuperview() {
         
@@ -382,7 +392,7 @@ class MakerTests: BaseTest {
         containet.addSubview(view2)
         
         containet.configureFrame { maker in
-            maker._container()
+            maker.container()
         }
         XCTAssertEqual(containet.frame, CGRect(x: 0, y: 0, width: 120, height: 120))
     }
