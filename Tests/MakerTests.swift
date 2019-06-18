@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Framezilla
 
 class MakerTests: BaseTest {
     
@@ -364,14 +365,59 @@ class MakerTests: BaseTest {
 
     func testThatCorrectlyConfiguresSliceOf_edge_insets_toSuperview() {
 
-        let insets: UIEdgeInsets = .init(top: 20, left: 10, bottom: 15, right: 10)
-        testingView.configureFrame { maker in
-            maker.edges(insets: insets, sides: .top, .left)
-            maker.size(width: 40, height: 40)
+        let sides: [Sides] = [.horizontal, .left, .vertical, .bottom, .top, .right]
+        var sideCases = Set<Sides>()
+
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var width: CGFloat = 50
+        var height: CGFloat = 50
+
+        sides.forEach { side in
+            sideCases.insert(side)
+            let insets: UIEdgeInsets = .init(top: 20, left: 10, bottom: 15, right: 10)
+            testingView.configureFrame { maker in
+                maker.edges(insets: insets, sides: sideCases)
+            }
+            switch side {
+            case .horizontal:
+                x = insets.left
+                width = mainView.frame.width - insets.left - insets.right
+            case .bottom:
+                if sideCases.contains(.top) {
+                    y = insets.top
+                    height = mainView.frame.height - insets.top - insets.bottom
+                }
+                else {
+                    y = mainView.frame.height - insets.bottom - testingView.frame.height
+                }
+            case .left:
+                x = insets.left
+                if sideCases.contains(.right) {
+                    width = mainView.frame.width - insets.left - insets.right
+                }
+            case .top:
+                y = insets.top
+                if sideCases.contains(.bottom) {
+                    height = mainView.frame.height - insets.top - insets.bottom
+                }
+            case .right:
+                if sideCases.contains(.right) {
+                    x = insets.left
+                    width = mainView.frame.width - insets.left - insets.right
+                }
+                else {
+                    x = mainView.frame.width - insets.right - testingView.frame.width
+                }
+            case .vertical:
+                y = insets.top
+                height = mainView.frame.height - insets.top - insets.bottom
+            }
+
+            XCTAssertEqual(testingView.frame, CGRect(x: x, y: y, width: width, height: height))
         }
-        XCTAssertEqual(testingView.frame, CGRect(x: 10, y: 20, width: 40, height: 40))
     }
-    
+
     func testThatCorrectlyConfigures_edge_toSuperview() {
         
         testingView.configureFrame { maker in
