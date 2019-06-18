@@ -370,8 +370,8 @@ class MakerTests: BaseTest {
 
         var x: CGFloat = 0
         var y: CGFloat = 0
-        var width: CGFloat = 50
-        var height: CGFloat = 50
+        var width: CGFloat = testingView.frame.width
+        var height: CGFloat = testingView.frame.height
 
         sides.forEach { side in
             sideCases.insert(side)
