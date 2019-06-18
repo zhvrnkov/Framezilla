@@ -365,7 +365,7 @@ class MakerTests: BaseTest {
 
     func testThatCorrectlyConfiguresSliceOf_edge_insets_toSuperview() {
 
-        let sides: [Sides] = [.bottom, .top, .right]
+        let sides: [Sides] = [.horizontal, .left, .vertical, .bottom, .top, .right]
         var sideCases = Set<Sides>()
 
         var x: CGFloat = 0
