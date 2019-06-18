@@ -131,7 +131,7 @@ Also if you have `UIEdgeInsets` property and you want to use cup of them you can
 ```swift
 let insets: UIEdgeInsets = .init(top: 15, left: 10, bottom: 20, right: 10)
 view.configureFrame { maker in
-    maker.edges(insets: insets, sides: .left, .bottom)
+    maker.edges(insets: insets, sides: [.left, .bottom])
 }
 ```
 
