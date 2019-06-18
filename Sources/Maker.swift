@@ -584,8 +584,8 @@ public final class Maker {
     /// - parameter sides: The sides which will inculed from edge insets to setting relations.
     ///
     /// - returns: `Maker` instance for chaining relations.
-    
-    @discardableResult public func edges(insets: UIEdgeInsets, sides: Sides...) -> Maker {
+
+    @discardableResult public func edges(insets: UIEdgeInsets, sides: Set<Sides>) -> Maker {
         sides.forEach { side in
             switch side {
             case .bottom:
