@@ -435,14 +435,14 @@ class MakerTests: BaseTest {
         let view1 = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
         let view2 = UIView(frame: CGRect(x: 70, y: 70, width: 50, height: 50))
         
-        let containet = UIView()
-        containet.addSubview(view1)
-        containet.addSubview(view2)
+        let containerView = UIView()
+        containerView.addSubview(view1)
+        containerView.addSubview(view2)
         
-        containet.configureFrame { maker in
+        containerView.configureFrame { maker in
             maker.container()
         }
-        XCTAssertEqual(containet.frame, CGRect(x: 0, y: 0, width: 120, height: 120))
+        XCTAssertEqual(containerView.frame, CGRect(x: 0, y: 0, width: 120, height: 120))
     }
     
     /* sizeToFit */
