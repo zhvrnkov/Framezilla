@@ -28,6 +28,7 @@
 		8497C0111E59EB7700447E2F /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497C0101E59EB7700447E2F /* Number.swift */; };
 		8497C0131E59FA4B00447E2F /* Array+Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497C0121E59FA4B00447E2F /* Array+Stack.swift */; };
 		84EDCC241F9B3AB10091FAB9 /* MakerSafeAreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDCC231F9B3AB10091FAB9 /* MakerSafeAreaTests.swift */; };
+		852FEEE322D473F200B79A6C /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852FEEE222D473F200B79A6C /* ExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		8497C0101E59EB7700447E2F /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		8497C0121E59FA4B00447E2F /* Array+Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Stack.swift"; sourceTree = "<group>"; };
 		84EDCC231F9B3AB10091FAB9 /* MakerSafeAreaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerSafeAreaTests.swift; sourceTree = "<group>"; };
+		852FEEE222D473F200B79A6C /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				8442F93D1EC75A8500B72551 /* StateTests.swift */,
 				845108061EE2F5BC006DC1C8 /* ScrollViewTests.swift */,
 				841192DC1FF205DC00AB255D /* ContainerTests.swift */,
+				852FEEE222D473F200B79A6C /* ExtensionsTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 11FB41261D844CD800700A40;
@@ -281,6 +285,7 @@
 				8442F9451EC75A8500B72551 /* StateTests.swift in Sources */,
 				841192DD1FF205DC00AB255D /* ContainerTests.swift in Sources */,
 				8442F9411EC75A8500B72551 /* MakerCenterTests.swift in Sources */,
+				852FEEE322D473F200B79A6C /* ExtensionsTests.swift in Sources */,
 				8442F9421EC75A8500B72551 /* MakerStackTests.swift in Sources */,
 				8442F9401EC75A8500B72551 /* MakerBothSideRelationsTests.swift in Sources */,
 				845108071EE2F5BC006DC1C8 /* ScrollViewTests.swift in Sources */,
