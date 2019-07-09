@@ -24,16 +24,46 @@ public var nui_safeArea: SafeArea {
     return SafeArea()
 }
 
-/// Sides enum.
+/// Sides option set.
 /// Used for choosing which side should be used for frame configuration from UIEdgeInsets.
 
-public enum Sides {
-    case top
-    case bottom
-    case left
-    case right
-    case vertical // combine both of top and bottom
-    case horizontal // combine both of left and right
+public struct Sides: OptionSet, CustomStringConvertible {
+    public let rawValue: Int
+    
+    public static let top: Sides = .init(rawValue: 1 << 0)
+    public static let bottom: Sides = .init(rawValue: 1 << 1)
+    public static let left: Sides = .init(rawValue: 1 << 2)
+    public static let right: Sides = .init(rawValue: 1 << 3)
+
+    public static let vertical: Sides = [.top, .bottom]
+    public static let horizontal: Sides = [.left, .right]
+
+    public static let all: Sides = [.vertical, .horizontal]
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+    
+    public var description: String {
+        switch self {
+        case .bottom:
+            return "bottom"
+        case .left:
+            return "left"
+        case .right:
+            return "right"
+        case .top:
+            return "top"
+        case .horizontal:
+            return "horizontal"
+        case .vertical:
+            return "vertical"
+        case .all:
+            return "all"
+        default:
+            return "default"
+        }
+    }
 }
 
 public final class Maker {
@@ -585,7 +615,7 @@ public final class Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func edges(insets: UIEdgeInsets, sides: Set<Sides>) -> Maker {
+    @discardableResult public func edges(insets: UIEdgeInsets, sides: Sides = .all) -> Maker {
         sides.forEach { side in
             switch side {
             case .bottom:
@@ -596,10 +626,8 @@ public final class Maker {
                 right(inset: insets.right)
             case .top:
                 top(inset: insets.top)
-            case .horizontal:
-                left(inset: insets.left).right(inset: insets.right)
-            case .vertical:
-                top(inset: insets.top).bottom(inset: insets.bottom)
+            default:
+                return
             }
         }
         return self
@@ -1013,6 +1041,19 @@ public final class Maker {
         case .width:  widthParameter = ValueParameter(value: value)
         case .height: heightParameter = ValueParameter(value: value)
         default: break
+        }
+    }
+}
+
+extension OptionSet where RawValue: BinaryInteger, Element == Self  {
+    public func forEach(_ body: (Self) -> Void) {
+        var i = 0
+        while i < rawValue.bitWidth {
+            let option = Self.init(rawValue: rawValue & (1 << i))
+            if contains(option) {
+                body(option)
+            }
+            i += 1
         }
     }
 }
