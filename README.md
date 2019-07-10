@@ -137,7 +137,7 @@ view.configureFrame { maker in
 or
 ```swift
 view.configureFrame { maker in
-maker.edges(insets: insets, sides: .horizontal)
+    maker.edges(insets: insets, sides: .horizontal)
 }
 ```
 

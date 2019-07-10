@@ -425,10 +425,12 @@ class MakerTests: BaseTest {
                         x = mainView.frame.width - insets.right - testingView.frame.width
                     }
                 default:
-                    XCTAssertNil(nil)
+                    XCTAssertNil(nil, "Side option not exist or not handled")
                 }
                 // Compare configured view frame with absolute frame
-                XCTAssertEqual(testingView.frame, CGRect(x: x, y: y, width: width, height: height))
+                XCTAssertEqual(testingView.frame,
+                               CGRect(x: x, y: y, width: width, height: height),
+                               "Actual view frame not equal to absolute frame")
             }
         }
 

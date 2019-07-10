@@ -27,7 +27,7 @@ public var nui_safeArea: SafeArea {
 /// Sides option set.
 /// Used for choosing which side should be used for frame configuration from UIEdgeInsets.
 
-public struct Sides: OptionSet, CustomStringConvertible {
+public struct Sides: OptionSet {
     public let rawValue: Int
     
     public static let top: Sides = .init(rawValue: 1 << 0)
@@ -42,27 +42,6 @@ public struct Sides: OptionSet, CustomStringConvertible {
     
     public init(rawValue: Int) {
         self.rawValue = rawValue
-    }
-    
-    public var description: String {
-        switch self {
-        case .bottom:
-            return "bottom"
-        case .left:
-            return "left"
-        case .right:
-            return "right"
-        case .top:
-            return "top"
-        case .horizontal:
-            return "horizontal"
-        case .vertical:
-            return "vertical"
-        case .all:
-            return "all"
-        default:
-            return "default"
-        }
     }
 }
 

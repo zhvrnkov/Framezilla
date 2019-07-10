@@ -7,7 +7,7 @@
 
 import XCTest
 
-class ExtensionsTests: BaseTest {
+final class ExtensionsTests: BaseTest {
 
     private struct TestOptionSet: OptionSet, CustomStringConvertible {
         let rawValue: Int
@@ -54,13 +54,13 @@ class ExtensionsTests: BaseTest {
             })
             switch options {
             case .all:
-                XCTAssertEqual(iterationsCount, allOptionsCount)
+                XCTAssertEqual(iterationsCount, allOptionsCount, "There's more iterations than needed")
             case .option1:
-                XCTAssertEqual(iterationsCount, 1)
+                XCTAssertEqual(iterationsCount, 1, "There's more iterations than needed")
             case .combinedOption:
-                XCTAssertEqual(iterationsCount, combinedOptionsCount)
+                XCTAssertEqual(iterationsCount, combinedOptionsCount, "There's more iterations than needed")
             default:
-                XCTAssertNil(nil)
+                XCTAssertNil(nil, "Option not exist or not handled")
             }
         }
     }
