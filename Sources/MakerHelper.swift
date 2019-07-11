@@ -9,7 +9,7 @@
 import Foundation
 
 fileprivate extension UIView {
-    
+
     func contains(_ view: UIView) -> Bool {
         if subviews.contains(view) {
             return true
@@ -34,8 +34,8 @@ extension Maker {
             if let supervew = self.view.superview {
                 return supervew.convert(view.frame, from: view.superview)
             }
-            assertionFailure("Can't configure a frame for view: \(self.view) without superview.")
-            return .zero
+
+            return self.view.convert(view.frame, from: view.superview)
         }
 
         var convertedRect = rect
@@ -45,16 +45,47 @@ extension Maker {
         }
 
         switch type {
-        case .top:        return convertedRect.minY
-        case .bottom:     return convertedRect.maxY
-        case .centerY:    return view.contains(self.view) ? convertedRect.height / 2 : convertedRect.midY
-        case .centerX:    return view.contains(self.view) ? convertedRect.width / 2 : convertedRect.midX
-        case .right:      return convertedRect.maxX
-        case .left:       return convertedRect.minX
-        default:          return 0
+        case .top:
+            return convertedRect.minY
+        case .bottom:
+            return convertedRect.maxY
+        case .centerY:
+            return view.contains(self.view) ? convertedRect.height / 2 : convertedRect.midY
+        case .centerX:
+            return view.contains(self.view) ? convertedRect.width / 2 : convertedRect.midX
+        case .right:
+            return convertedRect.maxX
+        case .left:
+            return convertedRect.minX
+        case .safeArea(.top):
+            if #available(iOS 11.0, *) {
+                return convertedRect.minY + view.safeAreaInsets.top
+            }
+
+            return convertedRect.minY
+        case .safeArea(.left):
+            if #available(iOS 11.0, *) {
+                return convertedRect.minX + view.safeAreaInsets.left
+            }
+
+            return convertedRect.minX
+        case .safeArea(.right):
+            if #available(iOS 11.0, *) {
+                return convertedRect.maxX - view.safeAreaInsets.right
+            }
+
+            return convertedRect.maxX
+        case .safeArea(.bottom):
+            if #available(iOS 11.0, *) {
+                return convertedRect.maxY - view.safeAreaInsets.bottom
+            }
+
+            return convertedRect.maxY
+        default:
+            return 0
         }
     }
-    
+
     func relationSize(view: UIView, for type: RelationType) -> CGFloat {
         switch type {
         case .width:  return view.bounds.width
@@ -65,7 +96,7 @@ extension Maker {
 }
 
 extension CGRect {
-    
+
     mutating func setValue(_ value: CGFloat, for type: RelationType) {
         var frame = self
         switch type {

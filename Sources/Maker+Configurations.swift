@@ -36,18 +36,18 @@ public postfix func >> (maker: Maker) {
 public typealias InstallerBlock = (Maker) -> Void
 
 extension Maker {
-    
+
     class func configure(view: UIView, for state: AnyHashable, installerBlock: InstallerBlock) {
         if view.nx_state == state {
             let maker = Maker(view: view)
-            
+
             maker.newRect = view.frame
             installerBlock(maker)
-            
+
             maker.configureFrame()
         }
     }
-    
+
     fileprivate func configureFrame() {
         handlers.sorted {
             $0.priority.rawValue <= $1.priority.rawValue

@@ -6,6 +6,8 @@
 //  Copyright © 2016 Nikita. All rights reserved.
 //
 
+// swiftlint:disable all
+
 /// Phantom type for `nui_left`, `nui_right`, `nui_centerX` relations.
 
 public protocol HorizontalRelation {}
@@ -14,7 +16,7 @@ public protocol HorizontalRelation {}
 
 public protocol VerticalRelation {}
 
-/// Phantom type for `nui_height`, `nui_widht` relations.
+/// Phantom type for `nui_height`, `nui_width` relations.
 
 public protocol SizeRelation {}
 
@@ -22,11 +24,18 @@ public final class RelationView<Relation> {
 
     unowned var view: UIView
     var relationType: RelationType
-    
+
     init(view: UIView, relation: RelationType) {
         self.view = view
         self.relationType = relation
     }
+}
+
+enum SafeAreaType {
+    case top
+    case left
+    case right
+    case bottom
 }
 
 enum RelationType {
@@ -40,55 +49,75 @@ enum RelationType {
     case heightTo
     case centerX
     case centerY
+    case safeArea(SafeAreaType)
+}
+
+public class SafeAreaRelationCollection {
+    unowned let view: UIView
+
+    public lazy var top: RelationView<VerticalRelation> = .init(view: view, relation: .safeArea(.top))
+    public lazy var left: RelationView<HorizontalRelation> = .init(view: view, relation: .safeArea(.left))
+    public lazy var right: RelationView<HorizontalRelation> = .init(view: view, relation: .safeArea(.right))
+    public lazy var bottom: RelationView<VerticalRelation> = .init(view: view, relation: .safeArea(.bottom))
+
+    init(view: UIView) {
+        self.view = view
+    }
 }
 
 public extension UIView {
-    
+
     /// Width relation of current view.
-    
-    public var nui_width: RelationView<SizeRelation> {
+
+    var nui_width: RelationView<SizeRelation> {
         return RelationView(view: self, relation: .width)
     }
-    
+
     /// Height relation of current view.
-    
-    public var nui_height: RelationView<SizeRelation> {
+
+    var nui_height: RelationView<SizeRelation> {
         return RelationView<SizeRelation>(view: self, relation: .height)
     }
-    
+
     /// Left relation of current view.
 
-    public var nui_left: RelationView<HorizontalRelation> {
+    var nui_left: RelationView<HorizontalRelation> {
         return RelationView<HorizontalRelation>(view: self, relation: .left)
     }
-    
+
     /// Right relation of current view.
-    
-    public var nui_right: RelationView<HorizontalRelation> {
+
+    var nui_right: RelationView<HorizontalRelation> {
         return RelationView<HorizontalRelation>(view: self, relation: .right)
     }
-    
+
     /// Top relation of current view.
-    
-    public var nui_top: RelationView<VerticalRelation> {
+
+    var nui_top: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: self, relation: .top)
     }
-    
+
     /// Bottom relation of current view.
-    
-    public var nui_bottom: RelationView<VerticalRelation> {
+
+    var nui_bottom: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: self, relation: .bottom)
     }
-    
+
     /// CenterX relation of current view.
-    
-    public var nui_centerX: RelationView<HorizontalRelation> {
+
+    var nui_centerX: RelationView<HorizontalRelation> {
         return RelationView<HorizontalRelation>(view: self, relation: .centerX)
     }
-    
+
     /// CenterY relation of current view.
-    
-    public var nui_centerY: RelationView<VerticalRelation> {
+
+    var nui_centerY: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: self, relation: .centerY)
+    }
+
+    /// Safe area
+
+    var nui_safeArea: SafeAreaRelationCollection {
+        return SafeAreaRelationCollection(view: self)
     }
 }
