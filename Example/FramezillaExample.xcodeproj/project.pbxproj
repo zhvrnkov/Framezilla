@@ -146,7 +146,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "Nikita Ermolenko";
+				ORGANIZATIONNAME = Rosberry;
 				TargetAttributes = {
 					8442F94E1EC75C9C00B72551 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -159,6 +159,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
