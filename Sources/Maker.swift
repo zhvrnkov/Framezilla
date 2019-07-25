@@ -24,6 +24,26 @@ public var nui_safeArea: SafeArea {
     return SafeArea()
 }
 
+/// Used for choosing which side should be used for frame configuration from UIEdgeInsets.
+
+public struct Sides: OptionSet {
+    public let rawValue: Int
+    
+    public static let top: Sides = .init(rawValue: 1 << 0)
+    public static let bottom: Sides = .init(rawValue: 1 << 1)
+    public static let left: Sides = .init(rawValue: 1 << 2)
+    public static let right: Sides = .init(rawValue: 1 << 3)
+
+    public static let vertical: Sides = [.top, .bottom]
+    public static let horizontal: Sides = [.left, .right]
+
+    public static let all: Sides = [.vertical, .horizontal]
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+}
+
 public final class Maker {
     
     typealias HandlerType = () -> Void
@@ -547,24 +567,28 @@ public final class Maker {
     ///
     /// - parameter insets: The insets for setting relations for superview.
     ///
+    /// - parameter sides: The sides which will inculed from edge insets to setting relations.
+    ///
     /// - returns: `Maker` instance for chaining relations.
-    
-    @discardableResult public func edges(insets: UIEdgeInsets) -> Maker {
-        guard let superview = view.superview else {
-            assertionFailure("Can not create edge relations without superview.")
-            return self
+
+    @discardableResult public func edges(insets: UIEdgeInsets, sides: Sides = .all) -> Maker {
+        sides.forEach { side in
+            switch side {
+            case .bottom:
+                bottom(inset: insets.bottom)
+            case .left:
+                left(inset: insets.left)
+            case .right:
+                right(inset: insets.right)
+            case .top:
+                top(inset: insets.top)
+            default:
+                return
+            }
         }
-        
-        let handler = { [unowned self, unowned superview] in
-            let width = superview.bounds.width - (insets.left + insets.right)
-            let height = superview.bounds.height - (insets.top + insets.bottom)
-            let frame = CGRect(x: insets.left, y: insets.top, width: width, height: height)
-            self.newRect = frame
-        }
-        handlers.append((.middle, handler))
         return self
     }
-    
+
     /// Creates bottom relation to superview.
     ///
     /// Use this method when you want to join bottom side of current view with bottom side of superview.

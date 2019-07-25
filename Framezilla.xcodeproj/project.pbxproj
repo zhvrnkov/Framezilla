@@ -28,6 +28,8 @@
 		8497C0111E59EB7700447E2F /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497C0101E59EB7700447E2F /* Number.swift */; };
 		8497C0131E59FA4B00447E2F /* Array+Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497C0121E59FA4B00447E2F /* Array+Stack.swift */; };
 		84EDCC241F9B3AB10091FAB9 /* MakerSafeAreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDCC231F9B3AB10091FAB9 /* MakerSafeAreaTests.swift */; };
+		85221C0022E99D4100EA9D3D /* OptionSet+ForEeach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */; };
+		852FEEE322D473F200B79A6C /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852FEEE222D473F200B79A6C /* ExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		8497C0101E59EB7700447E2F /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		8497C0121E59FA4B00447E2F /* Array+Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Stack.swift"; sourceTree = "<group>"; };
 		84EDCC231F9B3AB10091FAB9 /* MakerSafeAreaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerSafeAreaTests.swift; sourceTree = "<group>"; };
+		85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+ForEeach.swift"; sourceTree = "<group>"; };
+		852FEEE222D473F200B79A6C /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 				8497C0121E59FA4B00447E2F /* Array+Stack.swift */,
 				842BB7FB1F0638E9000D1CFF /* Parameters.swift */,
 				844BE8F220457634004C19A8 /* Maker+Unavailable.swift */,
+				85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				8442F93D1EC75A8500B72551 /* StateTests.swift */,
 				845108061EE2F5BC006DC1C8 /* ScrollViewTests.swift */,
 				841192DC1FF205DC00AB255D /* ContainerTests.swift */,
+				852FEEE222D473F200B79A6C /* ExtensionsTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -206,7 +212,8 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = Rosberry;
 				TargetAttributes = {
 					115972131D8450F500BC5C20 = {
 						CreatedOnToolsVersion = 8.0;
@@ -225,6 +232,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 11FB41261D844CD800700A40;
@@ -281,6 +289,7 @@
 				8442F9451EC75A8500B72551 /* StateTests.swift in Sources */,
 				841192DD1FF205DC00AB255D /* ContainerTests.swift in Sources */,
 				8442F9411EC75A8500B72551 /* MakerCenterTests.swift in Sources */,
+				852FEEE322D473F200B79A6C /* ExtensionsTests.swift in Sources */,
 				8442F9421EC75A8500B72551 /* MakerStackTests.swift in Sources */,
 				8442F9401EC75A8500B72551 /* MakerBothSideRelationsTests.swift in Sources */,
 				845108071EE2F5BC006DC1C8 /* ScrollViewTests.swift in Sources */,
@@ -296,6 +305,7 @@
 			files = (
 				11FB41461D844F8F00700A40 /* Maker+Configurations.swift in Sources */,
 				11FB41451D844F8F00700A40 /* Maker.swift in Sources */,
+				85221C0022E99D4100EA9D3D /* OptionSet+ForEeach.swift in Sources */,
 				8497C0111E59EB7700447E2F /* Number.swift in Sources */,
 				11FB41471D844F8F00700A40 /* MakerHelper.swift in Sources */,
 				8497C0131E59FA4B00447E2F /* Array+Stack.swift in Sources */,
@@ -433,11 +443,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -464,11 +476,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -544,7 +558,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -602,7 +616,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

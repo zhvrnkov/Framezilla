@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Framezilla
 
 class MakerTests: BaseTest {
     
@@ -361,7 +362,80 @@ class MakerTests: BaseTest {
         }
         XCTAssertEqual(testingView.frame, CGRect(x: 20, y: 10, width: 420, height: 450))
     }
-    
+
+    func testThatCorrectlyConfiguresSliceOf_edge_insets_toSuperview() {
+        // There're unordered array of available side option sets which will tested.
+        let sidesOptions: [Sides] = [.all, .horizontal, .vertical, .left, .right, .bottom, .top].shuffled()
+        // All options which will test will saved in this property, for check which option was already done.
+        var currentSideOptionSet: Sides = []
+        // Default frame properties which will modified like it should be and will compare with current frame late.
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var width: CGFloat = testingView.frame.width
+        var height: CGFloat = testingView.frame.height
+        
+        sidesOptions.forEach { sides in
+            // Run loop for each option included in option. For example option `horizontal` include `left` and `right`.
+            sides.forEach { side in
+                // Save current option which will be tested.
+                currentSideOptionSet.insert(side)
+                // Configure frame with some insets.
+                let insets: UIEdgeInsets = .init(top: 20, left: 10, bottom: 15, right: 10)
+                testingView.configureFrame { maker in
+                    maker.edges(insets: insets, sides: currentSideOptionSet)
+                }
+                // Update default frame properties like it should be configured in best scenario
+                switch side {
+                case .bottom:
+                    // If configure bottom with already configured top inset, so Y position of view should be equal to
+                    // top inset over the superview and height should be calculated too
+                    if currentSideOptionSet.contains(.top) {
+                        y = insets.top
+                        height = mainView.frame.height - insets.top - insets.bottom
+                    }
+                    // Y position wihout configured top inset before should be equal to distance between main view maxY
+                    // and testing view subject to bottom inset
+                    else {
+                        y = mainView.frame.height - insets.bottom - testingView.frame.height
+                    }
+                case .left:
+                    x = insets.left
+                    // If configure left with already configured right inset, so X position shouldn't be changed
+                    // but width should be calculated constrained by left and right insets main view width
+                    if currentSideOptionSet.contains(.right) {
+                        width = mainView.frame.width - insets.left - insets.right
+                    }
+                case .top:
+                    y = insets.top
+                    // If configure top with already configured bottom inset, so Y position shouldn't be changed
+                    // but height should be calculated constrained by top and bottom insets main view height
+                    if currentSideOptionSet.contains(.bottom) {
+                        height = mainView.frame.height - insets.top - insets.bottom
+                    }
+                case .right:
+                    // If configure right with already configured left inset, so X position of view should be equal to
+                    // left inset over the superview and width should be calculated too
+                    if currentSideOptionSet.contains(.left) {
+                        x = insets.left
+                        width = mainView.frame.width - insets.left - insets.right
+                    }
+                    // X position wihout configured left inset before should be equal to distance between main view maxX
+                    // and testing view subject to right inset
+                    else {
+                        x = mainView.frame.width - insets.right - testingView.frame.width
+                    }
+                default:
+                    XCTAssertNil(nil, "Side option not exist or not handled")
+                }
+                // Compare configured view frame with absolute frame
+                XCTAssertEqual(testingView.frame,
+                               CGRect(x: x, y: y, width: width, height: height),
+                               "Actual view frame not equal to absolute frame")
+            }
+        }
+
+    }
+
     func testThatCorrectlyConfigures_edge_toSuperview() {
         
         testingView.configureFrame { maker in
@@ -377,14 +451,14 @@ class MakerTests: BaseTest {
         let view1 = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
         let view2 = UIView(frame: CGRect(x: 70, y: 70, width: 50, height: 50))
         
-        let containet = UIView()
-        containet.addSubview(view1)
-        containet.addSubview(view2)
+        let containerView = UIView()
+        containerView.addSubview(view1)
+        containerView.addSubview(view2)
         
-        containet.configureFrame { maker in
-            maker._container()
+        containerView.configureFrame { maker in
+            maker.container()
         }
-        XCTAssertEqual(containet.frame, CGRect(x: 0, y: 0, width: 120, height: 120))
+        XCTAssertEqual(containerView.frame, CGRect(x: 0, y: 0, width: 120, height: 120))
     }
     
     /* sizeToFit */
