@@ -24,7 +24,6 @@ public var nui_safeArea: SafeArea {
     return SafeArea()
 }
 
-/// Sides option set.
 /// Used for choosing which side should be used for frame configuration from UIEdgeInsets.
 
 public struct Sides: OptionSet {
@@ -998,19 +997,6 @@ public final class Maker {
         case .width:  widthParameter = ValueParameter(value: value)
         case .height: heightParameter = ValueParameter(value: value)
         default: break
-        }
-    }
-}
-
-extension OptionSet where RawValue: BinaryInteger, Element == Self  {
-    public func forEach(_ body: (Self) -> Void) {
-        var i = 0
-        while i < rawValue.bitWidth {
-            let option = Self.init(rawValue: 1 << i)
-            if contains(option) {
-                body(option)
-            }
-            i += 1
         }
     }
 }
