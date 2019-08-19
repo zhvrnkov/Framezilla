@@ -44,6 +44,10 @@ final class KeyboardRectCloneView: UIView {
         frame = rect
 
         subscribers.compact().forEach { (reference: WeakRef<UIView>) in
+            guard reference.object?.window != nil else {
+                return
+            }
+
             reference.object?.setNeedsLayout()
             reference.object?.layoutIfNeeded()
         }

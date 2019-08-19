@@ -651,7 +651,7 @@ public final class Maker {
 
         let handler = { [unowned self] in
             if self.topParameter != nil {
-                let height = abs(self.newRect.minY - self.convertedValue(for: relationType, with: view)) - inset.value
+                let height = fabs(self.newRect.minY - self.convertedValue(for: relationType, with: view)) - inset.value
                 self.newRect.setValue(height, for: .height)
             }
             else {
@@ -722,7 +722,7 @@ public final class Maker {
 
         let handler = { [unowned self] in
             if self.leftParameter != nil {
-                let width = abs(self.newRect.minX - self.convertedValue(for: relationType, with: view)) - inset.value
+                let width = fabs(self.newRect.minX - self.convertedValue(for: relationType, with: view)) - inset.value
                 self.newRect.setValue(width, for: .width)
             }
             else {

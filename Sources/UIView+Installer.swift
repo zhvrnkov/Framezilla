@@ -23,7 +23,7 @@ public extension UIView {
     /// - note: Use `DEFAULT_STATE` for setting the state to the default value.
 
     @available(*, message: "Renamed due to conflict with Objective-C library - Framer", unavailable, renamed: "nx_state")
-    var nui_state: AnyHashable {
+    public var nui_state: AnyHashable {
         get {
             if let value = objc_getAssociatedObject(self, &stateTypeAssociationKey) as? AnyHashable {
                 return value
@@ -41,7 +41,7 @@ public extension UIView {
     ///
     /// - note: Use `DEFAULT_STATE` for setting the state to the default value.
 
-    var nx_state: AnyHashable {
+    public var nx_state: AnyHashable {
         get {
             if let value = objc_getAssociatedObject(self, &nxStateTypeAssociationKey) as? AnyHashable {
                 return value
@@ -59,7 +59,7 @@ public extension UIView {
 public extension UIView {
 
     @available(*, deprecated, renamed: "configureFrame(state:installerBlock:)")
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    public func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
         Maker.configure(view: self, for: state, installerBlock: installerBlock)
     }
 
@@ -70,7 +70,7 @@ public extension UIView {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    public func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
         guard self.superview != nil else {
             return
         }
@@ -85,7 +85,7 @@ public extension UIView {
     /// - parameter states:         The states for which you configure frame.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(states: [AnyHashable], installerBlock: InstallerBlock) {
+    public func configureFrame(states: [AnyHashable], installerBlock: InstallerBlock) {
         guard self.superview != nil else {
             return
         }
@@ -105,7 +105,7 @@ public extension Sequence where Iterator.Element: UIView {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    public func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
         for view in self {
             view.configureFrame(state: state, installerBlock: installerBlock)
         }
@@ -118,7 +118,7 @@ public extension Sequence where Iterator.Element: UIView {
     /// - parameter states:         The states for which you configure frames.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(states: [AnyHashable], installerBlock: InstallerBlock) {
+    public func configureFrames(states: [AnyHashable], installerBlock: InstallerBlock) {
         for view in self {
             view.configureFrame(states: states, installerBlock: installerBlock)
         }
@@ -150,7 +150,7 @@ public extension Collection where Iterator.Element: UIView {
     ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
     /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
 
-    func configure(container: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) {
+    public func configure(container: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) {
         container.frame = .zero
 
         var relationWidth: CGFloat?
@@ -224,7 +224,7 @@ public extension Collection where Iterator.Element: UIView {
     ///
     /// - returns: Container view.
 
-    func container(in view: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) -> UIView {
+    public func container(in view: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) -> UIView {
         let container: UIView
         if let superView = self.first?.superview {
             container = superView
