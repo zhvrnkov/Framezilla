@@ -14,6 +14,10 @@
 		11FB41471D844F8F00700A40 /* MakerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41421D844F8F00700A40 /* MakerHelper.swift */; };
 		11FB41481D844F8F00700A40 /* UIView+Installer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41431D844F8F00700A40 /* UIView+Installer.swift */; };
 		11FB41491D844F8F00700A40 /* UIView+Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41441D844F8F00700A40 /* UIView+Relations.swift */; };
+		2E083838230D2434007D0928 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E083837230D2434007D0928 /* Keyboard.swift */; };
+		2E08383A230D244F007D0928 /* KeyboardCloneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E083839230D244F007D0928 /* KeyboardCloneView.swift */; };
+		2E08383C230D245F007D0928 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E08383B230D245F007D0928 /* Weak.swift */; };
+		2E08383E230D2482007D0928 /* UIView+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E08383D230D2482007D0928 /* UIView+Keyboard.swift */; };
 		841192DD1FF205DC00AB255D /* ContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841192DC1FF205DC00AB255D /* ContainerTests.swift */; };
 		842BB7FC1F0638E9000D1CFF /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842BB7FB1F0638E9000D1CFF /* Parameters.swift */; };
 		8442F93E1EC75A8500B72551 /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442F9351EC75A8500B72551 /* BaseTest.swift */; };
@@ -54,6 +58,10 @@
 		11FB41441D844F8F00700A40 /* UIView+Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Relations.swift"; sourceTree = "<group>"; };
 		11FB414B1D844FFA00700A40 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		11FB414C1D844FFA00700A40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2E083837230D2434007D0928 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		2E083839230D244F007D0928 /* KeyboardCloneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardCloneView.swift; sourceTree = "<group>"; };
+		2E08383B230D245F007D0928 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		2E08383D230D2482007D0928 /* UIView+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Keyboard.swift"; sourceTree = "<group>"; };
 		841192DC1FF205DC00AB255D /* ContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTests.swift; sourceTree = "<group>"; };
 		842BB7FB1F0638E9000D1CFF /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		8442F9351EC75A8500B72551 /* BaseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
@@ -116,28 +124,56 @@
 		11FB413B1D844D5A00700A40 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				11FB413E1D844DD000700A40 /* Info-iOS.plist */,
+				2E083840230D24DF007D0928 /* Supporting */,
+				2E08383F230D249B007D0928 /* Extensions */,
+				2E083837230D2434007D0928 /* Keyboard.swift */,
 				11FB41401D844F8F00700A40 /* Maker.swift */,
-				11FB41411D844F8F00700A40 /* Maker+Configurations.swift */,
 				11FB41421D844F8F00700A40 /* MakerHelper.swift */,
-				11FB41431D844F8F00700A40 /* UIView+Installer.swift */,
-				11FB41441D844F8F00700A40 /* UIView+Relations.swift */,
-				11FB41351D844D2C00700A40 /* Framezilla.h */,
 				8497C0101E59EB7700447E2F /* Number.swift */,
-				8497C0121E59FA4B00447E2F /* Array+Stack.swift */,
 				842BB7FB1F0638E9000D1CFF /* Parameters.swift */,
-				844BE8F220457634004C19A8 /* Maker+Unavailable.swift */,
-				85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */,
+				2E083839230D244F007D0928 /* KeyboardCloneView.swift */,
+				2E08383B230D245F007D0928 /* Weak.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		2E08383F230D249B007D0928 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8497C0121E59FA4B00447E2F /* Array+Stack.swift */,
+				11FB41411D844F8F00700A40 /* Maker+Configurations.swift */,
+				844BE8F220457634004C19A8 /* Maker+Unavailable.swift */,
+				85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */,
+				11FB41431D844F8F00700A40 /* UIView+Installer.swift */,
+				2E08383D230D2482007D0928 /* UIView+Keyboard.swift */,
+				11FB41441D844F8F00700A40 /* UIView+Relations.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2E083840230D24DF007D0928 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				11FB413E1D844DD000700A40 /* Info-iOS.plist */,
+				11FB41351D844D2C00700A40 /* Framezilla.h */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		2E083841230D24EE007D0928 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				8442F9371EC75A8500B72551 /* Info.plist */,
+				8442F9361EC75A8500B72551 /* FramezillaTests-Bridging-Header.h */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		8442F9341EC75A8500B72551 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				2E083841230D24EE007D0928 /* Supporting */,
 				8442F9351EC75A8500B72551 /* BaseTest.swift */,
-				8442F9361EC75A8500B72551 /* FramezillaTests-Bridging-Header.h */,
-				8442F9371EC75A8500B72551 /* Info.plist */,
 				8442F9381EC75A8500B72551 /* MakerBothSideRelationsTests.swift */,
 				8442F9391EC75A8500B72551 /* MakerCenterTests.swift */,
 				8442F93A1EC75A8500B72551 /* MakerStackTests.swift */,
@@ -210,8 +246,8 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				ORGANIZATIONNAME = Rosberry;
 				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = Rosberry;
 				TargetAttributes = {
 					115972131D8450F500BC5C20 = {
 						CreatedOnToolsVersion = 8.0;
@@ -305,6 +341,9 @@
 				11FB41461D844F8F00700A40 /* Maker+Configurations.swift in Sources */,
 				11FB41451D844F8F00700A40 /* Maker.swift in Sources */,
 				85221C0022E99D4100EA9D3D /* OptionSet+ForEeach.swift in Sources */,
+				2E08383E230D2482007D0928 /* UIView+Keyboard.swift in Sources */,
+				2E08383C230D245F007D0928 /* Weak.swift in Sources */,
+				2E083838230D2434007D0928 /* Keyboard.swift in Sources */,
 				8497C0111E59EB7700447E2F /* Number.swift in Sources */,
 				11FB41471D844F8F00700A40 /* MakerHelper.swift in Sources */,
 				8497C0131E59FA4B00447E2F /* Array+Stack.swift in Sources */,
@@ -312,6 +351,7 @@
 				844BE8F320457634004C19A8 /* Maker+Unavailable.swift in Sources */,
 				11FB41491D844F8F00700A40 /* UIView+Relations.swift in Sources */,
 				842BB7FC1F0638E9000D1CFF /* Parameters.swift in Sources */,
+				2E08383A230D244F007D0928 /* KeyboardCloneView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -377,7 +417,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "Tests/FramezillaTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Supporting/FramezillaTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -418,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -426,7 +466,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Tests/FramezillaTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Supporting/FramezillaTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
@@ -543,7 +583,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Sources/Info-iOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -602,7 +642,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Sources/Info-iOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

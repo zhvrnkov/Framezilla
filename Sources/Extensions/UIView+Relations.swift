@@ -51,7 +51,9 @@ enum RelationType {
 }
 
 @available(iOS 11.0, *)
-public final class SafeAreaRelationCollection {
+public final class SafeAreaRelationCollection: EdgeRelationCollection {}
+
+public class EdgeRelationCollection {
     unowned var view: UIView
 
     public lazy var top: RelationView<VerticalRelation> = .init(view: view, relation: .safeArea(.top))
