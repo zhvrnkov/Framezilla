@@ -50,6 +50,7 @@ enum RelationType {
     case safeArea(SafeAreaType)
 }
 
+@available(iOS 11.0, *)
 public final class SafeAreaRelationCollection {
     unowned var view: UIView
 
@@ -115,6 +116,7 @@ public extension UIView {
 
     /// Safe area
 
+    @available(iOS 11.0, *)
     var nui_safeArea: SafeAreaRelationCollection {
         return SafeAreaRelationCollection(view: self)
     }
