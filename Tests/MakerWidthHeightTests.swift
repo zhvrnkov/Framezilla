@@ -195,6 +195,7 @@ class MakerWidthHeightTests: BaseTest {
 
         let label = UILabel()
         label.text = "HelloHelloHelloHello"
+        testingView.addSubview(label)
 
         label.configureFrame { maker in
             maker.heightToFit()
@@ -206,6 +207,7 @@ class MakerWidthHeightTests: BaseTest {
     func testHeightToFit_withWidthRelation() {
 
         let view = HeightFitView()
+        testingView.addSubview(view)
 
         view.configureFrame { maker in
             maker.heightToFit()
@@ -246,6 +248,7 @@ class MakerWidthHeightTests: BaseTest {
 
         let label = UILabel()
         label.text = "HelloHelloHelloHello"
+        testingView.addSubview(label)
 
         label.configureFrame { maker in
             maker.widthToFit()
@@ -257,6 +260,7 @@ class MakerWidthHeightTests: BaseTest {
     func testWidthToFit_withHeightRelation() {
 
         let view = WidthFitView()
+        testingView.addSubview(view)
 
         view.configureFrame { maker in
             maker.widthToFit()
@@ -299,6 +303,7 @@ class MakerWidthHeightTests: BaseTest {
 
         let label = UILabel()
         label.text = "HelloHelloHelloHello"
+        testingView.addSubview(label)
 
         label.configureFrame { maker in
             maker.widthThatFits(maxWidth: 30)
@@ -311,6 +316,7 @@ class MakerWidthHeightTests: BaseTest {
 
         let label = UILabel()
         label.text = "HelloHelloHelloHello"
+        testingView.addSubview(label)
 
         label.configureFrame { maker in
             maker.widthThatFits(maxWidth: 300)
@@ -323,6 +329,7 @@ class MakerWidthHeightTests: BaseTest {
 
         let label = UILabel()
         label.text = "HelloHelloHelloHello"
+        testingView.addSubview(label)
 
         label.configureFrame { maker in
             maker.heightThatFits(maxHeight: 5)
@@ -335,6 +342,7 @@ class MakerWidthHeightTests: BaseTest {
 
         let label = UILabel()
         label.text = "HelloHelloHelloHello"
+        testingView.addSubview(label)
 
         label.configureFrame { maker in
             maker.heightThatFits(maxHeight: 300)

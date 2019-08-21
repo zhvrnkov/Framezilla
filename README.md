@@ -142,10 +142,10 @@ In iOS 11 Apple has introduced the safe area, similar to `topLayoutGuide` and `b
 
 ```swift
 content.configureFrame { maker in
-    maker.top(to: nui_safeArea)
-    maker.bottom(to: nui_safeArea)
-    maker.right(to: nui_safeArea, inset: 10)
-    maker.left(to: nui_safeArea, inset: 10)
+    maker.top(to: view.nui_safeArea.top)
+    maker.bottom(to: view.nui_safeArea.bottom)
+    maker.right(to: view.nui_safeArea.right, inset: 10)
+    maker.left(to: view.nui_safeArea.left, inset: 10)
 }
 ```
 

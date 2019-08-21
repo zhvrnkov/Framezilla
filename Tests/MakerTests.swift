@@ -14,9 +14,12 @@ class MakerTests: BaseTest {
     /* Array configurator */
     
     func testThatCorrectlyConfiguresFramesForArrayOfViews() {
-        
+
         let label = UILabel(frame: .zero)
+        testingView.addSubview(label)
+
         let view = UIView(frame: .zero)
+        testingView.addSubview(view)
         
         [label, view].configureFrames { maker in
             maker.width(100)
@@ -338,7 +341,7 @@ class MakerTests: BaseTest {
     
     func testThatCorrectlyConfigures_equal_to_relationForNearSubview() {
         
-        let insets = UIEdgeInsetsMake(5, 10, 15, 20)
+        let insets = UIEdgeInsets(top: 5, left: 10, bottom: 15, right: 20)
         testingView.configureFrame { maker in
             maker.equal(to: nestedView1, insets: insets)
         }
@@ -358,7 +361,7 @@ class MakerTests: BaseTest {
     func testThatCorrectlyConfigures_edge_insets_toSuperview() {
         
         testingView.configureFrame { maker in
-            maker.edges(insets: UIEdgeInsetsMake(10, 20, 40, 60))
+            maker.edges(insets: UIEdgeInsets(top: 10, left: 20, bottom: 40, right: 60))
         }
         XCTAssertEqual(testingView.frame, CGRect(x: 20, y: 10, width: 420, height: 450))
     }
@@ -450,15 +453,16 @@ class MakerTests: BaseTest {
         
         let view1 = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
         let view2 = UIView(frame: CGRect(x: 70, y: 70, width: 50, height: 50))
+
+        let container = UIView()
+        container.addSubview(view1)
+        container.addSubview(view2)
+        testingView.addSubview(container)
         
-        let containerView = UIView()
-        containerView.addSubview(view1)
-        containerView.addSubview(view2)
-        
-        containerView.configureFrame { maker in
+        container.configureFrame { maker in
             maker.container()
         }
-        XCTAssertEqual(containerView.frame, CGRect(x: 0, y: 0, width: 120, height: 120))
+        XCTAssertEqual(container.frame, CGRect(x: 0, y: 0, width: 120, height: 120))
     }
     
     /* sizeToFit */
@@ -467,6 +471,7 @@ class MakerTests: BaseTest {
 
         let label = UILabel()
         label.text = "Hello"
+        testingView.addSubview(label)
         
         label.configureFrame { maker in
             maker.sizeToFit()
@@ -481,6 +486,7 @@ class MakerTests: BaseTest {
         
         let label = UILabel()
         label.text = "HelloHelloHelloHello"
+        testingView.addSubview(label)
         
         label.configureFrame { maker in
             maker.sizeThatFits(size: CGSize(width: 30, height: 0))
@@ -492,31 +498,25 @@ class MakerTests: BaseTest {
     /* corner radius */
 
     func testThat_cornerRadius_correctlyConfigures() {
-        let view = UIView()
-
-        view.configureFrame { maker in
+        testingView.configureFrame { maker in
             maker.cornerRadius(100)
         }
-        XCTAssertEqual(view.layer.cornerRadius, 100)
+        XCTAssertEqual(testingView.layer.cornerRadius, 100)
     }
 
     func testThat_cornerRadiusWithHalfWidth_correctlyConfigures() {
-        let view = UIView()
-
-        view.configureFrame { maker in
+        testingView.configureFrame { maker in
             maker.width(100)
             maker.cornerRadius(byHalf: .width)
         }
-        XCTAssertEqual(view.layer.cornerRadius, 50)
+        XCTAssertEqual(testingView.layer.cornerRadius, 50)
     }
 
     func testThat_cornerRadiusWithHalfHeight_correctlyConfigures() {
-        let view = UIView()
-
-        view.configureFrame { maker in
+        testingView.configureFrame { maker in
             maker.height(100)
             maker.cornerRadius(byHalf: .height)
         }
-        XCTAssertEqual(view.layer.cornerRadius, 50)
+        XCTAssertEqual(testingView.layer.cornerRadius, 50)
     }
 }

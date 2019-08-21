@@ -2,7 +2,7 @@
 //  Copyright © 2019 Rosberry. All rights reserved.
 //
 
-extension OptionSet where RawValue: BinaryInteger, Element == Self  {
+extension OptionSet where RawValue: BinaryInteger, Element == Self {
     public func forEach(_ body: (Self) -> Void) {
         var i = 0
         while i < rawValue.bitWidth {

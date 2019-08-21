@@ -12,7 +12,7 @@ public enum StackAxis: Int {
 }
 
 public extension Collection where Iterator.Element: UIView, Self.Index == Int {
-    
+
     /// Arranges views in the order of list along a vertical or horizontal axis, with spacing property.
     ///
     /// - note: You have to change the `nx_state` of the container, not the arranged subviews.
@@ -20,8 +20,8 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
     /// - parameter axis:      A stack with a horizontal axis is a row of arranged subviews, and a stack with a vertical axis is a column of arranged subviews.
     /// - parameter spacing:   Spacing between arranged subviews.
     /// - parameter state:     The state for which you configure frame.
-    
-    public func stack(axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE) {
+
+    func stack(axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE) {
         for view in self {
             guard view.superview != nil else {
                 assertionFailure("Can not configure stack relation without superview.")
@@ -33,14 +33,14 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
         for view in self where view.superview != superview {
             assertionFailure("All views should have the same superview.")
         }
-        
+
         guard superview.nx_state == state else {
             return
         }
-        
+
         let count = CGFloat(self.count)
         var prevView = self[0]
-        
+
         switch axis {
         case .horizontal:
             let width = (superview.bounds.width - (count - 1) * spacing.value) / count
@@ -74,7 +74,7 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
                 }
                 prevView = view
             }
-            
+
         }
     }
 }
