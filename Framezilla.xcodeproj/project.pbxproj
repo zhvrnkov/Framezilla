@@ -127,11 +127,11 @@
 				2E083840230D24DF007D0928 /* Supporting */,
 				2E08383F230D249B007D0928 /* Extensions */,
 				2E083837230D2434007D0928 /* Keyboard.swift */,
+				2E083839230D244F007D0928 /* KeyboardCloneView.swift */,
 				11FB41401D844F8F00700A40 /* Maker.swift */,
 				11FB41421D844F8F00700A40 /* MakerHelper.swift */,
 				8497C0101E59EB7700447E2F /* Number.swift */,
 				842BB7FB1F0638E9000D1CFF /* Parameters.swift */,
-				2E083839230D244F007D0928 /* KeyboardCloneView.swift */,
 				2E08383B230D245F007D0928 /* Weak.swift */,
 			);
 			path = Sources;

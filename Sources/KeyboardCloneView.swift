@@ -24,9 +24,17 @@ final class KeyboardRectCloneView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        return nil
+    }
+
+    // MARK: -
+
     func use(_ window: UIWindow) {
         window.addSubview(self)
+
         frame.origin.y = window.bounds.maxY
+        frame.size.width = window.bounds.width
 
         let keyPath: KeyPath<UIWindow, CGRect> = \UIWindow.frame
         observer = window.observe(keyPath, options: [.old, .new]) { [weak self] (_, change: NSKeyValueObservedChange<CGRect>) in
@@ -34,6 +42,7 @@ final class KeyboardRectCloneView: UIView {
                 return
             }
 
+            self.frame.size.width = newRect.width
             if oldRect.maxY == self.frame.minY {
                 self.frame.origin.y = newRect.maxY
             }
@@ -45,7 +54,13 @@ final class KeyboardRectCloneView: UIView {
             return
         }
 
-        frame = rect
+        if rect.isEmpty, let superview = superview {
+            frame = superview.bounds
+            frame.origin.y = superview.bounds.maxY
+        }
+        else {
+            frame = rect
+        }
 
         subscribers.compact().forEach { (reference: WeakRef<UIView>) in
             guard reference.object?.window != nil else {

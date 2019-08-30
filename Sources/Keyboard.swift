@@ -11,6 +11,10 @@ public class Keyboard: EdgeRelationCollection {
     }
 
     init() {
+        if KeyboardRectCloneView.shared.window == nil {
+            Maker.initializeKeyboardTracking()
+        }
+
         super.init(view: KeyboardRectCloneView.shared)
     }
 }

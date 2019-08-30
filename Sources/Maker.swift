@@ -65,6 +65,15 @@ public final class Maker {
     private var bottomParameter: SideParameter?
     private var rightParameter: SideParameter?
 
+    public static func initializeKeyboardTracking(with window: UIWindow? = nil) {
+        guard let window = window ?? UIApplication.shared.windows.first else {
+            assertionFailure("No window to attach to.")
+            return
+        }
+
+        KeyboardRectCloneView.shared.use(window)
+    }
+
     init(view: UIView) {
         self.view = view
         self.newRect = view.frame
