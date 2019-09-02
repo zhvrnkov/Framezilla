@@ -7,8 +7,8 @@ import UIKit
 final class KeyboardRectCloneView: UIView {
     static var shared: KeyboardRectCloneView = KeyboardRectCloneView(frame: .zero)
 
-    var subscribers: [WeakRef<UIView>] = []
-    var observer: NSKeyValueObservation?
+    private var subscribers: [WeakRef<UIView>] = []
+    private var observer: NSKeyValueObservation?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,6 +48,28 @@ final class KeyboardRectCloneView: UIView {
             }
         }
     }
+
+    func subscribe(_ view: UIView) {
+        guard subscribers.contains(where: { (reference: WeakRef<UIView>) -> Bool in
+            return reference.object === view
+        }) == false else {
+            return
+        }
+
+        subscribers.append(weak: view)
+    }
+
+    func unsubscribe(_ view: UIView) {
+        guard let index = subscribers.firstIndex(where: { (reference: WeakRef<UIView>) -> Bool in
+            return reference.object === view
+        }) else {
+            return
+        }
+
+        subscribers.remove(at: index)
+    }
+
+    // MARK: - Private
 
     @objc private func keyboardFrameChanged(_ notification: NSNotification) {
         guard let rect = notification.userInfo?[UIApplication.keyboardFrameEndUserInfoKey] as? CGRect else {

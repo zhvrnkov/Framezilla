@@ -6,8 +6,16 @@ import UIKit
 
 public class Keyboard: EdgeRelationCollection {
 
-    var rect: CGRect {
+    public var rect: CGRect {
         return KeyboardRectCloneView.shared.frame
+    }
+
+    public var isVisible: Bool {
+        guard let window = KeyboardRectCloneView.shared.window else {
+            return false
+        }
+
+        return KeyboardRectCloneView.shared.frame.minY != window.frame.maxY
     }
 
     init() {

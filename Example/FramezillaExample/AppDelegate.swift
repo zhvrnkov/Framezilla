@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        Maker.initializeKeyboardTracking(with: window)
+        // Calling `initializeKeyboardTracking` is not strictly required, but it helps avoid inconsistent keyboard state
+        // if the first `nui_keyboard` usage happens after keyboard was presented
+        // Maker.initializeKeyboardTracking(with: window)
         return true
     }
 }

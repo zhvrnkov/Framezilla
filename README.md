@@ -43,6 +43,7 @@ Run `carthage update` to build the framework and drag the built `Framezilla.fram
 - [x] Side relations: `nui_left`, `nui_bottom`, `nui_width`, `nui_centerX` and so on.
 - [x] States
 - [x] Safe area support 😱
+- [x] Keyboard
 
 # Usage :rocket:
 
@@ -207,6 +208,30 @@ label.configureFrame { maker in
     maker.centerX().and.centerY()
 }
 ```
+
+## Keyboard
+
+You can use framezilla to handle keyboard as well.
+
+To do so you need to : 
+1. Initialize keyboard tracking first via `Maker.initializeKeyboardTracking()`. It's better to do so as early as possible in order to avoid inconsistent keyboard state.
+2. Call `listenForKeyboardEvents()` on views which layout should take keyboard into consideration. This means that for every keyboard rect update, each view that's listening for keyboard events will be layed out. Listening for keyboard updates won't retain a view and view deallocation is handled gracefully, but there's also a `stopListeningForKeyboardEvents()` in case you don't longer need keyboard updates for some reason.
+3. Use `nui_keyboard` in layout code where needed.
+
+Example:
+```swift
+container.configureFrame { maker in
+    maker.left().right()
+    maker.height(40.0)
+    if nui_keyboard.isVisible {
+        maker.bottom(to: nui_keyboard.top)
+    }
+    else {
+        maker.bottom(to: view.nui_safeArea.bottom)
+    }
+}
+```
+
 
 ## Container
 

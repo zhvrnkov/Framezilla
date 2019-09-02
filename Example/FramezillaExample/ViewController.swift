@@ -87,7 +87,7 @@ class ViewController: UIViewController {
 
         container.configureFrame { maker in
             maker.centerX()
-            if view.isKeyboardVisible {
+            if nui_keyboard.isVisible {
                 maker.bottom(to: nui_keyboard.top)
             }
             else {

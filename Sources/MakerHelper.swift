@@ -44,43 +44,47 @@ extension Maker {
             convertedRect.size.height = superScrollView.contentSize.height
         }
 
+        return value(for: type, with: view, in: convertedRect)
+    }
+
+    func value(for type: RelationType, with view: UIView, in rect: CGRect) -> CGFloat {
         switch type {
         case .top:
-            return convertedRect.minY
+            return rect.minY
         case .bottom:
-            return convertedRect.maxY
+            return rect.maxY
         case .centerY:
-            return view.contains(self.view) ? convertedRect.height / 2 : convertedRect.midY
+            return view.contains(self.view) ? rect.height / 2 : rect.midY
         case .centerX:
-            return view.contains(self.view) ? convertedRect.width / 2 : convertedRect.midX
+            return view.contains(self.view) ? rect.width / 2 : rect.midX
         case .right:
-            return convertedRect.maxX
+            return rect.maxX
         case .left:
-            return convertedRect.minX
+            return rect.minX
         case .safeArea(.top):
             if #available(iOS 11.0, *) {
-                return convertedRect.minY + view.safeAreaInsets.top
+                return rect.minY + view.safeAreaInsets.top
             }
 
-            return convertedRect.minY
+            return rect.minY
         case .safeArea(.left):
             if #available(iOS 11.0, *) {
-                return convertedRect.minX + view.safeAreaInsets.left
+                return rect.minX + view.safeAreaInsets.left
             }
 
-            return convertedRect.minX
+            return rect.minX
         case .safeArea(.right):
             if #available(iOS 11.0, *) {
-                return convertedRect.maxX - view.safeAreaInsets.right
+                return rect.maxX - view.safeAreaInsets.right
             }
 
-            return convertedRect.maxX
+            return rect.maxX
         case .safeArea(.bottom):
             if #available(iOS 11.0, *) {
-                return convertedRect.maxY - view.safeAreaInsets.bottom
+                return rect.maxY - view.safeAreaInsets.bottom
             }
 
-            return convertedRect.maxY
+            return rect.maxY
         default:
             return 0
         }

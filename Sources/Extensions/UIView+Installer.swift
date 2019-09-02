@@ -123,13 +123,6 @@ public extension Sequence where Iterator.Element: UIView {
     }
 }
 
-public enum ContainerRelation {
-    case width(Number)
-    case height(Number)
-    case horizontal(left: Number, right: Number)
-    case vertical(top: Number, bottom: Number)
-}
-
 public extension Collection where Iterator.Element: UIView {
 
     /// Configures all subview within a passed container.

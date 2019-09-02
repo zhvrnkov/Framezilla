@@ -7,14 +7,10 @@ import Foundation
 public extension UIView {
 
     func listenForKeyboardEvents() {
-        KeyboardRectCloneView.shared.subscribers.append(weak: self)
+        KeyboardRectCloneView.shared.subscribe(self)
     }
 
-    var isKeyboardVisible: Bool {
-        guard let window = KeyboardRectCloneView.shared.window else {
-            return false
-        }
-
-        return KeyboardRectCloneView.shared.frame.minY != window.frame.maxY
+    func stopListeningForKeyboardEvents() {
+        KeyboardRectCloneView.shared.unsubscribe(self)
     }
 }

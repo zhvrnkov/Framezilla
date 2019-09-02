@@ -19,12 +19,6 @@ enum HandlerPriority: Int {
     case low
 }
 
-public struct SafeArea {}
-@available(*, deprecated, message: "Use `view.safeArea.<type>` instead")
-public var nui_safeArea: SafeArea {
-    return SafeArea()
-}
-
 /// Used for choosing which side should be used for frame configuration from UIEdgeInsets.
 
 public struct Sides: OptionSet {
