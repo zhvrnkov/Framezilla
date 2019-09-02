@@ -58,21 +58,12 @@ public enum ContainerRelation {
 public class EdgeRelationCollection {
     unowned var view: UIView
 
-    public lazy var top: RelationView<VerticalRelation> = .init(view: view, relation: .safeArea(.top))
-    public lazy var left: RelationView<HorizontalRelation> = .init(view: view, relation: .safeArea(.left))
-    public lazy var right: RelationView<HorizontalRelation> = .init(view: view, relation: .safeArea(.right))
-    public lazy var bottom: RelationView<VerticalRelation> = .init(view: view, relation: .safeArea(.bottom))
+    public lazy var top: RelationView<VerticalRelation> = .init(view: view, relation: .top)
+    public lazy var left: RelationView<HorizontalRelation> = .init(view: view, relation: .left)
+    public lazy var right: RelationView<HorizontalRelation> = .init(view: view, relation: .right)
+    public lazy var bottom: RelationView<VerticalRelation> = .init(view: view, relation: .bottom)
 
     init(view: UIView) {
         self.view = view
     }
-}
-
-@available(iOS 11.0, *)
-public final class SafeAreaRelationCollection: EdgeRelationCollection {}
-
-public struct SafeArea {}
-@available(*, deprecated, message: "Use `view.safeArea.<type>` instead")
-public var nui_safeArea: SafeArea {
-    return SafeArea()
 }

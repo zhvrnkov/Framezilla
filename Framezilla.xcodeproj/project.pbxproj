@@ -20,6 +20,8 @@
 		2E08383E230D2482007D0928 /* UIView+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E08383D230D2482007D0928 /* UIView+Keyboard.swift */; };
 		2E79EEC6231CE45C00A6C548 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E79EEC5231CE45C00A6C548 /* Relations.swift */; };
 		2E79EECA231CE8BB00A6C548 /* StateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E79EEC8231CE89D00A6C548 /* StateTests.swift */; };
+		2E79EECC231CF12300A6C548 /* KeyboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E79EECB231CF12300A6C548 /* KeyboardTests.swift */; };
+		2E79EECF231CF93900A6C548 /* SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E79EECD231CF90300A6C548 /* SafeArea.swift */; };
 		841192DD1FF205DC00AB255D /* ContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841192DC1FF205DC00AB255D /* ContainerTests.swift */; };
 		842BB7FC1F0638E9000D1CFF /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842BB7FB1F0638E9000D1CFF /* Parameters.swift */; };
 		8442F93E1EC75A8500B72551 /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442F9351EC75A8500B72551 /* BaseTest.swift */; };
@@ -65,6 +67,8 @@
 		2E08383D230D2482007D0928 /* UIView+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Keyboard.swift"; sourceTree = "<group>"; };
 		2E79EEC5231CE45C00A6C548 /* Relations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relations.swift; sourceTree = "<group>"; };
 		2E79EEC8231CE89D00A6C548 /* StateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateTests.swift; sourceTree = "<group>"; };
+		2E79EECB231CF12300A6C548 /* KeyboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTests.swift; sourceTree = "<group>"; };
+		2E79EECD231CF90300A6C548 /* SafeArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArea.swift; sourceTree = "<group>"; };
 		841192DC1FF205DC00AB255D /* ContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTests.swift; sourceTree = "<group>"; };
 		842BB7FB1F0638E9000D1CFF /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		8442F9351EC75A8500B72551 /* BaseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 				8497C0101E59EB7700447E2F /* Number.swift */,
 				842BB7FB1F0638E9000D1CFF /* Parameters.swift */,
 				2E79EEC5231CE45C00A6C548 /* Relations.swift */,
+				2E79EECD231CF90300A6C548 /* SafeArea.swift */,
 				2E08383B230D245F007D0928 /* Weak.swift */,
 			);
 			path = Sources;
@@ -187,6 +192,7 @@
 				2E79EEC8231CE89D00A6C548 /* StateTests.swift */,
 				841192DC1FF205DC00AB255D /* ContainerTests.swift */,
 				852FEEE222D473F200B79A6C /* ExtensionsTests.swift */,
+				2E79EECB231CF12300A6C548 /* KeyboardTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 			files = (
 				8442F9441EC75A8500B72551 /* MakerWidthHeightTests.swift in Sources */,
 				841192DD1FF205DC00AB255D /* ContainerTests.swift in Sources */,
+				2E79EECC231CF12300A6C548 /* KeyboardTests.swift in Sources */,
 				8442F9411EC75A8500B72551 /* MakerCenterTests.swift in Sources */,
 				2E79EECA231CE8BB00A6C548 /* StateTests.swift in Sources */,
 				852FEEE322D473F200B79A6C /* ExtensionsTests.swift in Sources */,
@@ -342,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11FB41461D844F8F00700A40 /* Maker+Configurations.swift in Sources */,
+				2E79EECF231CF93900A6C548 /* SafeArea.swift in Sources */,
 				11FB41451D844F8F00700A40 /* Maker.swift in Sources */,
 				85221C0022E99D4100EA9D3D /* OptionSet+ForEeach.swift in Sources */,
 				2E08383E230D2482007D0928 /* UIView+Keyboard.swift in Sources */,
