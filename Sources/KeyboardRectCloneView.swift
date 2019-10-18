@@ -15,7 +15,7 @@ final class KeyboardRectCloneView: UIView {
         isUserInteractionEnabled = false
 
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardFrameChanged(_:)),
+                                               selector: #selector(keyboardFrameChanged),
                                                name: UIApplication.keyboardWillChangeFrameNotification,
                                                object: nil)
     }

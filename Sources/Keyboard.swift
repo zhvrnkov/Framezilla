@@ -15,7 +15,7 @@ public class Keyboard: EdgeRelationCollection {
             return false
         }
 
-        return KeyboardRectCloneView.shared.frame.minY != window.frame.maxY
+        return KeyboardRectCloneView.shared.frame.intersects(window.frame)
     }
 
     init() {

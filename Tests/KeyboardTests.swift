@@ -5,7 +5,7 @@
 import XCTest
 import Framezilla
 
-class DummyView: UIView {
+final class DummyView: UIView {
     var layoutHandler: (() -> Void)?
 
     override func layoutSubviews() {
@@ -14,7 +14,7 @@ class DummyView: UIView {
     }
 }
 
-class KeyboardTests: BaseTest {
+final class KeyboardTests: BaseTest {
 
     private func postKeyboardNotification(rect: CGRect) {
         NotificationCenter.default.post(name: UIApplication.keyboardWillChangeFrameNotification,

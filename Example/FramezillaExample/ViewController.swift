@@ -29,7 +29,7 @@ class ViewController: UIViewController {
 
         view.backgroundColor = .white
 
-        container.backgroundColor = .yellow
+        container.backgroundColor = .cyan
 
         content1.backgroundColor = .red
         content2.backgroundColor = .black
@@ -49,6 +49,8 @@ class ViewController: UIViewController {
         label3.text = "Helloe"
 
         textField1.placeholder = "Type Something"
+        textField1.delegate = self
+        textField1.backgroundColor = .white
 
         view.addSubview(container)
         view.listenForKeyboardEvents()
@@ -97,3 +99,12 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
+
+extension ViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+}
