@@ -800,7 +800,7 @@ public final class Maker {
     /// Use this method when you want to center view by both axis relativity another view.
     ///
     /// - parameter view: The view on which you set center relation.
-    /// - parameter radius: Radius of the arc on which center point would be placed.
+    /// - parameter radius: Radius of the arc on which center point will be placed.
     /// - parameter angle: Angle at which center point will be placed.
     ///
     /// - returns: `Maker` instance for chaining relations.
