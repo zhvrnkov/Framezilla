@@ -337,4 +337,26 @@ class MakerCenterTests: BaseTest {
         }
         XCTAssertEqual(testingView.frame, CGRect(x: 225, y: 225, width: 50, height: 50))
     }
+
+    func testThatCorrectlyConfiguresCenterToAnotherViewWithArc() {
+        testingView.configureFrame { maker in
+            maker.center(to: nestedView2, radius: 20.0, angle: 0.0)
+        }
+        XCTAssertEqual(testingView.frame, CGRect(x: 245, y: 225, width: 50, height: 50))
+
+        testingView.configureFrame { maker in
+            maker.center(to: nestedView2, radius: 20.0, angle: 0.5 * .pi)
+        }
+        XCTAssertEqual(testingView.frame, CGRect(x: 225, y: 245, width: 50, height: 50))
+
+        testingView.configureFrame { maker in
+            maker.center(to: nestedView2, radius: 20.0, angle: .pi)
+        }
+        XCTAssertEqual(testingView.frame, CGRect(x: 205, y: 225, width: 50, height: 50))
+
+        testingView.configureFrame { maker in
+            maker.center(to: nestedView2, radius: 20.0, angle: 1.5 * .pi)
+        }
+        XCTAssertEqual(testingView.frame, CGRect(x: 225, y: 205, width: 50, height: 50))
+    }
 }
