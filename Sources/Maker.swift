@@ -795,6 +795,23 @@ public final class Maker {
                 .centerY(to: RelationView<VerticalRelation>(view: view, relation: .centerY))
     }
 
+    /// Creates center relation rotated around center of a specified view.
+    ///
+    /// Use this method when you want to center view by both axis relativity another view.
+    ///
+    /// - parameter view: The view on which you set center relation.
+    /// - parameter radius: Radius of the arc on which center point will be placed.
+    /// - parameter angle: Angle at which center point will be placed.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+
+    @discardableResult public func center(to view: UIView, radius: CGFloat, angle: CGFloat) -> Maker {
+        let offsetX = -radius * cos(-angle)
+        let offsetY = radius * sin(-angle)
+        return centerX(to: RelationView<HorizontalRelation>(view: view, relation: .centerX), offset: offsetX)
+                .centerY(to: RelationView<VerticalRelation>(view: view, relation: .centerY), offset: offsetY)
+    }
+
     /// Creates centerY relation.
     ///
     /// Use this method when you want to join centerY of current view with centerY of superview.

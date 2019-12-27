@@ -35,7 +35,7 @@ Run `carthage update` to build the framework and drag the built `Framezilla.fram
 - [x] Edges with superview
 - [x] Width / Height
 - [x] Top / Left / Bottom / Right 
-- [x] CenterX / CenterY / Center (between views)
+- [x] CenterX / CenterY / Center between views / Center on arc
 - [x] SizeToFit / SizeThatFits / WidthToFit / HeightToFit
 - [x] Container
 - [x] Stack
@@ -178,6 +178,18 @@ view.configureFrame { maker in
     maker.centerX(to: self.view1.nui_right, offset: 0)
     maker.centerY(to: self.view1.nui_top) //Zero offset - default
     maker.size(width: 50, height: 50)
+}
+```
+
+### Center on arc
+
+![](img/centeredArc.png)
+
+If you need to do something like this, you can do:
+```swift
+view.configureFrame { maker in
+    maker.centerX(to: view1, radius: 0.5 * view1.bounds.width, angle: -.pi / 4.0)
+    maker.size(width: 30, height: 30)
 }
 ```
 
