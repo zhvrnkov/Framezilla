@@ -31,8 +31,8 @@ extension Maker {
                 return CGRect(origin: .zero, size: superview.frame.size)
             }
 
-            if let supervew = self.view.superview {
-                return supervew.convert(view.frame, from: view.superview)
+            if let superview = self.view.superview {
+                return superview.convert(view.frame, from: view.superview)
             }
             assertionFailure("Can't configure a frame for view: \(self.view) without superview.")
             return .zero
