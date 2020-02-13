@@ -6,28 +6,24 @@ import UIKit
 
 public extension Maker {
 
-    func max<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
-        let deltas = calculatedDeltas(between: lhs, and: rhs)
-        let lhsDelta = deltas.lhsDelta
-        let rhsDelta = deltas.rhsDelta
-        return lhsDelta > rhsDelta ? lhs : rhs
+    func maxRelation<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
+        let lhsConvertedValue = convertedValue(for: lhs)
+        let rhsConvertedValue = convertedValue(for: rhs)
+        return lhsConvertedValue > rhsConvertedValue ? lhs : rhs
     }
 
-    func min<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
-        let deltas = calculatedDeltas(between: lhs, and: rhs)
-        let lhsDelta = deltas.lhsDelta
-        let rhsDelta = deltas.rhsDelta
-        return lhsDelta < rhsDelta ? lhs : rhs
+    func minRelation<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
+        let lhsConvertedValue = convertedValue(for: lhs)
+        let rhsConvertedValue = convertedValue(for: rhs)
+        return lhsConvertedValue < rhsConvertedValue ? lhs : rhs
     }
 
-    private func calculatedDeltas<Relation>(between lhs: RelationView<Relation>,
-                                            and rhs: RelationView<Relation>) -> (lhsDelta: CGFloat, rhsDelta: CGFloat) {
-
-        let currentConvertedPoint = convertedValue(for: lhs.relationType, with: view)
-        let lhsConvertedPoint = convertedValue(for: lhs.relationType, with: lhs.view)
-        let rhsConvertedPoint = convertedValue(for: rhs.relationType, with: rhs.view)
-        let lhsDelta = lhsConvertedPoint - currentConvertedPoint
-        let rhsDelta = rhsConvertedPoint - currentConvertedPoint
-        return (lhsDelta, rhsDelta)
+    private func convertedValue<Relation>(for relation: RelationView<Relation>) -> CGFloat {
+        if relation.relationType.isSizeType {
+            return relationSize(view: relation.view, for: relation.relationType)
+        }
+        else {
+            return convertedValue(for: relation.relationType, with: relation.view)
+        }
     }
 }

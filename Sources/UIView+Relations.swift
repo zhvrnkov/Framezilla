@@ -42,6 +42,17 @@ enum RelationType {
     case centerY
 }
 
+extension RelationType {
+    var isSizeType: Bool {
+        switch self {
+            case .height, .heightTo, .width, .widthTo:
+                return true
+            default:
+                return false
+        }
+    }
+}
+
 public extension UIView {
     
     /// Width relation of current view.

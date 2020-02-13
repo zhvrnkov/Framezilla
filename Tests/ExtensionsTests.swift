@@ -65,7 +65,7 @@ final class ExtensionsTests: BaseTest {
     func testMinHorizontalRelationSearch() {
         testingView.frame = .zero
         testingView.configureFrame { maker in
-            let minLeftRelation = maker.min(nestedView1.nui_left, nestedView2.nui_left)
+            let minLeftRelation = maker.minRelation(nestedView1.nui_left, nestedView2.nui_left)
             maker.left(to: minLeftRelation)
         }
         let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
