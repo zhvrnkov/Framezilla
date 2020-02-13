@@ -276,11 +276,22 @@ If you have already configured container, then this method will be more convenie
 
 ## Cool things:
 
-Sometimes you want to configure a few views with the same size, for examlple. There is a convinience method:
+Sometimes you want to configure a few views with the same size, for examlple. There is a convenience method:
 
 ```swift
 [view1, view2].configureFrames { maker in
     maker.size(width: 200, height: 100)
+}
+```       
+If you need to find maximum or minimum between relations you can use following convenience methods:
+
+```swift
+let view2.frame = CGRect(x: 0, y: 300, width: 200, height: 200)
+let view3.frame = CGRect(x: 100, y: 100, width: 200, height: 200)
+view1.configureFrame { maker in
+    let minLeftRelation = maker.min(view2.nui_left, view3.nui_left)
+    let maxTopRelation = maker.max(view2.nui_top, view3.nui_top)
+    maker.left(to: minLeftRelation).bottom(to: maxTopRelation)
 }
 ```       
 
