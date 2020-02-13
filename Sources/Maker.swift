@@ -258,6 +258,16 @@ public final class Maker {
         return self.width(width).height(height)
     }
 
+    /// Installs constant width and height at the same time.
+    ///
+    /// - parameter size:  The size for view.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+
+    @discardableResult public func size(_ size: CGSize) -> Maker {
+        return self.size(width: size.width, height: size.height)
+    }
+
     /// Creates left relation to superview.
     ///
     /// Use this method when you want to join left side of current view with left side of superview.
