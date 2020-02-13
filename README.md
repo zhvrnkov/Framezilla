@@ -35,7 +35,7 @@ Run `carthage update` to build the framework and drag the built `Framezilla.fram
 - [x] Edges with superview
 - [x] Width / Height
 - [x] Top / Left / Bottom / Right 
-- [x] CenterX / CenterY / Center (between views)
+- [x] CenterX / CenterY / Center between views / Center on arc
 - [x] SizeToFit / SizeThatFits / WidthToFit / HeightToFit
 - [x] Container
 - [x] Stack
@@ -43,6 +43,7 @@ Run `carthage update` to build the framework and drag the built `Framezilla.fram
 - [x] Side relations: `nui_left`, `nui_bottom`, `nui_width`, `nui_centerX` and so on.
 - [x] States
 - [x] Safe area support 😱
+- [x] Keyboard
 
 # Usage :rocket:
 
@@ -142,10 +143,10 @@ In iOS 11 Apple has introduced the safe area, similar to `topLayoutGuide` and `b
 
 ```swift
 content.configureFrame { maker in
-    maker.top(to: nui_safeArea)
-    maker.bottom(to: nui_safeArea)
-    maker.right(to: nui_safeArea, inset: 10)
-    maker.left(to: nui_safeArea, inset: 10)
+    maker.top(to: view.nui_safeArea.top)
+    maker.bottom(to: view.nui_safeArea.bottom)
+    maker.right(to: view.nui_safeArea.right, inset: 10)
+    maker.left(to: view.nui_safeArea.left, inset: 10)
 }
 ```
 
@@ -180,6 +181,18 @@ view.configureFrame { maker in
 }
 ```
 
+### Center on arc
+
+![](img/centeredArc.png)
+
+If you need to do something like this, you can do:
+```swift
+view.configureFrame { maker in
+    maker.centerX(to: view1, radius: 0.5 * view1.bounds.width, angle: -.pi / 4.0)
+    maker.size(width: 30, height: 30)
+}
+```
+
 ## SizeToFit and SizeThatFits
 
 Very often you should configure labels, so there are some methods for comfortable work with them.
@@ -207,6 +220,30 @@ label.configureFrame { maker in
     maker.centerX().and.centerY()
 }
 ```
+
+## Keyboard
+
+You can use framezilla to handle keyboard as well.
+
+To do so you need to : 
+1. Initialize keyboard tracking first via `Maker.initializeKeyboardTracking()`. It's better to do so as early as possible in order to avoid inconsistent keyboard state.
+2. Call `listenForKeyboardEvents()` on views which layout should take keyboard into consideration. This means that for every keyboard rect update, each view that's listening for keyboard events will be layed out. Listening for keyboard updates won't retain a view and view deallocation is handled gracefully, but there's also a `stopListeningForKeyboardEvents()` in case you don't longer need keyboard updates for some reason.
+3. Use `nui_keyboard` in layout code where needed.
+
+Example:
+```swift
+container.configureFrame { maker in
+    maker.left().right()
+    maker.height(40.0)
+    if nui_keyboard.isVisible {
+        maker.bottom(to: nui_keyboard.top)
+    }
+    else {
+        maker.bottom(to: view.nui_safeArea.bottom)
+    }
+}
+```
+
 
 ## Container
 

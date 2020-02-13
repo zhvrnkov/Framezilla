@@ -44,6 +44,7 @@ class StateTests: BaseTest {
     private func configureFramesForSingleView() {
         
         view1.frame = .zero
+        testingView.addSubview(view1)
         
         view1.configureFrame { maker in
             maker.width(10)
@@ -93,7 +94,10 @@ class StateTests: BaseTest {
     private func configureFramesForArrayOfViews() {
         
         view1.frame = .zero
+        testingView.addSubview(view1)
+
         view2.frame = .zero
+        testingView.addSubview(view2)
         
         [view1, view2].configureFrames { maker in
             maker.width(10)

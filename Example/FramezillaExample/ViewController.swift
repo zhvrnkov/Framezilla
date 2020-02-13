@@ -22,12 +22,14 @@ class ViewController: UIViewController {
     let label2 = UILabel()
     let label3 = UILabel()
 
+    let textField1 = UITextField()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
 
-        container.backgroundColor = .yellow
+        container.backgroundColor = .cyan
 
         content1.backgroundColor = .red
         content2.backgroundColor = .black
@@ -46,13 +48,18 @@ class ViewController: UIViewController {
         label2.text = "Helloe Helloe Helloe Helloe Helloe"
         label3.text = "Helloe"
 
+        textField1.placeholder = "Type Something"
+        textField1.delegate = self
+        textField1.backgroundColor = .white
+
         view.addSubview(container)
+        view.listenForKeyboardEvents()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        [content1, label1, label2, label3].configure(container: container, relation: .horizontal(left: 20, right: 20)) {
+        [content1, label1, label2, label3, textField1].configure(container: container, relation: .horizontal(left: 20, right: 20)) {
             content1.configureFrame { maker in
                 maker.top(inset: 10)
                 maker.size(width: 100, height: 60)
@@ -73,12 +80,31 @@ class ViewController: UIViewController {
                 maker.left().right().top(to: label2.nui_bottom, inset: 20)
                 maker.heightToFit()
             }
+
+            textField1.configureFrame { maker in
+                maker.left().right().top(to: label3.nui_bottom, inset: 20)
+                maker.heightToFit()
+            }
         }
 
         container.configureFrame { maker in
             maker.centerX()
-            maker.bottom(inset: 20)
+            if nui_keyboard.isVisible {
+                maker.bottom(to: nui_keyboard.top)
+            }
+            else {
+                maker.bottom(to: view.nui_safeArea.bottom, inset: 20)
+            }
         }
     }
 }
 
+// MARK: - UITextFieldDelegate
+
+extension ViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+}

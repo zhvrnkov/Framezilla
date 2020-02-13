@@ -9,7 +9,7 @@
 import Foundation
 
 fileprivate extension UIView {
-    
+
     func contains(_ view: UIView) -> Bool {
         if subviews.contains(view) {
             return true
@@ -44,17 +44,52 @@ extension Maker {
             convertedRect.size.height = superScrollView.contentSize.height
         }
 
+        return value(for: type, with: view, in: convertedRect)
+    }
+
+    func value(for type: RelationType, with view: UIView, in rect: CGRect) -> CGFloat {
         switch type {
-        case .top:        return convertedRect.minY
-        case .bottom:     return convertedRect.maxY
-        case .centerY:    return view.contains(self.view) ? convertedRect.height / 2 : convertedRect.midY
-        case .centerX:    return view.contains(self.view) ? convertedRect.width / 2 : convertedRect.midX
-        case .right:      return convertedRect.maxX
-        case .left:       return convertedRect.minX
-        default:          return 0
+        case .top:
+            return rect.minY
+        case .bottom:
+            return rect.maxY
+        case .centerY:
+            return view.contains(self.view) ? rect.height / 2 : rect.midY
+        case .centerX:
+            return view.contains(self.view) ? rect.width / 2 : rect.midX
+        case .right:
+            return rect.maxX
+        case .left:
+            return rect.minX
+        case .safeArea(.top):
+            if #available(iOS 11.0, *) {
+                return rect.minY + view.safeAreaInsets.top
+            }
+
+            return rect.minY
+        case .safeArea(.left):
+            if #available(iOS 11.0, *) {
+                return rect.minX + view.safeAreaInsets.left
+            }
+
+            return rect.minX
+        case .safeArea(.right):
+            if #available(iOS 11.0, *) {
+                return rect.maxX - view.safeAreaInsets.right
+            }
+
+            return rect.maxX
+        case .safeArea(.bottom):
+            if #available(iOS 11.0, *) {
+                return rect.maxY - view.safeAreaInsets.bottom
+            }
+
+            return rect.maxY
+        default:
+            return 0
         }
     }
-    
+
     func relationSize(view: UIView, for type: RelationType) -> CGFloat {
         switch type {
         case .width:  return view.bounds.width
@@ -65,7 +100,7 @@ extension Maker {
 }
 
 extension CGRect {
-    
+
     mutating func setValue(_ value: CGFloat, for type: RelationType) {
         var frame = self
         switch type {
