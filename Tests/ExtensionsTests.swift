@@ -62,6 +62,8 @@ final class ExtensionsTests: BaseTest {
         }
     }
 
+    // MARK: - Min / Max relation search tests
+
     func testMinHorizontalRelationSearch() {
         testingView.frame = .zero
         testingView.configureFrame { maker in
@@ -75,5 +77,50 @@ final class ExtensionsTests: BaseTest {
         XCTAssertEqual(testingView.frame.origin.x,
                        minX,
                        "Left inset of testing view should be equal to minimal X between nested views")
+    }
+
+    func testMaxHorizontalRelationSearch() {
+        testingView.frame = .zero
+        testingView.configureFrame { maker in
+            let maxLeftRelation = maker.maxRelation(nestedView1.nui_left, nestedView2.nui_left)
+            maker.left(to: maxLeftRelation)
+        }
+        let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
+        let convertedRect2 = mainView.convert(nestedView2.frame, from: nestedView2.superview)
+
+        let maxX = max(convertedRect1.origin.x, convertedRect2.origin.x)
+        XCTAssertEqual(testingView.frame.origin.x,
+                       maxX,
+                       "Left inset of testing view should be equal to maximum X between nested views")
+    }
+
+    func testMinVerticalRelationSearch() {
+        testingView.frame = .zero
+        testingView.configureFrame { maker in
+            let minBottomRelation = maker.minRelation(nestedView1.nui_bottom, nestedView2.nui_bottom)
+            maker.bottom(to: minBottomRelation)
+        }
+        let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
+        let convertedRect2 = mainView.convert(nestedView2.frame, from: nestedView2.superview)
+
+        let minY = min(convertedRect1.maxY, convertedRect2.maxY)
+        XCTAssertEqual(testingView.frame.origin.y,
+                       minY,
+                       "Left inset of testing view should be equal to minimum Y between nested views")
+    }
+
+    func testMaxVerticalRelationSearch() {
+        testingView.frame = .zero
+        testingView.configureFrame { maker in
+            let maxBottomRelation = maker.maxRelation(nestedView1.nui_bottom, nestedView2.nui_bottom)
+            maker.bottom(to: maxBottomRelation)
+        }
+        let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
+        let convertedRect2 = mainView.convert(nestedView2.frame, from: nestedView2.superview)
+
+        let maxY = max(convertedRect1.maxY, convertedRect2.maxY)
+        XCTAssertEqual(testingView.frame.origin.y,
+                       maxY,
+                       "Left inset of testing view should be equal to maximum Y between nested views")
     }
 }
