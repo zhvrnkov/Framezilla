@@ -61,4 +61,19 @@ final class ExtensionsTests: BaseTest {
             }
         }
     }
+
+    func testMinHorizontalRelationSearch() {
+        testingView.frame = .zero
+        testingView.configureFrame { maker in
+            let minLeftRelation = maker.min(nestedView1.nui_left, nestedView2.nui_left)
+            maker.left(to: minLeftRelation)
+        }
+        let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
+        let convertedRect2 = mainView.convert(nestedView2.frame, from: nestedView2.superview)
+
+        let minX = min(convertedRect1.origin.x, convertedRect2.origin.x)
+        XCTAssertEqual(testingView.frame.origin.x,
+                       minX,
+                       "Left inset of testing view should be equal to minimal X between nested views")
+    }
 }
