@@ -472,6 +472,14 @@ class MakerTests: BaseTest {
         testingView.frame = .zero
         testingView.configureFrame { maker in
             maker.size(width: size.width, height: size.height)
+        }
+        XCTAssertEqual(size, testingView.frame.size)
+    }
+
+    func testSizeConfigurationWithCGSize() {
+        let size = CGSize(width: 50, height: 50)
+        testingView.frame = .zero
+        testingView.configureFrame { maker in
             maker.size(size)
         }
         XCTAssertEqual(size, testingView.frame.size)
