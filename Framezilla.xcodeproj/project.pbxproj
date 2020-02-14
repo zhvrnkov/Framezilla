@@ -37,6 +37,7 @@
 		84EDCC241F9B3AB10091FAB9 /* MakerSafeAreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDCC231F9B3AB10091FAB9 /* MakerSafeAreaTests.swift */; };
 		85221C0022E99D4100EA9D3D /* OptionSet+ForEeach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */; };
 		852FEEE322D473F200B79A6C /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852FEEE222D473F200B79A6C /* ExtensionsTests.swift */; };
+		853DC84223F6498300C10332 /* Maker+Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853DC84123F6498300C10332 /* Maker+Relations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		84EDCC231F9B3AB10091FAB9 /* MakerSafeAreaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerSafeAreaTests.swift; sourceTree = "<group>"; };
 		85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+ForEeach.swift"; sourceTree = "<group>"; };
 		852FEEE222D473F200B79A6C /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
+		853DC84123F6498300C10332 /* Maker+Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Maker+Relations.swift"; path = "Sources/Maker+Relations.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		2E08383F230D249B007D0928 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				853DC84123F6498300C10332 /* Maker+Relations.swift */,
 				8497C0121E59FA4B00447E2F /* Array+Stack.swift */,
 				11FB41411D844F8F00700A40 /* Maker+Configurations.swift */,
 				844BE8F220457634004C19A8 /* Maker+Unavailable.swift */,
@@ -360,6 +363,7 @@
 				11FB41471D844F8F00700A40 /* MakerHelper.swift in Sources */,
 				8497C0131E59FA4B00447E2F /* Array+Stack.swift in Sources */,
 				11FB41481D844F8F00700A40 /* UIView+Installer.swift in Sources */,
+				853DC84223F6498300C10332 /* Maker+Relations.swift in Sources */,
 				844BE8F320457634004C19A8 /* Maker+Unavailable.swift in Sources */,
 				11FB41491D844F8F00700A40 /* UIView+Relations.swift in Sources */,
 				842BB7FC1F0638E9000D1CFF /* Parameters.swift in Sources */,

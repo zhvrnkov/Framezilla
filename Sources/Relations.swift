@@ -48,6 +48,17 @@ enum RelationType {
     case safeArea(SafeAreaType)
 }
 
+extension RelationType {
+    var isSizeType: Bool {
+        switch self {
+        case .width, .widthTo, .height, .heightTo:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 public enum ContainerRelation {
     case width(Number)
     case height(Number)
