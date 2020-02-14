@@ -10,8 +10,8 @@ public extension Maker {
     ///
     /// Use this method when you want to find relation with max value.
     ///
-    /// - parameter lhs:   The left hand side relation to campare.
-    /// - parameter rhs:   The right hand side relation to campare.
+    /// - parameter lhs:   The left hand side relation to compare.
+    /// - parameter rhs:   The right hand side relation to compare.
     ///
     /// - returns: `RelationView<Relation>` relation with max value between `lhs`and `rhs`.
 
@@ -25,8 +25,8 @@ public extension Maker {
     ///
     /// Use this method when you want to find relation with min value.
     ///
-    /// - parameter lhs:   The left hand side relation to campare.
-    /// - parameter rhs:   The right hand side relation to campare.
+    /// - parameter lhs:   The left hand side relation to compare.
+    /// - parameter rhs:   The right hand side relation to compare.
     ///
     /// - returns: `RelationView<Relation>` relation with min value between `lhs`and `rhs`.
 
