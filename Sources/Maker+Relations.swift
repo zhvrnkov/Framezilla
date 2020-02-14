@@ -15,7 +15,7 @@ public extension Maker {
     ///
     /// - returns: `RelationView<Relation>` relation with max value between `lhs`and `rhs`.
 
-    func maxRelation<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
+    func max<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
         let lhsConvertedValue = convertedValue(for: lhs)
         let rhsConvertedValue = convertedValue(for: rhs)
         return lhsConvertedValue > rhsConvertedValue ? lhs : rhs
@@ -30,7 +30,7 @@ public extension Maker {
     ///
     /// - returns: `RelationView<Relation>` relation with min value between `lhs`and `rhs`.
 
-    func minRelation<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
+    func min<Relation>(_ lhs: RelationView<Relation>, _ rhs: RelationView<Relation>) -> RelationView<Relation> {
         let lhsConvertedValue = convertedValue(for: lhs)
         let rhsConvertedValue = convertedValue(for: rhs)
         return lhsConvertedValue < rhsConvertedValue ? lhs : rhs

@@ -67,7 +67,7 @@ final class ExtensionsTests: BaseTest {
     func testMinHorizontalRelationSearch() {
         testingView.frame = .zero
         testingView.configureFrame { maker in
-            let minLeftRelation = maker.minRelation(nestedView1.nui_left, nestedView2.nui_left)
+            let minLeftRelation = maker.min(nestedView1.nui_left, nestedView2.nui_left)
             maker.left(to: minLeftRelation)
         }
         let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
@@ -82,7 +82,7 @@ final class ExtensionsTests: BaseTest {
     func testMaxHorizontalRelationSearch() {
         testingView.frame = .zero
         testingView.configureFrame { maker in
-            let maxLeftRelation = maker.maxRelation(nestedView1.nui_left, nestedView2.nui_left)
+            let maxLeftRelation = maker.max(nestedView1.nui_left, nestedView2.nui_left)
             maker.left(to: maxLeftRelation)
         }
         let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
@@ -97,7 +97,7 @@ final class ExtensionsTests: BaseTest {
     func testMinVerticalRelationSearch() {
         testingView.frame = .zero
         testingView.configureFrame { maker in
-            let minBottomRelation = maker.minRelation(nestedView1.nui_bottom, nestedView2.nui_bottom)
+            let minBottomRelation = maker.min(nestedView1.nui_bottom, nestedView2.nui_bottom)
             maker.bottom(to: minBottomRelation)
         }
         let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
@@ -112,7 +112,7 @@ final class ExtensionsTests: BaseTest {
     func testMaxVerticalRelationSearch() {
         testingView.frame = .zero
         testingView.configureFrame { maker in
-            let maxBottomRelation = maker.maxRelation(nestedView1.nui_bottom, nestedView2.nui_bottom)
+            let maxBottomRelation = maker.max(nestedView1.nui_bottom, nestedView2.nui_bottom)
             maker.bottom(to: maxBottomRelation)
         }
         let convertedRect1 = mainView.convert(nestedView1.frame, from: nestedView1.superview)
