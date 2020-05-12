@@ -22,6 +22,10 @@ class ViewController: UIViewController {
     let label2 = UILabel()
     let label3 = UILabel()
 
+    let layer1 = CALayer()
+    let layer2 = CALayer()
+    let layer3 = CALayer()
+
     let textField1 = UITextField()
 
     override func viewDidLoad() {
@@ -52,7 +56,12 @@ class ViewController: UIViewController {
         textField1.delegate = self
         textField1.backgroundColor = .white
 
+        layer1.backgroundColor = UIColor.red.cgColor
+        layer2.backgroundColor = UIColor.green.cgColor
+        layer3.backgroundColor = UIColor.blue.cgColor
+
         view.addSubview(container)
+        view.layer.addSublayer(layer1)
         view.listenForKeyboardEvents()
     }
 
@@ -95,6 +104,19 @@ class ViewController: UIViewController {
             else {
                 maker.bottom(to: view.nui_safeArea.bottom, inset: 20)
             }
+        }
+
+        [layer2, layer3].configure(container: layer1) {
+            layer2.configureFrame { maker in
+                maker.size(width: 100, height: 20).centerY()
+            }
+            layer3.configureFrame { maker in
+                maker.size(width: 20, height: 100).centerX()
+            }
+        }
+
+        layer1.configureFrame { maker in
+            maker.top(to: view.nui_safeArea.top, inset: 10).centerX()
         }
     }
 }

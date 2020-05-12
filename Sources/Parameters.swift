@@ -18,11 +18,11 @@ final class ValueParameter {
 
 final class SideParameter {
 
-    unowned let view: UIView
+    let view: ViewType
     let value: CGFloat
     let relationType: RelationType
 
-    init(view: UIView, value: CGFloat, relationType: RelationType) {
+    init(view: ViewType, value: CGFloat, relationType: RelationType) {
         self.view = view
         self.value = value
         self.relationType = relationType

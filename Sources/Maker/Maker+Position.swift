@@ -1,276 +1,10 @@
 //
-//  Maker.swift
-//  Framezilla
-//
-//  Created by Nikita on 26/08/16.
-//  Copyright © 2016 Nikita. All rights reserved.
+//  Copyright © 2020 Rosberry. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-public enum Size {
-    case width
-    case height
-}
-
-enum HandlerPriority: Int {
-    case high
-    case middle
-    case low
-}
-
-/// Used for choosing which side should be used for frame configuration from UIEdgeInsets.
-
-public struct Sides: OptionSet {
-    public let rawValue: Int
-    
-    public static let top: Sides = .init(rawValue: 1 << 0)
-    public static let bottom: Sides = .init(rawValue: 1 << 1)
-    public static let left: Sides = .init(rawValue: 1 << 2)
-    public static let right: Sides = .init(rawValue: 1 << 3)
-
-    public static let vertical: Sides = [.top, .bottom]
-    public static let horizontal: Sides = [.left, .right]
-
-    public static let all: Sides = [.vertical, .horizontal]
-    
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
-    }
-}
-
-public final class Maker {
-
-    typealias HandlerType = () -> Void
-
-    unowned let view: UIView
-
-    var handlers = ContiguousArray<(priority: HandlerPriority, handler: HandlerType)>()
-    var newRect: CGRect
-
-    private var widthParameter: ValueParameter?
-    private var widthToParameter: SideParameter?
-
-    private var heightParameter: ValueParameter?
-    private var heightToParameter: SideParameter?
-
-    private var leftParameter: SideParameter?
-    private var topParameter: SideParameter?
-    private var bottomParameter: SideParameter?
-    private var rightParameter: SideParameter?
-
-    public static func initializeKeyboardTracking(with window: UIWindow? = nil) {
-        guard let window = window ?? UIApplication.shared.windows.first else {
-            assertionFailure("No window to attach to.")
-            return
-        }
-
-        KeyboardRectCloneView.shared.use(window)
-    }
-
-    init(view: UIView) {
-        self.view = view
-        self.newRect = view.frame
-    }
-
-    // MARK: Additions
-
-    ///	Optional semantic property for improvements readability.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    public var and: Maker {
-        return self
-    }
-
-    /// Creates edge relations.
-    ///
-    /// - parameter view:   The view, against which sets relations.
-    /// - parameter insets: The insets for setting relations with `view`. Default value: `UIEdgeInsets.zero`.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func equal(to view: UIView, insets: UIEdgeInsets = .zero) -> Maker {
-        let topView = RelationView<VerticalRelation>(view: view, relation: .top)
-        let leftView = RelationView<HorizontalRelation>(view: view, relation: .left)
-        let bottomView = RelationView<VerticalRelation>(view: view, relation: .bottom)
-        let rightView = RelationView<HorizontalRelation>(view: view, relation: .right)
-
-        return  top(to: topView, inset: insets.top)
-                .left(to: leftView, inset: insets.left)
-                .bottom(to: bottomView, inset: insets.bottom)
-                .right(to: rightView, inset: insets.right)
-    }
-
-    /// Creates edge relations.
-    ///
-    /// It's useful method for configure some side relations in short form.
-    ///
-    /// ```
-    /// Instead of writing:
-    ///     maker.top(10).bottom(10).and.left(10)
-    /// just write:
-    ///     maker.edges(top:10, left:10, bottom:10) - it's more elegant.
-    /// ```
-    ///
-    /// - parameter top:    The top inset relation relatively superview.
-    /// - parameter left:   The left inset relation relatively superview.
-    /// - parameter bottom: The bottom inset relation relatively superview.
-    /// - parameter right:  The right inset relation relatively superview.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func edges(top: Number? = nil, left: Number? = nil, bottom: Number? = nil, right: Number? = nil) -> Maker {
-        return apply(self.top, top).apply(self.left, left).apply(self.bottom, bottom).apply(self.right, right)
-    }
-
-    private func apply(_ f: ((Number) -> Maker), _ inset: Number?) -> Maker {
-        return (inset != nil) ? f(inset!) : self
-    }
-
-    // MARK: High priority
-
-    /// Installs constant width for current view.
-    ///
-    /// - parameter width: The width for view.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func width(_ width: Number) -> Maker {
-        let handler = { [unowned self] in
-            self.newRect.setValue(width.value, for: .width)
-        }
-        handlers.append((.high, handler))
-        widthParameter = ValueParameter(value: width.value)
-        return self
-    }
-
-    /// Creates width relation relatively another view = Aspect ratio.
-    ///
-    /// Use this method when you want that your view's width equals to another view's height with some multiplier, for example.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_width` and `nui_height`.
-    ///
-    /// - parameter relationView:   The view on which you set relation.
-    /// - parameter multiplier:     The multiplier for views relation. Default multiplier value: 1.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func width(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) -> Maker {
-        let view = relationView.view
-        let relationType = relationView.relationType
-
-        let handler = { [unowned self] in
-            if view != self.view {
-                let width = self.relationSize(view: view, for: relationType) * multiplier.value
-                self.newRect.setValue(width, for: .width)
-            }
-            else {
-                if let parameter = self.heightParameter {
-                    self.newRect.setValue(parameter.value * multiplier.value, for: .width)
-                }
-                else if let parameter = self.heightToParameter {
-                    let width = self.relationSize(view: parameter.view, for: parameter.relationType) * (parameter.value * multiplier.value)
-                    self.newRect.setValue(width, for: .width)
-                }
-                else {
-                    guard let topParameter = self.topParameter, let bottomParameter = self.bottomParameter else {
-                        return
-                    }
-
-                    let topViewY = self.convertedValue(for: topParameter.relationType, with: topParameter.view) + topParameter.value
-                    let bottomViewY = self.convertedValue(for: bottomParameter.relationType, with: bottomParameter.view) - bottomParameter.value
-
-                    self.newRect.setValue((bottomViewY - topViewY) * multiplier.value, for: .width)
-                }
-            }
-        }
-        handlers.append((.high, handler))
-        widthToParameter = SideParameter(view: view, value: multiplier.value, relationType: relationType)
-        return self
-
-    }
-
-    /// Installs constant height for current view.
-    ///
-    /// - parameter height: The height for view.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func height(_ height: Number) -> Maker {
-        let handler = { [unowned self] in
-            self.newRect.setValue(height.value, for: .height)
-        }
-        handlers.append((.high, handler))
-        heightParameter = ValueParameter(value: height.value)
-        return self
-    }
-
-    /// Creates height relation relatively another view = Aspect ratio.
-    ///
-    /// Use this method when you want that your view's height equals to another view's width with some multiplier, for example.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_width` and `nui_height`.
-    ///
-    /// - parameter relationView:   The view on which you set relation.
-    /// - parameter multiplier:     The multiplier for views relation. Default multiplier value: 1.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func height(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) -> Maker {
-        let view = relationView.view
-        let relationType = relationView.relationType
-
-        let handler = { [unowned self] in
-            if view != self.view {
-                let height = self.relationSize(view: view, for: relationType) * multiplier.value
-                self.newRect.setValue(height, for: .height)
-            }
-            else {
-                if let parameter = self.widthParameter {
-                    self.newRect.setValue(parameter.value * multiplier.value, for: .height)
-                }
-                else if let parameter = self.widthToParameter {
-                    let height = self.relationSize(view: parameter.view, for: parameter.relationType) * (parameter.value * multiplier.value)
-                    self.newRect.setValue(height, for: .height)
-                }
-                else {
-                    guard let leftParameter = self.leftParameter, let rightParameter = self.rightParameter else {
-                        return
-                    }
-
-                    let leftViewX = self.convertedValue(for: leftParameter.relationType, with: leftParameter.view) + leftParameter.value
-                    let rightViewX = self.convertedValue(for: rightParameter.relationType, with: rightParameter.view) - rightParameter.value
-
-                    self.newRect.setValue((rightViewX - leftViewX) * multiplier.value, for: .height)
-                }
-            }
-        }
-        handlers.append((.high, handler))
-        heightToParameter = SideParameter(view: view, value: multiplier.value, relationType: relationType)
-        return self
-    }
-
-    /// Installs constant width and height at the same time.
-    ///
-    /// - parameter width:  The width for view.
-    /// - parameter height: The height for view.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func size(width: Number, height: Number) -> Maker {
-        return self.width(width).height(height)
-    }
-
-    /// Installs constant width and height at the same time.
-    ///
-    /// - parameter size:  The size for view.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func size(_ size: CGSize) -> Maker {
-        return self.size(width: size.width, height: size.height)
-    }
+extension Maker {
 
     /// Creates left relation to superview.
     ///
@@ -402,170 +136,6 @@ public final class Maker {
         return self
     }
 
-    /// Creates сontainer relation.
-    ///
-    /// Use this method when you want to set `width` and `height` by wrapping all subviews.
-    ///
-    /// - note: First, you should configure all subviews and then call this method for `container view`.
-    /// - note: Also important to understand, that it's not correct to call 'left' and 'right' relations together by subview, because
-    ///         `container` sets width relatively width of subview and here is some ambiguous.
-    ///
-    /// - warning: Please make note that there is a more flexible container method:
-    ///
-    ///  ```
-    ///  let container = [view1, view2].container(in: view) {}
-    ///  ```
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @available(*, deprecated, message: "there is a more flexible container method - сheck the method description.")
-    @discardableResult public func container() -> Maker {
-        return _container()
-    }
-
-    @discardableResult func _container() -> Maker {
-        var frame = CGRect.zero
-
-        var minX: CGFloat = 0
-        var minY: CGFloat = 0
-
-        for subview in view.subviews {
-            if subview.frame.origin.x < 0 {
-                subview.frame.origin.x = 0
-            }
-
-            if subview.frame.origin.y < 0 {
-                subview.frame.origin.y = 0
-            }
-
-            if subview.frame.origin.x < minX {
-                minX = subview.frame.origin.x
-            }
-            if subview.frame.origin.y < minY {
-                minY = subview.frame.origin.y
-            }
-        }
-
-        for subview in view.subviews {
-            subview.frame.origin.x -= minX
-            subview.frame.origin.y -= minY
-
-            frame = frame.union(subview.frame)
-        }
-
-        setHighPriorityValue(frame.width, for: .width)
-        setHighPriorityValue(frame.height, for: .height)
-        return self
-    }
-
-    /// Resizes the current view so it just encloses its subviews.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func sizeToFit() -> Maker {
-        view.sizeToFit()
-        setHighPriorityValue(view.bounds.width, for: .width)
-        setHighPriorityValue(view.bounds.height, for: .height)
-        return self
-    }
-
-    /// Calculates the size that best fits the specified size.
-    ///
-    /// ```
-    ///     maker.sizeThatFits(size: CGSize(width: cell.frame.width, height: cell.frame.height)
-    /// ```
-    /// - parameter size: The size for best-fitting.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func sizeThatFits(size: CGSize) -> Maker {
-        let fitSize = view.sizeThatFits(size)
-        let width = min(size.width, fitSize.width)
-        let height = min(size.height, fitSize.height)
-        setHighPriorityValue(width, for: .width)
-        setHighPriorityValue(height, for: .height)
-        return self
-    }
-
-    /// Resizes and moves the receiver view so it just encloses its subviews only for height.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func heightToFit() -> Maker {
-        return heightThatFits(maxHeight: CGFloat.greatestFiniteMagnitude)
-    }
-
-    /// Calculates the height that best fits the specified size.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func heightThatFits(maxHeight: Number) -> Maker {
-        let handler = { [unowned self] in
-            let fitWidth: CGFloat
-
-            if let parameter = self.widthParameter {
-                fitWidth = parameter.value
-            }
-            else if let parameter = self.widthToParameter {
-                fitWidth = self.relationSize(view: parameter.view, for: parameter.relationType) * parameter.value
-            }
-            else if let leftParameter = self.leftParameter, let rightParameter = self.rightParameter {
-                let leftViewX = self.convertedValue(for: leftParameter.relationType, with: leftParameter.view) + leftParameter.value
-                let rightViewX = self.convertedValue(for: rightParameter.relationType, with: rightParameter.view) - rightParameter.value
-
-                fitWidth = rightViewX - leftViewX
-            }
-            else {
-                fitWidth = .greatestFiniteMagnitude
-            }
-
-            let fitSize = self.view.sizeThatFits(CGSize(width: fitWidth, height: .greatestFiniteMagnitude))
-            self.newRect.setValue(min(maxHeight.value, fitSize.height), for: .height)
-        }
-        handlers.append((.high, handler))
-        return self
-    }
-
-    /// Resizes and moves the receiver view so it just encloses its subviews only for width.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func widthToFit() -> Maker {
-        return widthThatFits(maxWidth: CGFloat.greatestFiniteMagnitude)
-    }
-
-    /// Calculates the width that best fits the specified size.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func widthThatFits(maxWidth: Number) -> Maker {
-        let handler = { [unowned self] in
-            let fitHeight: CGFloat
-
-            if let parameter = self.heightParameter {
-                fitHeight = parameter.value
-            }
-            else if let parameter = self.heightToParameter {
-                fitHeight = self.relationSize(view: parameter.view, for: parameter.relationType) * parameter.value
-            }
-            else if let topParameter = self.topParameter, let bottomParameter = self.bottomParameter {
-                let topViewY = self.convertedValue(for: topParameter.relationType, with: topParameter.view) + topParameter.value
-                let bottomViewY = self.convertedValue(for: bottomParameter.relationType, with: bottomParameter.view) - bottomParameter.value
-
-                fitHeight = bottomViewY - topViewY
-            }
-            else {
-                fitHeight = .greatestFiniteMagnitude
-            }
-
-            let fitSize = self.view.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: fitHeight))
-            self.newRect.setValue(min(maxWidth.value, fitSize.width), for: .width)
-        }
-
-        handlers.append((.high, handler))
-        return self
-    }
-
     // MARK: Middle priority
 
     /// Creates margin relation for superview.
@@ -577,32 +147,6 @@ public final class Maker {
     @discardableResult public func margin(_ inset: Number) -> Maker {
         let inset = inset.value
         return edges(insets: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset))
-    }
-
-    /// Creates edge relations for superview.
-    ///
-    /// - parameter insets: The insets for setting relations for superview.
-    ///
-    /// - parameter sides: The sides which will inculed from edge insets to setting relations.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func edges(insets: UIEdgeInsets, sides: Sides = .all) -> Maker {
-        sides.forEach { side in
-            switch side {
-            case .bottom:
-                bottom(inset: insets.bottom)
-            case .left:
-                left(inset: insets.left)
-            case .right:
-                right(inset: insets.right)
-            case .top:
-                top(inset: insets.top)
-            default:
-                return
-            }
-        }
-        return self
     }
 
     /// Creates bottom relation to superview.
@@ -747,37 +291,6 @@ public final class Maker {
         return self
     }
 
-    // MARK: Low priority
-
-    /// Set up the corner radius value.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func cornerRadius(_ cornerRadius: Number) -> Maker {
-        let handler = { [unowned self] in
-            self.view.layer.cornerRadius = cornerRadius.value
-        }
-        handlers.append((.low, handler))
-        return self
-    }
-
-    /// Set up the corner radius value as either a half-width or half-height.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func cornerRadius(byHalf type: Size) -> Maker {
-        let handler = { [unowned self] in
-            if case Size.width = type {
-                self.view.layer.cornerRadius = self.newRect.width / 2
-            }
-            else {
-                self.view.layer.cornerRadius = self.newRect.height / 2
-            }
-        }
-        handlers.append((.low, handler))
-        return self
-    }
-
     /// Creates center relation to superview.
     ///
     /// Use this method when you want to center view by both axis relativity superview.
@@ -789,7 +302,13 @@ public final class Maker {
             assertionFailure("Can not configure a center relation to superview without superview.")
             return self
         }
-        return center(to: superview)
+        switch superview {
+        case .view(let view):
+            return center(to: view)
+        case .layer(let layer):
+            return center(to: layer)
+        }
+
     }
 
     /// Creates center relation.
@@ -801,8 +320,8 @@ public final class Maker {
     /// - returns: `Maker` instance for chaining relations.
 
     @discardableResult public func center(to view: UIView) -> Maker {
-        return centerX(to: RelationView<HorizontalRelation>(view: view, relation: .centerX))
-                .centerY(to: RelationView<VerticalRelation>(view: view, relation: .centerY))
+        return centerX(to: RelationView<HorizontalRelation>(view: .view(view), relation: .centerX))
+            .centerY(to: RelationView<VerticalRelation>(view: .view(view), relation: .centerY))
     }
 
     /// Creates center relation rotated around center of a specified view.
@@ -818,8 +337,8 @@ public final class Maker {
     @discardableResult public func center(to view: UIView, radius: CGFloat, angle: CGFloat) -> Maker {
         let offsetX = -radius * cos(-angle)
         let offsetY = radius * sin(-angle)
-        return centerX(to: RelationView<HorizontalRelation>(view: view, relation: .centerX), offset: offsetX)
-                .centerY(to: RelationView<VerticalRelation>(view: view, relation: .centerY), offset: offsetY)
+        return centerX(to: RelationView<HorizontalRelation>(view: .view(view), relation: .centerX), offset: offsetX)
+            .centerY(to: RelationView<VerticalRelation>(view: .view(view), relation: .centerY), offset: offsetY)
     }
 
     /// Creates centerY relation.
@@ -1020,18 +539,16 @@ public final class Maker {
         return self
     }
 
-    // MARK: Private
+    /// Creates center relation.
+    ///
+    /// Use this method when you want to center view by both axis relativity another layer.
+    ///
+    /// - parameter layer: The layer on which you set center relation.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
 
-    private func setHighPriorityValue(_ value: CGFloat, for relationType: RelationType) {
-        let handler = { [unowned self] in
-            self.newRect.setValue(value, for: relationType)
-        }
-        handlers.append((.high, handler))
-
-        switch relationType {
-        case .width:  widthParameter = ValueParameter(value: value)
-        case .height: heightParameter = ValueParameter(value: value)
-        default: break
-        }
+    @discardableResult public func center(to layer: CALayer) -> Maker {
+        return centerX(to: RelationView<HorizontalRelation>(view: .layer(layer), relation: .centerX))
+            .centerY(to: RelationView<VerticalRelation>(view: .layer(layer), relation: .centerY))
     }
 }

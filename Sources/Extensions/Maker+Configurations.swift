@@ -20,8 +20,22 @@ postfix operator >>
 /// - returns: `Maker` instance for chaining relations.
 
 public postfix func << (view: UIView) -> Maker {
-    let maker = Maker(view: view)
+    let maker = Maker(view: .view(view))
     maker.newRect = view.frame
+    return maker
+}
+
+/// Start frame configuration for `DEFAULT_STATE` state.
+///
+/// - note: Don't forget to call `>>` operator for ending of configuration.
+///
+/// - parameter layer: The layer you are configuring.
+///
+/// - returns: `Maker` instance for chaining relations.
+
+public postfix func << (layer: CALayer) -> Maker {
+    let maker = Maker(view: .layer(layer))
+    maker.newRect = layer.frame
     return maker
 }
 
@@ -37,7 +51,7 @@ public typealias InstallerBlock = (Maker) -> Void
 
 extension Maker {
 
-    class func configure(view: UIView, for state: AnyHashable, installerBlock: InstallerBlock) {
+    class func configure(view: ViewType, for state: AnyHashable, installerBlock: InstallerBlock) {
         if view.nx_state == state {
             let maker = Maker(view: view)
 

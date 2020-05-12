@@ -18,10 +18,10 @@ public protocol SizeRelation {}
 
 public final class RelationView<Relation> {
 
-    unowned var view: UIView
+    var view: ViewType
     var relationType: RelationType
 
-    init(view: UIView, relation: RelationType) {
+    init(view: ViewType, relation: RelationType) {
         self.view = view
         self.relationType = relation
     }
@@ -67,14 +67,14 @@ public enum ContainerRelation {
 }
 
 public class EdgeRelationCollection {
-    unowned var view: UIView
+    var view: ViewType
 
     public lazy var top: RelationView<VerticalRelation> = .init(view: view, relation: .top)
     public lazy var left: RelationView<HorizontalRelation> = .init(view: view, relation: .left)
     public lazy var right: RelationView<HorizontalRelation> = .init(view: view, relation: .right)
     public lazy var bottom: RelationView<VerticalRelation> = .init(view: view, relation: .bottom)
 
-    init(view: UIView) {
+    init(view: ViewType) {
         self.view = view
     }
 }

@@ -1,39 +1,10 @@
 //
-//  UIView+Installer.swift
-//  Framezilla
-//
-//  Created by Nikita on 27/08/16.
-//  Copyright © 2016 Nikita. All rights reserved.
+//  Copyright © 2020 Rosberry. All rights reserved.
 //
 
-import Foundation
-import ObjectiveC
+import UIKit
 
-public let DEFAULT_STATE = "DEFAULT STATE"
-
-var stateTypeAssociationKey: UInt8 = 0
-var nxStateTypeAssociationKey: UInt8 = 1
-
-public extension UIView {
-
-    /// Apply new configuration state without frame updating.
-    ///
-    /// - note: Use `DEFAULT_STATE` for setting the state to the default value.
-
-    @available(*, message: "Renamed due to conflict with Objective-C library - Framer", unavailable, renamed: "nx_state")
-    var nui_state: AnyHashable {
-        get {
-            if let value = objc_getAssociatedObject(self, &stateTypeAssociationKey) as? AnyHashable {
-                return value
-            }
-            else {
-                return DEFAULT_STATE
-            }
-        }
-        set {
-            objc_setAssociatedObject(self, &stateTypeAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
+public extension CALayer {
 
     /// Apply new configuration state without frame updating.
     ///
@@ -54,12 +25,7 @@ public extension UIView {
     }
 }
 
-public extension UIView {
-
-    @available(*, deprecated, renamed: "configureFrame(state:installerBlock:)")
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
-        Maker.configure(view: .view(self), for: state, installerBlock: installerBlock)
-    }
+public extension CALayer {
 
     /// Configures frame of current view for special state.
     ///
@@ -69,11 +35,11 @@ public extension UIView {
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
-        guard self.superview != nil else {
+        guard self.superlayer != nil else {
             return
         }
 
-        Maker.configure(view: .view(self), for: state, installerBlock: installerBlock)
+        Maker.configure(view: .layer(self), for: state, installerBlock: installerBlock)
     }
 
     /// Configures frame of current view for special states.
@@ -84,17 +50,17 @@ public extension UIView {
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrame(states: [AnyHashable], installerBlock: InstallerBlock) {
-        guard self.superview != nil else {
+        guard self.superlayer != nil else {
             return
         }
 
         for state in states {
-            Maker.configure(view: .view(self), for: state, installerBlock: installerBlock)
+            Maker.configure(view: .layer(self), for: state, installerBlock: installerBlock)
         }
     }
 }
 
-public extension Sequence where Iterator.Element: UIView {
+public extension Sequence where Iterator.Element: CALayer {
 
     /// Configures frames of the views for special state.
     ///
@@ -123,7 +89,7 @@ public extension Sequence where Iterator.Element: UIView {
     }
 }
 
-public extension Collection where Iterator.Element: UIView {
+public extension Collection where Iterator.Element: CALayer {
 
     /// Configures all subview within a passed container.
     ///
@@ -133,7 +99,7 @@ public extension Collection where Iterator.Element: UIView {
     /// - note: If you don't use a static width for instance, important to understand, that it's not correct to call 'left' and 'right' relations together by subviews,
     ///         because `container` sets width relatively width of subviews and here is some ambiguous.
     ///
-    /// - parameter view:                The view where a container will be added.
+    /// - parameter container:                The layer where a container will be added.
     /// - parameter relation:            The relation of `ContainerRelation` type.
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
@@ -141,7 +107,7 @@ public extension Collection where Iterator.Element: UIView {
     ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
     /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
 
-    func configure(container: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) {
+    func configure(container: CALayer, relation: ContainerRelation? = nil, installerBlock: () -> Void) {
         container.frame = .zero
 
         var relationWidth: CGFloat?
@@ -177,8 +143,8 @@ public extension Collection where Iterator.Element: UIView {
             }
         }
 
-        for subview in self where subview.superview != container {
-            container.addSubview(subview)
+        for sublayer in self where sublayer.superlayer != container {
+            container.addSublayer(sublayer)
         }
 
         installerBlock()
@@ -205,7 +171,7 @@ public extension Collection where Iterator.Element: UIView {
     /// - note: If you don't use a static width for instance, important to understand, that it's not correct to call 'left' and 'right' relations together by subviews,
     ///         because `container` sets width relatively width of subviews and here is some ambiguous.
     ///
-    /// - parameter view:                The view where a container will be added.
+    /// - parameter layer:                The layer where a container will be added.
     /// - parameter relation:            The relation of `ContainerRelation` type.
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
@@ -215,16 +181,16 @@ public extension Collection where Iterator.Element: UIView {
     ///
     /// - returns: Container view.
 
-    func container(in view: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) -> UIView {
-        let container: UIView
-        if let superView = self.first?.superview {
-            container = superView
+    func container(in layer: CALayer, relation: ContainerRelation? = nil, installerBlock: () -> Void) -> CALayer {
+        let container: CALayer
+        if let superLayer = self.first?.superlayer {
+            container = superLayer
         }
         else {
-            container = UIView()
+            container = CALayer()
         }
 
-        view.addSubview(container)
+        layer.addSublayer(container)
         configure(container: container, relation: relation, installerBlock: installerBlock)
         return container
     }

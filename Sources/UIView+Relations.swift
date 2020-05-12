@@ -45,10 +45,10 @@ enum RelationType {
 extension RelationType {
     var isSizeType: Bool {
         switch self {
-            case .height, .heightTo, .width, .widthTo:
-                return true
-            default:
-                return false
+        case .height, .heightTo, .width, .widthTo:
+            return true
+        default:
+            return false
         }
     }
 }

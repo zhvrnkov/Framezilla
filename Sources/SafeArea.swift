@@ -7,7 +7,7 @@ import UIKit
 @available(iOS 11.0, *)
 public final class SafeAreaRelationCollection: EdgeRelationCollection {
 
-    override init(view: UIView) {
+    override init(view: ViewType) {
         super.init(view: view)
         
         top = .init(view: view, relation: .safeArea(.top))
