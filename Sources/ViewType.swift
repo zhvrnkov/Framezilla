@@ -157,12 +157,14 @@ extension ViewType {
             }
         }
         switch (self, view) {
-        case (.view(let superview), .view(let view)):
+        case let (.view(superview), .view(view)):
             return superview.convert(rect, from: view)
-        case (.layer(let superlayer), .layer(let layer)):
+        case let (.layer(superlayer), .layer(layer)):
             return superlayer.convert(rect, from: layer)
-        default:
-            return rect
+        case let (.layer(superlayer), .view(view)):
+            return superlayer.convert(rect, from: view.layer)
+        case let (.view(superview), .layer(layer)):
+            return superview.layer.convert(rect, from: layer)
         }
     }
 }

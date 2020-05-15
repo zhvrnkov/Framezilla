@@ -53,11 +53,4 @@ public extension CALayer {
     var nui_centerY: RelationView<VerticalRelation> {
         return RelationView<VerticalRelation>(view: .layer(self), relation: .centerY)
     }
-
-    /// Safe area
-
-    @available(iOS 11.0, *)
-    var nui_safeArea: SafeAreaRelationCollection {
-        return SafeAreaRelationCollection(view: .layer(self))
-    }
 }
