@@ -62,12 +62,12 @@ extension Maker {
             return rect.minX
         case .safeArea(.right):
             if let layout = view.layout as? UIViewLayout {
-                return rect.maxX + layout.safeAreaInsets.right
+                return rect.maxX - layout.safeAreaInsets.right
             }
             return rect.maxX
         case .safeArea(.bottom):
             if let layout = view.layout as? UIViewLayout {
-                return rect.maxY + layout.safeAreaInsets.bottom
+                return rect.maxY - layout.safeAreaInsets.bottom
             }
             return rect.maxY
         default:

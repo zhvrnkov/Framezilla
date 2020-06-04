@@ -138,7 +138,7 @@ public extension Collection where Iterator.Element: UIView {
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
     ///     - `horizontal(left, right)`: The left and right insets of a container. If you specify these parameters only a dynamic height will be calculated.
-    ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
+    ///     - `vertical(top, bottom)`:   The top and bottom insets of a container. If you specify these parameters only a dynamic width will be calculated.
     /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
 
     func configure(container: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) {
@@ -210,7 +210,7 @@ public extension Collection where Iterator.Element: UIView {
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
     ///     - `horizontal(left, right)`: The left and right insets of a container. If you specify these parameters only a dynamic height will be calculated.
-    ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
+    ///     - `vertical(top, bottom)`:   The top and bottom insets of a container. If you specify these parameters only a dynamic width will be calculated.
     /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
     ///
     /// - returns: Container view.

@@ -67,7 +67,7 @@ public final class CALayerMaker: Maker {
     /// Creates equal relations.
     ///
     /// - parameter layer:   The layer, against which sets relations.
-    /// - parameter insets: The insets for setting relations with `view`. Default value: `UIEdgeInsets.zero`.
+    /// - parameter insets: The insets for setting relations with `layer`. Default value: `UIEdgeInsets.zero`.
     ///
     /// - returns: `Maker` instance for chaining relations.
 
@@ -75,7 +75,6 @@ public final class CALayerMaker: Maker {
         _equal(to: layer, insets: insets)
         return self
     }
-
 
     // MARK: High priority
 
@@ -286,10 +285,9 @@ public final class CALayerMaker: Maker {
         return self
     }
 
-
     /// Creates center relation to superlayer.
     ///
-    /// Use this method when you want to center view by both axis relativity superview.
+    /// Use this method when you want to center layer by both axis relativity superlayer.
     ///
     /// - returns: `Maker` instance for chaining relations.
 
@@ -300,7 +298,7 @@ public final class CALayerMaker: Maker {
 
     /// Creates center relation.
     ///
-    /// Use this method when you want to center view by both axis relativity another layer.
+    /// Use this method when you want to center layer by both axis relativity another layer.
     ///
     /// - parameter view: The view on which you set center relation.
     ///
@@ -313,7 +311,7 @@ public final class CALayerMaker: Maker {
 
     /// Creates center relation rotated around center of a specified layer.
     ///
-    /// Use this method when you want to center view by both axis relativity another layer.
+    /// Use this method when you want to center layer by both axis relativity another layer.
     ///
     /// - parameter view: The view on which you set center relation.
     /// - parameter radius: Radius of the arc on which center point will be placed.
@@ -328,7 +326,7 @@ public final class CALayerMaker: Maker {
 
     /// Creates centerY relation.
     ///
-    /// Use this method when you want to join centerY of current view with centerY of superlayer.
+    /// Use this method when you want to join centerY of current layer with centerY of superlayer.
     ///
     /// - parameter offset: Additional offset for centerY point. Default value: 0.
     ///
@@ -341,7 +339,7 @@ public final class CALayerMaker: Maker {
 
     /// Creates centerY relation.
     ///
-    /// Use this method when you want to join centerY of current view with some vertical side of another layer.
+    /// Use this method when you want to join centerY of current layer with some vertical side of another layer.
     ///
     /// - note: You can not use this method with other relations except for `nui_top`, `nui_centerY` and `nui_bottom`.
     ///
@@ -386,7 +384,7 @@ public final class CALayerMaker: Maker {
 
     /// Creates centerX relation to superlayer.
     ///
-    /// Use this method when you want to join centerX of current view with centerX of superlayer.
+    /// Use this method when you want to join centerX of current layer with centerX of superlayer.
     ///
     /// - parameter offset: Additional offset for centerX point. Default value: 0.
     ///
@@ -399,7 +397,7 @@ public final class CALayerMaker: Maker {
 
     /// Creates centerX relation.
     ///
-    /// Use this method when you want to join centerX of current view with some horizontal side of c
+    /// Use this method when you want to join centerX of current layer with some horizontal side of c
     ///
     /// - note: You can not use this method with other relations except for `nui_left`, `nui_centerX` and `nui_right`.
     ///
@@ -466,7 +464,7 @@ public final class CALayerMaker: Maker {
 
     /// Creates center relation.
     ///
-    /// Use this method when you want to center view by both axis relativity another layer.
+    /// Use this method when you want to center layer by both axis relativity another layer.
     ///
     /// - parameter layer: The layer on which you set center relation.
     ///

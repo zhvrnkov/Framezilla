@@ -100,7 +100,7 @@ public class Maker {
         var minX: CGFloat = 0
         var minY: CGFloat = 0
 
-        for var subview in view.layout.subviews {
+        for subview in view.layout.subviews {
             if subview.layout.frame.origin.x < 0 {
                 subview.layout.frame.origin.x = 0
             }
@@ -117,7 +117,7 @@ public class Maker {
             }
         }
 
-        for var subview in view.layout.subviews {
+        for subview in view.layout.subviews {
             subview.layout.frame.origin.x -= minX
             subview.layout.frame.origin.y -= minY
 

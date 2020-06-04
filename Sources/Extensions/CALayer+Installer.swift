@@ -27,7 +27,7 @@ public extension CALayer {
 
 public extension CALayer {
 
-    /// Configures frame of current view for special state.
+    /// Configures frame of current layer for special state.
     ///
     /// - note: When you configure frame without implicit state parameter (default value), frame configures for the `DEFAULT_STATE`.
     ///
@@ -35,14 +35,10 @@ public extension CALayer {
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: CALayerInstallerBlock) {
-        guard self.superlayer != nil else {
-            return
-        }
-
-        Maker.configure(layer: self, for: state, installerBlock: installerBlock)
+        configureFrame(states: [state], installerBlock: installerBlock)
     }
 
-    /// Configures frame of current view for special states.
+    /// Configures frame of current layer for special states.
     ///
     /// - note: Don't forget about `DEFAULT_VALUE`.
     ///
@@ -50,7 +46,7 @@ public extension CALayer {
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrame(states: [AnyHashable], installerBlock: CALayerInstallerBlock) {
-        guard self.superlayer != nil else {
+        guard superlayer != nil else {
             return
         }
 
@@ -62,7 +58,7 @@ public extension CALayer {
 
 public extension Sequence where Iterator.Element: CALayer {
 
-    /// Configures frames of the views for special state.
+    /// Configures frames of the layers for special state.
     ///
     /// - note: When you configure frame without implicit state parameter (default value), frame configures for the `DEFAULT_STATE`.
     ///
@@ -70,12 +66,12 @@ public extension Sequence where Iterator.Element: CALayer {
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: CALayerInstallerBlock) {
-        for view in self {
-            view.configureFrame(state: state, installerBlock: installerBlock)
+        for layer in self {
+            layer.configureFrame(state: state, installerBlock: installerBlock)
         }
     }
 
-    /// Configures frames of the views for special states.
+    /// Configures frames of the layers for special states.
     ///
     /// - note: Don't forget about `DEFAULT_VALUE`.
     ///
@@ -83,29 +79,29 @@ public extension Sequence where Iterator.Element: CALayer {
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrames(states: [AnyHashable], installerBlock: CALayerInstallerBlock) {
-        for view in self {
-            view.configureFrame(states: states, installerBlock: installerBlock)
+        for layer in self {
+            layer.configureFrame(states: states, installerBlock: installerBlock)
         }
     }
 }
 
 public extension Collection where Iterator.Element: CALayer {
 
-    /// Configures all subview within a passed container.
+    /// Configures all sublayers within a passed container.
     ///
-    /// Use this method when you want to calculate width and height by wrapping all subviews. Or use static parameters.
+    /// Use this method when you want to calculate width and height by wrapping all sublayers. Or use static parameters.
     ///
-    /// - note: It automatically adds all subviews to the container. Don't add subviews manually.
-    /// - note: If you don't use a static width for instance, important to understand, that it's not correct to call 'left' and 'right' relations together by subviews,
-    ///         because `container` sets width relatively width of subviews and here is some ambiguous.
+    /// - note: It automatically adds all sublayers to the container. Don't add sublayers manually.
+    /// - note: If you don't use a static width for instance, important to understand, that it's not correct to call 'left' and 'right' relations together by sublayers,
+    ///         because `container` sets width relatively width of sublayers and here is some ambiguous.
     ///
     /// - parameter container:                The layer where a container will be added.
     /// - parameter relation:            The relation of `ContainerRelation` type.
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
     ///     - `horizontal(left, right)`: The left and right insets of a container. If you specify these parameters only a dynamic height will be calculated.
-    ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
-    /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
+    ///     - `vertical(top, bottom)`:   The top and bottom insets of a container. If you specify these parameters only a dynamic width will be calculated.
+    /// - parameter installerBlock:      The installer block within which you should configure frames for all sublayers.
 
     func configure(container: CALayer, relation: ContainerRelation? = nil, installerBlock: () -> Void) {
         container.frame = .zero
@@ -163,27 +159,27 @@ public extension Collection where Iterator.Element: CALayer {
         installerBlock()
     }
 
-    /// Creates a сontainer view and configures all subview within this container.
+    /// Creates a сontainer layer and configures all sublayer within this container.
     ///
-    /// Use this method when you want to calculate `width` and `height` by wrapping all subviews. Or use static parameters.
+    /// Use this method when you want to calculate `width` and `height` by wrapping all sublayers. Or use static parameters.
     ///
-    /// - note: It automatically adds all subviews to the container. Don't add subviews manually. A generated container is automatically added to a `view` as well.
-    /// - note: If you don't use a static width for instance, important to understand, that it's not correct to call 'left' and 'right' relations together by subviews,
-    ///         because `container` sets width relatively width of subviews and here is some ambiguous.
+    /// - note: It automatically adds all sublayers to the container. Don't add sublayer manually. A generated container is automatically added to a `layer` as well.
+    /// - note: If you don't use a static width for instance, important to understand, that it's not correct to call 'left' and 'right' relations together by sublayers,
+    ///         because `container` sets width relatively width of sublayers and here is some ambiguous.
     ///
     /// - parameter layer:                The layer where a container will be added.
     /// - parameter relation:            The relation of `ContainerRelation` type.
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
     ///     - `horizontal(left, right)`: The left and right insets of a container. If you specify these parameters only a dynamic height will be calculated.
-    ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
-    /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
+    ///     - `vertical(top, bottom)`:   The top and bottom insets of a container. If you specify these parameters only a dynamic width will be calculated.
+    /// - parameter installerBlock:      The installer block within which you should configure frames for all sublayers.
     ///
-    /// - returns: Container view.
+    /// - returns: Container layer.
 
     func container(in layer: CALayer, relation: ContainerRelation? = nil, installerBlock: () -> Void) -> CALayer {
         let container: CALayer
-        if let superLayer = self.first?.superlayer {
+        if let superLayer = first?.superlayer {
             container = superLayer
         }
         else {

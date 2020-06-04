@@ -62,7 +62,7 @@ protocol Layout: class {
     /// - note: Use `DEFAULT_STATE` for setting the state to the default value.
     var nx_state: AnyHashable { get }
     
-    var superview: ViewType?  { get }
+    var superview: ViewType? { get }
     var subviews: [ViewType] { get }
     var frame: CGRect { get set}
     var bounds: CGRect { get set}
@@ -142,7 +142,7 @@ final class UIViewLayout: Layout {
         guard let view = view else {
             return self.view.convert(rect, from: nil)
         }
-        switch (view) {
+        switch view {
         case let .view(view):
             return self.view.convert(rect, from: view)
         case let .layer(layer):
@@ -225,7 +225,7 @@ final class CALayerLayout: Layout {
         guard let view = view else {
             return self.layer.convert(rect, from: nil)
         }
-        switch (view) {
+        switch view {
         case let .view(view):
             return self.layer.convert(rect, from: view.layer)
         case let .layer(layer):
