@@ -39,7 +39,7 @@ public struct Sides: OptionSet {
     }
 }
 
-public final class Maker {
+public class Maker {
 
     typealias HandlerType = () -> Void
 
@@ -70,17 +70,7 @@ public final class Maker {
 
     init(view: ViewType) {
         self.view = view
-        self.newRect = view.frame
-    }
-
-    // MARK: Additions
-
-    ///	Optional semantic property for improvements readability.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    public var and: Maker {
-        return self
+        self.newRect = view.layout.frame
     }
 
     /// Creates сontainer relation.
@@ -110,28 +100,28 @@ public final class Maker {
         var minX: CGFloat = 0
         var minY: CGFloat = 0
 
-        for var subview in view.subviews {
-            if subview.frame.origin.x < 0 {
-                subview.frame.origin.x = 0
+        for var subview in view.layout.subviews {
+            if subview.layout.frame.origin.x < 0 {
+                subview.layout.frame.origin.x = 0
             }
 
-            if subview.frame.origin.y < 0 {
-                subview.frame.origin.y = 0
+            if subview.layout.frame.origin.y < 0 {
+                subview.layout.frame.origin.y = 0
             }
 
-            if subview.frame.origin.x < minX {
-                minX = subview.frame.origin.x
+            if subview.layout.frame.origin.x < minX {
+                minX = subview.layout.frame.origin.x
             }
-            if subview.frame.origin.y < minY {
-                minY = subview.frame.origin.y
+            if subview.layout.frame.origin.y < minY {
+                minY = subview.layout.frame.origin.y
             }
         }
 
-        for var subview in view.subviews {
-            subview.frame.origin.x -= minX
-            subview.frame.origin.y -= minY
+        for var subview in view.layout.subviews {
+            subview.layout.frame.origin.x -= minX
+            subview.layout.frame.origin.y -= minY
 
-            frame = frame.union(subview.frame)
+            frame = frame.union(subview.layout.frame)
         }
 
         setHighPriorityValue(frame.width, for: .width)
@@ -147,7 +137,7 @@ public final class Maker {
 
     @discardableResult public func cornerRadius(_ cornerRadius: Number) -> Maker {
         let handler = { [unowned self] in
-            self.view.cornerRadius = cornerRadius.value
+            self.view.layout.cornerRadius = cornerRadius.value
         }
         handlers.append((.low, handler))
         return self
@@ -160,18 +150,20 @@ public final class Maker {
     @discardableResult public func cornerRadius(byHalf type: Size) -> Maker {
         let handler = { [unowned self] in
             if case Size.width = type {
-                self.view.cornerRadius = self.newRect.width / 2
+                self.view.layout.cornerRadius = self.newRect.width / 2
             }
             else {
-                self.view.cornerRadius = self.newRect.height / 2
+                self.view.layout.cornerRadius = self.newRect.height / 2
             }
         }
         handlers.append((.low, handler))
         return self
     }
 
-    func apply(_ f: ((Number) -> Maker), _ inset: Number?) -> Maker {
-        return (inset != nil) ? f(inset!) : self
+    func apply(_ f: ((Number) -> Void), _ inset: Number?) {
+        if let inset = inset {
+            f(inset)
+        }
     }
 
     func setHighPriorityValue(_ value: CGFloat, for relationType: RelationType) {

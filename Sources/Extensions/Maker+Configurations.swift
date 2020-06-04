@@ -42,20 +42,32 @@ public postfix func << (layer: CALayer) -> Maker {
 /// End frame configuration.
 
 public postfix func >> (maker: Maker) {
-    if (maker.view.nx_state as? String) == DEFAULT_STATE {
+    if (maker.view.layout.nx_state as? String) == DEFAULT_STATE {
         maker.configureFrame()
     }
 }
 
-public typealias InstallerBlock = (Maker) -> Void
+public typealias UIViewInstallerBlock = (UIViewMaker) -> Void
+public typealias CALayerInstallerBlock = (CALayerMaker) -> Void
 
 extension Maker {
 
-    class func configure(view: ViewType, for state: AnyHashable, installerBlock: InstallerBlock) {
+    class func configure(view: UIView, for state: AnyHashable, installerBlock: UIViewInstallerBlock) {
         if view.nx_state == state {
-            let maker = Maker(view: view)
+            let maker = UIViewMaker(view: .view(view))
 
             maker.newRect = view.frame
+            installerBlock(maker)
+
+            maker.configureFrame()
+        }
+    }
+
+    class func configure(layer: CALayer, for state: AnyHashable, installerBlock: CALayerInstallerBlock) {
+        if layer.nx_state == state {
+            let maker = CALayerMaker(view: .layer(layer))
+
+            maker.newRect = layer.frame
             installerBlock(maker)
 
             maker.configureFrame()
@@ -69,6 +81,6 @@ extension Maker {
             $0.handler()
         }
 
-        view.frame = newRect
+        view.layout.frame = newRect
     }
 }

@@ -101,7 +101,7 @@ final class KeyboardTests: BaseTest {
 
         view.listenForKeyboardEvents()
         view.layoutHandler = {
-            view.configureFrame(installerBlock: { (maker: Maker) in
+            view.configureFrame(installerBlock: { maker in
                 maker.left(to: nui_keyboard.left)
                 maker.right(to: nui_keyboard.right)
                 maker.top(to: nui_keyboard.top)

@@ -4,6 +4,8 @@
 
 import UIKit
 
+private var layoutAssociationKey = "layout_association_key"
+
 public enum ViewType {
     case view(UIView)
     case layer(CALayer)
@@ -11,160 +13,20 @@ public enum ViewType {
 
 extension ViewType {
 
-    var subviews: [ViewType] {
-        switch self {
-        case .view(let view):
-            return view.subviews.map { view in
-                .view(view)
-            }
-        case .layer(let layer):
-            return layer.sublayers?.map { layer in
-                .layer(layer)
-            } ?? []
+    var layout: Layout {
+        if let value = objc_getAssociatedObject(self, &layoutAssociationKey) as? Layout {
+            return value
         }
-    }
-
-    var frame: CGRect {
-        get {
+        else {
+            let layout: Layout
             switch self {
             case .view(let view):
-                return view.frame
+                layout = UIViewLayout(view)
             case .layer(let layer):
-                return layer.frame
+                layout = CALayerLayout(layer)
             }
-        }
-        set {
-            switch self {
-            case .view(let view):
-                view.frame = newValue
-            case .layer(let layer):
-                layer.frame = newValue
-            }
-        }
-    }
-
-    var bounds: CGRect {
-        switch self {
-        case .view(let view):
-            return view.bounds
-        case .layer(let layer):
-            return layer.bounds
-        }
-    }
-
-    var safeAreaInsets: UIEdgeInsets {
-        switch self {
-        case .view(let view):
-            if #available(iOS 11.0, *) {
-                return view.safeAreaInsets
-            }
-            return .zero
-        case .layer:
-            return .zero
-        }
-    }
-
-    var superview: ViewType? {
-        switch self {
-        case .view(let view):
-            guard let superview = view.superview else {
-                return nil
-            }
-            return .view(superview)
-        case .layer(let layer):
-            guard let superlayer = layer.superlayer else {
-                return nil
-            }
-            return .layer(superlayer)
-        }
-    }
-
-    func contains(_ view: ViewType) -> Bool {
-        if subviews.contains(view) {
-            return true
-        }
-        for subview in subviews {
-            if subview.contains(view) {
-                return true
-            }
-        }
-        return false
-    }
-
-    var nx_state: AnyHashable {
-        get {
-            switch self {
-            case .view(let view):
-                return view.nx_state
-            case .layer(let layer):
-                return layer.nx_state
-            }
-        }
-        set {
-            switch self {
-            case .view(let view):
-                view.nx_state = newValue
-            case .layer(let layer):
-                layer.nx_state = newValue
-            }
-        }
-    }
-
-    var cornerRadius: CGFloat {
-        get {
-            switch self {
-            case .view(let view):
-                return view.layer.cornerRadius
-            case .layer(let layer):
-                return layer.cornerRadius
-            }
-        }
-        set {
-            switch self {
-            case .view(let view):
-                view.layer.cornerRadius = newValue
-            case .layer(let layer):
-                layer.cornerRadius = newValue
-            }
-        }
-    }
-
-    func sizeThatFits(_ size: CGSize) -> CGSize {
-        switch self {
-        case .view(let view):
-            return view.sizeThatFits(size)
-        case .layer(let layer):
-            return layer.bounds.size
-        }
-    }
-
-    func sizeToFit() {
-        switch self {
-        case .view(let view):
-            view.sizeToFit()
-        default:
-            return
-        }
-    }
-
-    func convert(_ rect: CGRect, from view: ViewType?) -> CGRect {
-        guard let view = view else {
-            switch self {
-            case .view(let view):
-                return view.convert(rect, from: nil)
-            case .layer(let layer):
-                return layer.convert(rect, from: nil)
-            }
-        }
-        switch (self, view) {
-        case let (.view(superview), .view(view)):
-            return superview.convert(rect, from: view)
-        case let (.layer(superlayer), .layer(layer)):
-            return superlayer.convert(rect, from: layer)
-        case let (.layer(superlayer), .view(view)):
-            return superlayer.convert(rect, from: view.layer)
-        case let (.view(superview), .layer(layer)):
-            return superview.layer.convert(rect, from: layer)
+            objc_setAssociatedObject(self, &layoutAssociationKey, layout, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            return layout
         }
     }
 }
@@ -190,5 +52,188 @@ extension ViewType: Equatable {
         default:
             return false
         }
+    }
+}
+
+protocol Layout: class {
+
+    /// Apply new configuration state without frame updating.
+    ///
+    /// - note: Use `DEFAULT_STATE` for setting the state to the default value.
+    var nx_state: AnyHashable { get }
+    
+    var superview: ViewType?  { get }
+    var subviews: [ViewType] { get }
+    var frame: CGRect { get set}
+    var bounds: CGRect { get set}
+    var cornerRadius: CGFloat { get set}
+
+    func contains(_ view: ViewType) -> Bool
+    func convert(_ rect: CGRect, from view: ViewType?) -> CGRect
+}
+
+extension Layout {
+    func contains(_ view: ViewType) -> Bool {
+        if subviews.contains(view) {
+            return true
+        }
+        for subview in subviews {
+            if subview.layout.contains(view) {
+                return true
+            }
+        }
+        return false
+    }
+}
+
+final class UIViewLayout: Layout {
+    unowned let view: UIView
+
+    var nx_state: AnyHashable {
+        get {
+            view.nx_state
+        }
+        set {
+            view.nx_state = newValue
+        }
+    }
+
+    var superview: ViewType? {
+        guard let superview = view.superview else {
+            return nil
+        }
+        return .view(superview)
+    }
+
+    var subviews: [ViewType] {
+        return view.subviews.map { view in
+            .view(view)
+        }
+    }
+
+    var frame: CGRect {
+        get {
+            view.frame
+        }
+        set {
+            view.frame = newValue
+        }
+    }
+
+    var bounds: CGRect {
+        get {
+            view.bounds
+        }
+        set {
+            view.bounds = newValue
+        }
+    }
+
+    var cornerRadius: CGFloat {
+        get {
+            view.layer.cornerRadius
+        }
+        set {
+            view.layer.cornerRadius = newValue
+        }
+    }
+
+    func convert(_ rect: CGRect, from view: ViewType?) -> CGRect {
+        guard let view = view else {
+            return self.view.convert(rect, from: nil)
+        }
+        switch (view) {
+        case let .view(view):
+            return self.view.convert(rect, from: view)
+        case let .layer(layer):
+            return self.view.layer.convert(rect, from: layer)
+        }
+    }
+
+    func sizeToFit() {
+        view.sizeToFit()
+    }
+
+    func sizeThatFits(_ size: CGSize) -> CGSize {
+        view.sizeThatFits(size)
+    }
+
+    var safeAreaInsets: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return view.safeAreaInsets
+        }
+        return .zero
+    }
+
+    init(_ view: UIView) {
+        self.view = view
+    }
+}
+
+final class CALayerLayout: Layout {
+    unowned let layer: CALayer
+    var nx_state: AnyHashable {
+        get {
+            layer.nx_state
+        }
+        set {
+            layer.nx_state = newValue
+        }
+    }
+
+    var superview: ViewType? {
+        guard let superlayer = layer.superlayer else {
+            return nil
+        }
+        return .layer(superlayer)
+    }
+
+    var subviews: [ViewType] {
+        return layer.sublayers?.map { layer in
+            .layer(layer)
+        } ?? []
+    }
+
+    var frame: CGRect {
+        get {
+            layer.frame
+        }
+        set {
+            layer.frame = newValue
+        }
+    }
+
+    var bounds: CGRect {
+        get {
+            layer.bounds
+        }
+        set {
+            layer.bounds = newValue
+        }
+    }
+
+    var cornerRadius: CGFloat {
+        get {
+            layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+
+    func convert(_ rect: CGRect, from view: ViewType?) -> CGRect {
+        guard let view = view else {
+            return self.layer.convert(rect, from: nil)
+        }
+        switch (view) {
+        case let .view(view):
+            return self.layer.convert(rect, from: view.layer)
+        case let .layer(layer):
+            return self.layer.convert(rect, from: layer)
+        }
+    }
+
+    init(_ layer: CALayer) {
+        self.layer = layer
     }
 }

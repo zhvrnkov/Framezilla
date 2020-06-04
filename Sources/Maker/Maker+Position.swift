@@ -6,59 +6,15 @@ import UIKit
 
 extension Maker {
 
-    /// Creates left relation to superview.
-    ///
-    /// Use this method when you want to join left side of current view with left side of superview.
-    ///
-    /// - parameter inset: The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func left(inset: Number = 0.0) -> Maker {
-        guard let superview = view.superview else {
+    func _left(inset: Number = 0.0) {
+        guard let superview = view.layout.superview else {
             assertionFailure("Can not configure left relation to superview without superview.")
-            return self
+            return
         }
-        return left(to: RelationView(view: superview, relation: .left), inset: inset)
+        _left(to: RelationView(view: superview, relation: .left), inset: inset)
     }
 
-    /// Creates a left relation to the superview's safe area.
-    ///
-    /// Use this method when you want to join a left side of current view with left edge of the superview's safe area.
-    ///
-    /// - note: In earlier versions of OS than iOS 11, it creates a left relation to a superview.
-    ///
-    /// - parameter safeArea:  The safe area of current view. Use a `nui_safeArea` - global property.
-    /// - parameter inset:     The inset for additional space to safe area. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @available(*, deprecated, message: "Use `left(to: view.nui_safeArea.left, inset: ...)` instead")
-    @discardableResult public func left(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
-        if #available(iOS 11.0, *) {
-            guard let superview = view.superview else {
-                assertionFailure("Can not configure a left relation to the safe area without superview.")
-                return self
-            }
-            return left(inset: superview.safeAreaInsets.left + inset.value)
-        }
-        else {
-            return left(inset: inset)
-        }
-    }
-
-    /// Creates left relation.
-    ///
-    /// Use this method when you want to join left side of current view with some horizontal side of another view.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_left`, `nui_centerX` and `nui_right`.
-    ///
-    /// - parameter relationView:   The view on which you set left relation.
-    /// - parameter inset:          The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func left(to relationView: RelationView<HorizontalRelation>, inset: Number = 0.0) -> Maker {
+    func _left(to relationView: RelationView<HorizontalRelation>, inset: Number = 0.0) {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -68,62 +24,30 @@ extension Maker {
         }
         handlers.append((.high, handler))
         leftParameter = SideParameter(view: view, value: inset.value, relationType: relationType)
-        return self
     }
 
-    /// Creates top relation to superview.
-    ///
-    /// Use this method when you want to join top side of current view with top side of superview.
-    ///
-    /// - parameter inset: The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func top(inset: Number = 0.0) -> Maker {
-        guard let superview = view.superview else {
+    func _top(inset: Number = 0.0) {
+        guard let superview = view.layout.superview else {
             assertionFailure("Can not configure a top relation to superview without superview.")
-            return self
+            return
         }
-        return top(to: RelationView(view: superview, relation: .top), inset: inset.value)
+        _top(to: RelationView(view: superview, relation: .top), inset: inset.value)
     }
 
-    /// Creates a top relation to the superview's safe area.
-    ///
-    /// Use this method when you want to join a top side of current view with top edge of the superview's safe area.
-    ///
-    /// - note: In earlier versions of OS than iOS 11, it creates a top relation to a superview.
-    ///
-    /// - parameter safeArea:  The safe area of current view. Use a `nui_safeArea` - global property.
-    /// - parameter inset:     The inset for additional space to safe area. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @available(*, deprecated, message: "Use `top(to: view.nui_safeArea.top, inset: ...)` instead")
-    @discardableResult public func top(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
+    func _top(to safeArea: SafeArea, inset: Number = 0.0) {
         if #available(iOS 11.0, *) {
-            guard let superview = view.superview else {
+            guard let superview = view.layout.superview,
+                let layout = superview.layout as? UIViewLayout else {
                 assertionFailure("Can not configure a top relation to the safe area without superview.")
-                return self
+                return
             }
-            return top(inset: superview.safeAreaInsets.top + inset.value)
+            _top(inset: layout.safeAreaInsets.top + inset.value)
+            return
         }
-        else {
-            return top(inset: inset)
-        }
+        _top(inset: inset)
     }
 
-    /// Creates top relation.
-    ///
-    /// Use this method when you want to join top side of current view with some vertical side of another view.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_top`, `nui_centerY` and `nui_bottom`.
-    ///
-    /// - parameter relationView:  The view on which you set top relation.
-    /// - parameter inset:         The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func top(to relationView: RelationView<VerticalRelation>, inset: Number = 0.0) -> Maker {
+    func _top(to relationView: RelationView<VerticalRelation>, inset: Number = 0.0) {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -133,75 +57,35 @@ extension Maker {
         }
         handlers.append((.high, handler))
         topParameter = SideParameter(view: view, value: inset.value, relationType: relationType)
-        return self
     }
 
-    // MARK: Middle priority
-
-    /// Creates margin relation for superview.
-    ///
-    /// - parameter inset: The inset for setting top, left, bottom and right relations for superview.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func margin(_ inset: Number) -> Maker {
+    func _margin(_ inset: Number) {
         let inset = inset.value
-        return edges(insets: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset))
+        _edges(insets: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset))
     }
 
-    /// Creates bottom relation to superview.
-    ///
-    /// Use this method when you want to join bottom side of current view with bottom side of superview.
-    ///
-    /// - parameter inset: The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func bottom(inset: Number = 0.0) -> Maker {
-        guard let superview = view.superview else {
+    func _bottom(inset: Number = 0.0) {
+        guard let superview = view.layout.superview else {
             assertionFailure("Can not configure a bottom relation to superview without superview.")
-            return self
+            return
         }
-        return bottom(to: RelationView(view: superview, relation: .bottom), inset: inset)
+        _bottom(to: RelationView(view: superview, relation: .bottom), inset: inset)
     }
 
-    /// Creates a bottom relation to the superview's safe area.
-    ///
-    /// Use this method when you want to join a bottom side of current view with bottom edge of the superview's safe area.
-    ///
-    /// - note: In earlier versions of OS than iOS 11, it creates a bottom relation to a superview.
-    ///
-    /// - parameter safeArea:  The safe area of current view. Use a `nui_safeArea` - global property.
-    /// - parameter inset:     The inset for additional space to safe area. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @available(*, deprecated, message: "Use `bottom(to: view.nui_safeArea.bottom, inset: ...)` instead")
-    @discardableResult public func bottom(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
+    func _bottom(to safeArea: SafeArea, inset: Number = 0.0) {
         if #available(iOS 11.0, *) {
-            guard let superview = view.superview else {
+            guard let superview = view.layout.superview,
+                let layout = superview.layout as? UIViewLayout else {
                 assertionFailure("Can not configure a bottom relation to the safe area without superview.")
-                return self
+                return
             }
-            return bottom(inset: superview.safeAreaInsets.bottom + inset.value)
+            _bottom(inset: layout.safeAreaInsets.bottom + inset.value)
+            return
         }
-        else {
-            return bottom(inset: inset)
-        }
+        _bottom(inset: inset)
     }
 
-    /// Creates bottom relation.
-    ///
-    /// Use this method when you want to join bottom side of current view with some vertical side of another view.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_top`, `nui_centerY` and `nui_bottom`.
-    ///
-    /// - parameter relationView:   The view on which you set bottom relation.
-    /// - parameter inset:          The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func bottom(to relationView: RelationView<VerticalRelation>, inset: Number = 0.0) -> Maker {
+    func _bottom(to relationView: RelationView<VerticalRelation>, inset: Number = 0.0) {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -217,62 +101,17 @@ extension Maker {
         }
         handlers.append((.middle, handler))
         bottomParameter = SideParameter(view: view, value: inset.value, relationType: relationType)
-        return self
     }
 
-    /// Creates right relation to superview.
-    ///
-    /// Use this method when you want to join right side of current view with right side of superview.
-    ///
-    /// - parameter inset: The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func right(inset: Number = 0.0) -> Maker {
-        guard let superview = view.superview else {
+    func _right(inset: Number = 0.0) {
+        guard let superview = view.layout.superview else {
             assertionFailure("Can not configure a right relation to superview without superview.")
-            return self
+            return
         }
-        return right(to: RelationView(view: superview, relation: .right), inset: inset.value)
+        _right(to: RelationView(view: superview, relation: .right), inset: inset.value)
     }
 
-    /// Creates a right relation to the superview's safe area.
-    ///
-    /// Use this method when you want to join a right side of current view with right edge of the superview's safe area.
-    ///
-    /// - note: In earlier versions of OS than iOS 11, it creates a right relation to a superview.
-    ///
-    /// - parameter safeArea:  The safe area of current view. Use a `nui_safeArea` - global property.
-    /// - parameter inset:     The inset for additional space to safe area. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @available(*, deprecated, message: "Use `right(to: view.nui_safeArea.right, inset: ...)` instead")
-    @discardableResult public func right(to safeArea: SafeArea, inset: Number = 0.0) -> Maker {
-        if #available(iOS 11.0, *) {
-            guard let superview = view.superview else {
-                assertionFailure("Can not configure a right relation to the safe area without superview.")
-                return self
-            }
-            return right(inset: superview.safeAreaInsets.right + inset.value)
-        }
-        else {
-            return right(inset: inset)
-        }
-    }
-
-    /// Creates right relation.
-    ///
-    /// Use this method when you want to join right side of current view with some horizontal side of another view.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_left`, `nui_centerX` and `nui_right`.
-    ///
-    /// - parameter relationView:     The view on which you set right relation.
-    /// - parameter inset:            The inset for additional space between views. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func right(to relationView: RelationView<HorizontalRelation>, inset: Number = 0.0) -> Maker {
+    func _right(to relationView: RelationView<HorizontalRelation>, inset: Number = 0.0) {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -288,87 +127,42 @@ extension Maker {
         }
         handlers.append((.middle, handler))
         rightParameter = SideParameter(view: view, value: inset.value, relationType: relationType)
-        return self
     }
 
-    /// Creates center relation to superview.
-    ///
-    /// Use this method when you want to center view by both axis relativity superview.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func center() -> Maker {
-        guard let superview = view.superview else {
+    func _center() {
+        guard let superview = view.layout.superview else {
             assertionFailure("Can not configure a center relation to superview without superview.")
-            return self
+            return
         }
         switch superview {
         case .view(let view):
-            return center(to: view)
+            _center(to: view)
         case .layer(let layer):
-            return center(to: layer)
+            _center(to: layer)
         }
-
     }
 
-    /// Creates center relation.
-    ///
-    /// Use this method when you want to center view by both axis relativity another view.
-    ///
-    /// - parameter view: The view on which you set center relation.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func center(to view: UIView) -> Maker {
-        return centerX(to: RelationView<HorizontalRelation>(view: .view(view), relation: .centerX))
-            .centerY(to: RelationView<VerticalRelation>(view: .view(view), relation: .centerY))
+    func _center(to view: UIView) {
+        _centerX(to: RelationView<HorizontalRelation>(view: .view(view), relation: .centerX))
+        _centerY(to: RelationView<VerticalRelation>(view: .view(view), relation: .centerY))
     }
 
-    /// Creates center relation rotated around center of a specified view.
-    ///
-    /// Use this method when you want to center view by both axis relativity another view.
-    ///
-    /// - parameter view: The view on which you set center relation.
-    /// - parameter radius: Radius of the arc on which center point will be placed.
-    /// - parameter angle: Angle at which center point will be placed.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func center(to view: UIView, radius: CGFloat, angle: CGFloat) -> Maker {
+    func _center(to view: UIView, radius: CGFloat, angle: CGFloat) {
         let offsetX = -radius * cos(-angle)
         let offsetY = radius * sin(-angle)
-        return centerX(to: RelationView<HorizontalRelation>(view: .view(view), relation: .centerX), offset: offsetX)
-            .centerY(to: RelationView<VerticalRelation>(view: .view(view), relation: .centerY), offset: offsetY)
+        _centerX(to: RelationView<HorizontalRelation>(view: .view(view), relation: .centerX), offset: offsetX)
+        _centerY(to: RelationView<VerticalRelation>(view: .view(view), relation: .centerY), offset: offsetY)
     }
 
-    /// Creates centerY relation.
-    ///
-    /// Use this method when you want to join centerY of current view with centerY of superview.
-    ///
-    /// - parameter offset: Additional offset for centerY point. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerY(offset: Number = 0.0) -> Maker {
-        guard let superview = view.superview else {
+    func _centerY(offset: Number = 0.0) {
+        guard let superview = view.layout.superview else {
             assertionFailure("Can not configure a centerY relation to superview without superview.")
-            return self
+            return
         }
-        return centerY(to: RelationView(view: superview, relation: .centerY), offset: offset.value)
+        _centerY(to: RelationView(view: superview, relation: .centerY), offset: offset.value)
     }
 
-    /// Creates centerY relation.
-    ///
-    /// Use this method when you want to join centerY of current view with some vertical side of another view.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_top`, `nui_centerY` and `nui_bottom`.
-    ///
-    /// - parameter relationView:   The view on which you set centerY relation.
-    /// - parameter offset:         Additional offset for centerY point. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerY(to relationView: RelationView<VerticalRelation>, offset: Number = 0.0) -> Maker {
+    func _centerY(to relationView: RelationView<VerticalRelation>, offset: Number = 0.0) {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -377,35 +171,15 @@ extension Maker {
             self.newRect.setValue(y, for: .top)
         }
         handlers.append((.low, handler))
-        return self
     }
 
-    /// Creates centerY relation between two views.
-    ///
-    /// Use this method when you want to configure centerY point between two following views.
-    ///
-    /// - parameter view1: The first view between which you set `centerY` relation.
-    /// - parameter view2: The second view between which you set `centerY` relation.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerY(between view1: UIView, _ view2: UIView) -> Maker {
+    func _centerY(between view1: UIView, _ view2: UIView) {
         let topView = view1.frame.maxY > view2.frame.minY ? view2 : view1
         let bottomView = topView === view1 ? view2 : view1
-        return self.centerY(between: topView.nui_bottom, bottomView.nui_top)
+        _centerY(between: topView.nui_bottom, bottomView.nui_top)
     }
 
-    /// Creates centerY relation between two relation views.
-    ///
-    /// Use this method when you want to configure centerY point between two relations views.
-    ///
-    /// - parameter relationView1: The first relation view between which you set `centerY` relation.
-    /// - parameter relationView2: The second relation view between which you set `centerY` relation.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerY(between relationView1: RelationView<VerticalRelation>,
-                                           _ relationView2: RelationView<VerticalRelation>) -> Maker {
+    func _centerY(between relationView1: RelationView<VerticalRelation>, _ relationView2: RelationView<VerticalRelation>) {
         let view1 = relationView1.view
         let view2 = relationView2.view
 
@@ -423,37 +197,17 @@ extension Maker {
             self.newRect.setValue(y, for: .top)
         }
         handlers.append((.low, handler))
-        return self
     }
 
-    /// Creates centerX relation to superview.
-    ///
-    /// Use this method when you want to join centerX of current view with centerX of superview.
-    ///
-    /// - parameter offset: Additional offset for centerX point. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerX(offset: Number = 0.0) -> Maker {
-        guard let superview = view.superview else {
+    func _centerX(offset: Number = 0.0) {
+        guard let superview = view.layout.superview else {
             assertionFailure("Can not configure a centerX relation to superview without superview.")
-            return self
+            return
         }
-        return centerX(to: RelationView(view: superview, relation: .centerX), offset: offset.value)
+        _centerX(to: RelationView(view: superview, relation: .centerX), offset: offset.value)
     }
 
-    /// Creates centerX relation.
-    ///
-    /// Use this method when you want to join centerX of current view with some horizontal side of another view.
-    ///
-    /// - note: You can not use this method with other relations except for `nui_left`, `nui_centerX` and `nui_right`.
-    ///
-    /// - parameter relationView:   The view on which you set centerX relation.
-    /// - parameter offset:         Additional offset for centerX point. Default value: 0.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerX(to relationView: RelationView<HorizontalRelation>, offset: Number = 0.0) -> Maker {
+    func _centerX(to relationView: RelationView<HorizontalRelation>, offset: Number = 0.0) {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -462,35 +216,15 @@ extension Maker {
             self.newRect.setValue(x, for: .left)
         }
         handlers.append((.low, handler))
-        return self
     }
 
-    /// Creates centerX relation between two views.
-    ///
-    /// Use this method when you want to configure centerX point between two following views.
-    ///
-    /// - parameter view1: The first view between which you set `centerX` relation.
-    /// - parameter view2: The second view between which you set `centerX` relation.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerX(between view1: UIView, _ view2: UIView) -> Maker {
+    func _centerX(between view1: UIView, _ view2: UIView) {
         let leftView = view1.frame.maxX > view2.frame.minX ? view2 : view1
         let rightView = leftView === view1 ? view2 : view1
-        return self.centerX(between: leftView.nui_right, rightView.nui_left)
+        _centerX(between: leftView.nui_right, rightView.nui_left)
     }
 
-    /// Creates centerX relation between two relation views.
-    ///
-    /// Use this method when you want to configure centerX point between two relations views.
-    ///
-    /// - parameter relationView1: The first relation view between which you set `centerX` relation.
-    /// - parameter relationView2: The second relation view between which you set `centerX` relation.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func centerX(between relationView1: RelationView<HorizontalRelation>,
-                                           _ relationView2: RelationView<HorizontalRelation>) -> Maker {
+    func _centerX(between relationView1: RelationView<HorizontalRelation>, _ relationView2: RelationView<HorizontalRelation>) {
         let view1 = relationView1.view
         let view2 = relationView2.view
 
@@ -508,47 +242,24 @@ extension Maker {
             self.newRect.setValue(x, for: .left)
         }
         handlers.append((.low, handler))
-        return self
     }
 
-    /// Just setting centerX.
-    ///
-    /// - parameter value: The value for setting centerX.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func setCenterX(value: Number) -> Maker {
+    func _setCenterX(value: Number) {
         let handler = { [unowned self] in
             self.newRect.setValue(value.value, for: .centerX)
         }
         handlers.append((.low, handler))
-        return self
     }
 
-    /// Just setting centerY.
-    ///
-    /// - parameter value: The value for setting centerY.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func setCenterY(value: Number) -> Maker {
+    func _setCenterY(value: Number) {
         let handler = { [unowned self] in
             self.newRect.setValue(value.value, for: .centerY)
         }
         handlers.append((.low, handler))
-        return self
     }
 
-    /// Creates center relation.
-    ///
-    /// Use this method when you want to center view by both axis relativity another layer.
-    ///
-    /// - parameter layer: The layer on which you set center relation.
-    ///
-    /// - returns: `Maker` instance for chaining relations.
-
-    @discardableResult public func center(to layer: CALayer) -> Maker {
-        return centerX(to: RelationView<HorizontalRelation>(view: .layer(layer), relation: .centerX))
-            .centerY(to: RelationView<VerticalRelation>(view: .layer(layer), relation: .centerY))
+    func _center(to layer: CALayer) {
+        _centerX(to: RelationView<HorizontalRelation>(view: .layer(layer), relation: .centerX))
+        _centerY(to: RelationView<VerticalRelation>(view: .layer(layer), relation: .centerY))
     }
 }

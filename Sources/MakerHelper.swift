@@ -12,19 +12,19 @@ extension Maker {
 
     func convertedValue(for type: RelationType, with view: ViewType) -> CGFloat {
         var rect: CGRect {
-            if let superview = self.view.superview, superview === view {
-                return CGRect(origin: .zero, size: superview.frame.size)
+            if let superview = self.view.layout.superview, superview === view {
+                return CGRect(origin: .zero, size: superview.layout.frame.size)
             }
 
-            if let superview = self.view.superview {
-                return superview.convert(view.frame, from: view.superview)
+            if let superview = self.view.layout.superview {
+                return superview.layout.convert(view.layout.frame, from: view.layout.superview)
             }
             assertionFailure("Can't configure a frame for view: \(self.view) without superview.")
             return .zero
         }
 
         var convertedRect = rect
-        if case let .view(superview) = self.view.superview,
+        if case let .view(superview) = self.view.layout.superview,
             case let .view(view) = view,
             let superScrollView = superview as? UIScrollView,
             view is UIScrollView,
@@ -43,21 +43,33 @@ extension Maker {
         case .bottom:
             return rect.maxY
         case .centerY:
-            return view.contains(self.view) ? rect.height / 2 : rect.midY
+            return view.layout.contains(self.view) ? rect.height / 2 : rect.midY
         case .centerX:
-            return view.contains(self.view) ? rect.width / 2 : rect.midX
+            return view.layout.contains(self.view) ? rect.width / 2 : rect.midX
         case .right:
             return rect.maxX
         case .left:
             return rect.minX
         case .safeArea(.top):
-            return rect.minY + view.safeAreaInsets.top
+            if let layout = view.layout as? UIViewLayout {
+                return rect.minY + layout.safeAreaInsets.top
+            }
+            return rect.minY
         case .safeArea(.left):
-            return rect.minX + view.safeAreaInsets.left
+            if let layout = view.layout as? UIViewLayout {
+                return rect.minX + layout.safeAreaInsets.left
+            }
+            return rect.minX
         case .safeArea(.right):
-            return rect.maxX - view.safeAreaInsets.right
+            if let layout = view.layout as? UIViewLayout {
+                return rect.maxX + layout.safeAreaInsets.right
+            }
+            return rect.maxX
         case .safeArea(.bottom):
-            return rect.maxY - view.safeAreaInsets.bottom
+            if let layout = view.layout as? UIViewLayout {
+                return rect.maxY + layout.safeAreaInsets.bottom
+            }
+            return rect.maxY
         default:
             return 0
         }
@@ -65,8 +77,8 @@ extension Maker {
 
     func relationSize(view: ViewType, for type: RelationType) -> CGFloat {
         switch type {
-        case .width:  return view.bounds.width
-        case .height: return view.bounds.height
+        case .width:  return view.layout.bounds.width
+        case .height: return view.layout.bounds.height
         default:      return 0
         }
     }

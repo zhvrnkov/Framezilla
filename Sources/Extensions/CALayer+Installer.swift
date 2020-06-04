@@ -34,12 +34,12 @@ public extension CALayer {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: CALayerInstallerBlock) {
         guard self.superlayer != nil else {
             return
         }
 
-        Maker.configure(view: .layer(self), for: state, installerBlock: installerBlock)
+        Maker.configure(layer: self, for: state, installerBlock: installerBlock)
     }
 
     /// Configures frame of current view for special states.
@@ -49,13 +49,13 @@ public extension CALayer {
     /// - parameter states:         The states for which you configure frame.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(states: [AnyHashable], installerBlock: InstallerBlock) {
+    func configureFrame(states: [AnyHashable], installerBlock: CALayerInstallerBlock) {
         guard self.superlayer != nil else {
             return
         }
 
         for state in states {
-            Maker.configure(view: .layer(self), for: state, installerBlock: installerBlock)
+            Maker.configure(layer: self, for: state, installerBlock: installerBlock)
         }
     }
 }
@@ -69,7 +69,7 @@ public extension Sequence where Iterator.Element: CALayer {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: CALayerInstallerBlock) {
         for view in self {
             view.configureFrame(state: state, installerBlock: installerBlock)
         }
@@ -82,7 +82,7 @@ public extension Sequence where Iterator.Element: CALayer {
     /// - parameter states:         The states for which you configure frames.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(states: [AnyHashable], installerBlock: InstallerBlock) {
+    func configureFrames(states: [AnyHashable], installerBlock: CALayerInstallerBlock) {
         for view in self {
             view.configureFrame(states: states, installerBlock: installerBlock)
         }
