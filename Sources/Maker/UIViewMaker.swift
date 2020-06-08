@@ -14,7 +14,7 @@ public final class UIViewMaker: Maker {
 
     override init(view: ViewType) {
         guard case let .view(view) = view else {
-            fatalError("UIViewMaker was initialized with wong ViewType")
+            fatalError("UIViewMaker was initialized with wrong ViewType")
         }
         self.uiView = view
         super.init(view: .view(view))
