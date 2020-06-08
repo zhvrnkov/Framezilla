@@ -48,7 +48,7 @@ public postfix func >> (maker: Maker) {
 }
 
 public typealias UIViewInstallerBlock = (UIViewMaker) -> Void
-public typealias CALayerInstallerBlock = (CALayerMaker) -> Void
+public typealias InstallerBlock = (Maker) -> Void
 
 extension Maker {
 
@@ -63,9 +63,9 @@ extension Maker {
         }
     }
 
-    class func configure(layer: CALayer, for state: AnyHashable, installerBlock: CALayerInstallerBlock) {
+    class func configure(layer: CALayer, for state: AnyHashable, installerBlock: InstallerBlock) {
         if layer.nx_state == state {
-            let maker = CALayerMaker(view: .layer(layer))
+            let maker = Maker(view: .layer(layer))
 
             maker.newRect = layer.frame
             installerBlock(maker)

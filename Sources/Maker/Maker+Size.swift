@@ -8,15 +8,31 @@ extension Maker {
 
     // MARK: High priority
 
-    func _width(_ width: Number) {
+    /// Installs constant width for current instance.
+    ///
+    /// - parameter width: The width for instance.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+    @discardableResult public func width(_ width: Number) -> Self {
         let handler = { [unowned self] in
             self.newRect.setValue(width.value, for: .width)
         }
         handlers.append((.high, handler))
         widthParameter = ValueParameter(value: width.value)
+        return self
     }
 
-    func _width(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) {
+    /// Creates width relation relatively another view = Aspect ratio.
+    ///
+    /// Use this method when you want that your view's width equals to another view's height with some multiplier, for example.
+    ///
+    /// - note: You can not use this method with other relations except for `nui_width` and `nui_height`.
+    ///
+    /// - parameter relationView:   The view on which you set relation.
+    /// - parameter multiplier:     The multiplier for views relation. Default multiplier value: 1.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+    @discardableResult public func width(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) -> Self {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -47,17 +63,35 @@ extension Maker {
         }
         handlers.append((.high, handler))
         widthToParameter = SideParameter(view: view, value: multiplier.value, relationType: relationType)
+        return self
+
     }
 
-    func _height(_ height: Number) {
+    /// Installs constant height for current view.
+    ///
+    /// - parameter height: The height for view.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+    @discardableResult public func height(_ height: Number) -> Self {
         let handler = { [unowned self] in
             self.newRect.setValue(height.value, for: .height)
         }
         handlers.append((.high, handler))
         heightParameter = ValueParameter(value: height.value)
+        return self
     }
 
-    func _height(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) {
+    /// Creates height relation relatively another view = Aspect ratio.
+    ///
+    /// Use this method when you want that your view's height equals to another view's width with some multiplier, for example.
+    ///
+    /// - note: You can not use this method with other relations except for `nui_width` and `nui_height`.
+    ///
+    /// - parameter relationView:   The view on which you set relation.
+    /// - parameter multiplier:     The multiplier for views relation. Default multiplier value: 1.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+    @discardableResult public func height(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) -> Self {
         let view = relationView.view
         let relationType = relationView.relationType
 
@@ -88,14 +122,25 @@ extension Maker {
         }
         handlers.append((.high, handler))
         heightToParameter = SideParameter(view: view, value: multiplier.value, relationType: relationType)
+        return self
     }
 
-    func _size(width: Number, height: Number) {
-        _width(width)
-        _height(height)
+    /// Installs constant width and height at the same time.
+    ///
+    /// - parameter width:  The width for instance.
+    /// - parameter height: The height for instance.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+    @discardableResult public func size(width: Number, height: Number) -> Self {
+        return self.width(width).height(height)
     }
 
-    func _size(_ size: CGSize) {
-        _size(width: size.width, height: size.height)
+    /// Installs constant width and height at the same time.
+    ///
+    /// - parameter size:  The size for instance.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+    @discardableResult public func size(_ size: CGSize) -> Self {
+        return self.size(width: size.width, height: size.height)
     }
 }

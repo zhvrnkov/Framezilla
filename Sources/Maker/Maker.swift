@@ -73,6 +73,16 @@ public class Maker {
         self.newRect = view.layout.frame
     }
 
+    // MARK: Additions
+
+    ///    Optional semantic property for improvements readability.
+    ///
+    /// - returns: `Maker` instance for chaining relations.
+
+    public var and: Self {
+        return self
+    }
+
     /// Creates сontainer relation.
     ///
     /// Use this method when you want to set `width` and `height` by wrapping all subviews.
@@ -90,11 +100,11 @@ public class Maker {
     /// - returns: `Maker` instance for chaining relations.
 
     @available(*, deprecated, message: "there is a more flexible container method - сheck the method description.")
-    @discardableResult public func container() -> Maker {
+    @discardableResult public func container() -> Self {
         return _container()
     }
 
-    @discardableResult func _container() -> Maker {
+    @discardableResult func _container() -> Self {
         var frame = CGRect.zero
 
         var minX: CGFloat = 0
@@ -135,7 +145,7 @@ public class Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func cornerRadius(_ cornerRadius: Number) -> Maker {
+    @discardableResult public func cornerRadius(_ cornerRadius: Number) -> Self {
         let handler = { [unowned self] in
             self.view.layout.cornerRadius = cornerRadius.value
         }
@@ -147,7 +157,7 @@ public class Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func cornerRadius(byHalf type: Size) -> Maker {
+    @discardableResult public func cornerRadius(byHalf type: Size) -> Self {
         let handler = { [unowned self] in
             if case Size.width = type {
                 self.view.layout.cornerRadius = self.newRect.width / 2
@@ -160,9 +170,9 @@ public class Maker {
         return self
     }
 
-    func apply(_ f: ((Number) -> Void), _ inset: Number?) {
+    func apply(_ f: ((Number) -> Self), _ inset: Number?) {
         if let inset = inset {
-            f(inset)
+            _ = f(inset)
         }
     }
 

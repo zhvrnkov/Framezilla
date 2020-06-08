@@ -34,7 +34,7 @@ public extension CALayer {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: CALayerInstallerBlock) {
+    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
         configureFrame(states: [state], installerBlock: installerBlock)
     }
 
@@ -45,7 +45,7 @@ public extension CALayer {
     /// - parameter states:         The states for which you configure frame.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(states: [AnyHashable], installerBlock: CALayerInstallerBlock) {
+    func configureFrame(states: [AnyHashable], installerBlock: InstallerBlock) {
         guard superlayer != nil else {
             return
         }
@@ -65,7 +65,7 @@ public extension Sequence where Iterator.Element: CALayer {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: CALayerInstallerBlock) {
+    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
         for layer in self {
             layer.configureFrame(state: state, installerBlock: installerBlock)
         }
@@ -78,7 +78,7 @@ public extension Sequence where Iterator.Element: CALayer {
     /// - parameter states:         The states for which you configure frames.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(states: [AnyHashable], installerBlock: CALayerInstallerBlock) {
+    func configureFrames(states: [AnyHashable], installerBlock: InstallerBlock) {
         for layer in self {
             layer.configureFrame(states: states, installerBlock: installerBlock)
         }
