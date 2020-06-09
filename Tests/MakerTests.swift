@@ -343,7 +343,6 @@ class MakerTests: BaseTest {
         
         let insets = UIEdgeInsets(top: 5, left: 10, bottom: 15, right: 20)
         testingView.configureFrame { maker in
-            maker
             maker.equal(to: nestedView1, insets: insets)
         }
         XCTAssertEqual(testingView.frame, CGRect(x: nestedView1.frame.minX + insets.left,

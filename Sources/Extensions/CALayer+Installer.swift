@@ -6,27 +6,6 @@ import UIKit
 
 public extension CALayer {
 
-    /// Apply new configuration state without frame updating.
-    ///
-    /// - note: Use `DEFAULT_STATE` for setting the state to the default value.
-
-    var nx_state: AnyHashable {
-        get {
-            if let value = objc_getAssociatedObject(self, &nxStateTypeAssociationKey) as? AnyHashable {
-                return value
-            }
-            else {
-                return DEFAULT_STATE
-            }
-        }
-        set {
-            objc_setAssociatedObject(self, &nxStateTypeAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
-
-public extension CALayer {
-
     /// Configures frame of current layer for special state.
     ///
     /// - note: When you configure frame without implicit state parameter (default value), frame configures for the `DEFAULT_STATE`.
@@ -34,25 +13,11 @@ public extension CALayer {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
-        configureFrame(states: [state], installerBlock: installerBlock)
-    }
-
-    /// Configures frame of current layer for special states.
-    ///
-    /// - note: Don't forget about `DEFAULT_VALUE`.
-    ///
-    /// - parameter states:         The states for which you configure frame.
-    /// - parameter installerBlock: The installer block within which you can configure frame relations.
-
-    func configureFrame(states: [AnyHashable], installerBlock: InstallerBlock) {
+    func configureFrame(installerBlock: InstallerBlock) {
         guard superlayer != nil else {
             return
         }
-
-        for state in states {
-            Maker.configure(layer: self, for: state, installerBlock: installerBlock)
-        }
+        Maker.configure(layer: self, installerBlock: installerBlock)
     }
 }
 
@@ -65,9 +30,9 @@ public extension Sequence where Iterator.Element: CALayer {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    func configureFrames(installerBlock: InstallerBlock) {
         for layer in self {
-            layer.configureFrame(state: state, installerBlock: installerBlock)
+            layer.configureFrame(installerBlock: installerBlock)
         }
     }
 
@@ -80,7 +45,7 @@ public extension Sequence where Iterator.Element: CALayer {
 
     func configureFrames(states: [AnyHashable], installerBlock: InstallerBlock) {
         for layer in self {
-            layer.configureFrame(states: states, installerBlock: installerBlock)
+            layer.configureFrame(installerBlock: installerBlock)
         }
     }
 }

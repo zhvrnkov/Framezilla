@@ -56,12 +56,6 @@ extension ViewType: Equatable {
 }
 
 protocol Layout: class {
-
-    /// Apply new configuration state without frame updating.
-    ///
-    /// - note: Use `DEFAULT_STATE` for setting the state to the default value.
-    var nx_state: AnyHashable { get }
-    
     var superview: ViewType? { get }
     var subviews: [ViewType] { get }
     var frame: CGRect { get set}
@@ -172,14 +166,6 @@ final class UIViewLayout: Layout {
 
 final class CALayerLayout: Layout {
     unowned let layer: CALayer
-    var nx_state: AnyHashable {
-        get {
-            layer.nx_state
-        }
-        set {
-            layer.nx_state = newValue
-        }
-    }
 
     var superview: ViewType? {
         guard let superlayer = layer.superlayer else {
