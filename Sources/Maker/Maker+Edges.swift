@@ -49,6 +49,17 @@ extension Maker {
                 right(inset: insets.right)
             case .top:
                 top(inset: insets.top)
+            case .horizontal:
+                right(inset: insets.right)
+                left(inset: insets.left)
+            case .vertical:
+                top(inset: insets.top)
+                bottom(inset: insets.bottom)
+            case .all:
+                right(inset: insets.right)
+                left(inset: insets.left)
+                top(inset: insets.top)
+                bottom(inset: insets.bottom)
             default:
                 return
             }

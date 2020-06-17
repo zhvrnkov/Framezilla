@@ -6,11 +6,8 @@ import UIKit
 
 public extension CALayer {
 
-    /// Configures frame of current layer for special state.
+    /// Configures frame of current layer.
     ///
-    /// - note: When you configure frame without implicit state parameter (default value), frame configures for the `DEFAULT_STATE`.
-    ///
-    /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrame(installerBlock: InstallerBlock) {
@@ -23,27 +20,11 @@ public extension CALayer {
 
 public extension Sequence where Iterator.Element: CALayer {
 
-    /// Configures frames of the layers for special state.
+    /// Configures frames of the layers.
     ///
-    /// - note: When you configure frame without implicit state parameter (default value), frame configures for the `DEFAULT_STATE`.
-    ///
-    /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
     func configureFrames(installerBlock: InstallerBlock) {
-        for layer in self {
-            layer.configureFrame(installerBlock: installerBlock)
-        }
-    }
-
-    /// Configures frames of the layers for special states.
-    ///
-    /// - note: Don't forget about `DEFAULT_VALUE`.
-    ///
-    /// - parameter states:         The states for which you configure frames.
-    /// - parameter installerBlock: The installer block within which you can configure frame relations.
-
-    func configureFrames(states: [AnyHashable], installerBlock: InstallerBlock) {
         for layer in self {
             layer.configureFrame(installerBlock: installerBlock)
         }
@@ -109,6 +90,7 @@ public extension Collection where Iterator.Element: CALayer {
         }
 
         installerBlock()
+
         container.configureFrame { maker in
             maker._container()
         }

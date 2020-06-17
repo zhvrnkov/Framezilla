@@ -21,9 +21,9 @@ extension ViewType {
             let layout: Layout
             switch self {
             case .view(let view):
-                layout = UIViewLayout(view)
+                layout = UIViewLayout(view: view)
             case .layer(let layer):
-                layout = CALayerLayout(layer)
+                layout = CALayerLayout(layer: layer)
             }
             objc_setAssociatedObject(self, &layoutAssociationKey, layout, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return layout
@@ -159,7 +159,7 @@ final class UIViewLayout: Layout {
         return .zero
     }
 
-    init(_ view: UIView) {
+    init(view: UIView) {
         self.view = view
     }
 }
@@ -219,7 +219,7 @@ final class CALayerLayout: Layout {
         }
     }
 
-    init(_ layer: CALayer) {
+    init(layer: CALayer) {
         self.layer = layer
     }
 }
