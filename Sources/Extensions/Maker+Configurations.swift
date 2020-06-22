@@ -20,7 +20,7 @@ postfix operator >>
 /// - returns: `Maker` instance for chaining relations.
 
 public postfix func << (view: UIView) -> Maker {
-    let maker = Maker(view: .view(view))
+    let maker = Maker(element: .view(view))
     maker.newRect = view.frame
     return maker
 }
@@ -34,7 +34,7 @@ public postfix func << (view: UIView) -> Maker {
 /// - returns: `Maker` instance for chaining relations.
 
 public postfix func << (layer: CALayer) -> Maker {
-    let maker = Maker(view: .layer(layer))
+    let maker = Maker(element: .layer(layer))
     maker.newRect = layer.frame
     return maker
 }
@@ -51,7 +51,7 @@ public typealias InstallerBlock = (Maker) -> Void
 extension Maker {
     class func configure(view: UIView, for state: AnyHashable, installerBlock: UIViewInstallerBlock) {
         if view.nx_state == state {
-            let maker = UIViewMaker(view: .view(view))
+            let maker = UIViewMaker(view: view)
 
             maker.newRect = view.frame
             installerBlock(maker)
@@ -61,7 +61,7 @@ extension Maker {
     }
 
     class func configure(layer: CALayer, installerBlock: InstallerBlock) {
-        let maker = Maker(view: .layer(layer))
+        let maker = Maker(element: .layer(layer))
 
         maker.newRect = layer.frame
         installerBlock(maker)
@@ -76,6 +76,6 @@ extension Maker {
             $0.handler()
         }
 
-        view.layout.frame = newRect
+        element.frame = newRect
     }
 }

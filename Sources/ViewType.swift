@@ -4,178 +4,26 @@
 
 import UIKit
 
-private var layoutAssociationKey = "layout_association_key"
-
-public enum ViewType {
-    case view(UIView)
-    case layer(CALayer)
-}
-
-extension ViewType {
-
-    var layout: Layout {
-        if let value = objc_getAssociatedObject(self, &layoutAssociationKey) as? Layout {
-            return value
-        }
-        else {
-            let layout: Layout
-            switch self {
-            case .view(let view):
-                layout = UIViewLayout(view: view)
-            case .layer(let layer):
-                layout = CALayerLayout(layer: layer)
-            }
-            objc_setAssociatedObject(self, &layoutAssociationKey, layout, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            return layout
-        }
-    }
-}
-
-extension ViewType: Equatable {
-    public static func == (lhs: ViewType, rhs: ViewType) -> Bool {
-        switch (lhs, rhs) {
-        case (.view(let lhs), .view(let rhs)):
-            return lhs == rhs
-        case (.layer(let lhs), .layer(let rhs)):
-            return lhs == rhs
-        default:
-            return false
-        }
+public class ElementType {
+    static func view(_ view: UIView) -> ElementType {
+        return ViewType(view: view)
     }
 
-    public static func === (lhs: ViewType, rhs: ViewType) -> Bool {
-        switch (lhs, rhs) {
-        case (.view(let lhs), .view(let rhs)):
-            return lhs === rhs
-        case (.layer(let lhs), .layer(let rhs)):
-            return lhs === rhs
-        default:
-            return false
-        }
-    }
-}
-
-protocol Layout: class {
-    var superview: ViewType? { get }
-    var subviews: [ViewType] { get }
-    var frame: CGRect { get set}
-    var bounds: CGRect { get set}
-    var cornerRadius: CGFloat { get set}
-
-    func contains(_ view: ViewType) -> Bool
-    func convert(_ rect: CGRect, from view: ViewType?) -> CGRect
-}
-
-extension Layout {
-    func contains(_ view: ViewType) -> Bool {
-        if subviews.contains(view) {
-            return true
-        }
-        for subview in subviews {
-            if subview.layout.contains(view) {
-                return true
-            }
-        }
-        return false
-    }
-}
-
-final class UIViewLayout: Layout {
-    unowned let view: UIView
-
-    var nx_state: AnyHashable {
-        get {
-            view.nx_state
-        }
-        set {
-            view.nx_state = newValue
-        }
+    static func layer(_ layer: CALayer) -> ElementType {
+        return .init(layer: layer)
     }
 
-    var superview: ViewType? {
-        guard let superview = view.superview else {
-            return nil
-        }
-        return .view(superview)
-    }
-
-    var subviews: [ViewType] {
-        return view.subviews.map { view in
-            .view(view)
-        }
-    }
-
-    var frame: CGRect {
-        get {
-            view.frame
-        }
-        set {
-            view.frame = newValue
-        }
-    }
-
-    var bounds: CGRect {
-        get {
-            view.bounds
-        }
-        set {
-            view.bounds = newValue
-        }
-    }
-
-    var cornerRadius: CGFloat {
-        get {
-            view.layer.cornerRadius
-        }
-        set {
-            view.layer.cornerRadius = newValue
-        }
-    }
-
-    func convert(_ rect: CGRect, from view: ViewType?) -> CGRect {
-        guard let view = view else {
-            return self.view.convert(rect, from: nil)
-        }
-        switch view {
-        case let .view(view):
-            return self.view.convert(rect, from: view)
-        case let .layer(layer):
-            return self.view.layer.convert(rect, from: layer)
-        }
-    }
-
-    func sizeToFit() {
-        view.sizeToFit()
-    }
-
-    func sizeThatFits(_ size: CGSize) -> CGSize {
-        view.sizeThatFits(size)
-    }
-
-    var safeAreaInsets: UIEdgeInsets {
-        if #available(iOS 11.0, *) {
-            return view.safeAreaInsets
-        }
-        return .zero
-    }
-
-    init(view: UIView) {
-        self.view = view
-    }
-}
-
-final class CALayerLayout: Layout {
     unowned let layer: CALayer
 
-    var superview: ViewType? {
+    var superelement: ElementType? {
         guard let superlayer = layer.superlayer else {
             return nil
         }
         return .layer(superlayer)
     }
 
-    var subviews: [ViewType] {
-        return layer.sublayers?.map { layer in
+    var subelements: [ElementType] {
+        layer.sublayers?.map { layer in
             .layer(layer)
         } ?? []
     }
@@ -207,19 +55,87 @@ final class CALayerLayout: Layout {
         }
     }
 
-    func convert(_ rect: CGRect, from view: ViewType?) -> CGRect {
-        guard let view = view else {
+    init(layer: CALayer) {
+        self.layer = layer
+    }
+
+    func contains(_ element: ElementType) -> Bool {
+        let isSubelement = subelements.contains { subelement in
+            subelement == element
+        }
+        guard !isSubelement else {
+            return true
+        }
+        for subelement in subelements {
+            if subelement.contains(element) {
+                return true
+            }
+        }
+        return false
+    }
+
+    func convert(_ rect: CGRect, from element: ElementType?) -> CGRect {
+        guard let element = element else {
             return self.layer.convert(rect, from: nil)
         }
-        switch view {
-        case let .view(view):
-            return self.layer.convert(rect, from: view.layer)
-        case let .layer(layer):
-            return self.layer.convert(rect, from: layer)
+        return layer.convert(rect, from: element.layer)
+    }
+
+    static func == (lhs: ElementType, rhs: ElementType) -> Bool {
+        lhs.layer == rhs.layer
+    }
+
+    static func != (lhs: ElementType, rhs: ElementType) -> Bool {
+        lhs.layer != rhs.layer
+    }
+
+    static func === (lhs: ElementType, rhs: ElementType) -> Bool {
+        type(of: lhs) == type(of: rhs) && lhs.layer === rhs.layer
+    }
+}
+
+public class ViewType: ElementType {
+   unowned let view: UIView
+
+    var nx_state: AnyHashable {
+        get {
+            view.nx_state
+        }
+        set {
+            view.nx_state = newValue
         }
     }
 
-    init(layer: CALayer) {
-        self.layer = layer
+    override var superelement: ElementType? {
+        guard let superview = view.superview else {
+            return nil
+        }
+        return .view(superview)
+    }
+
+    override var subelements: [ElementType] {
+        view.subviews.map { view in
+            .view(view)
+        }
+    }
+
+    var safeAreaInsets: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return view.safeAreaInsets
+        }
+        return .zero
+    }
+
+    init(view: UIView) {
+        self.view = view
+        super.init(layer: view.layer)
+    }
+
+    func sizeToFit() {
+        view.sizeToFit()
+    }
+
+    func sizeThatFits(_ size: CGSize) -> CGSize {
+        view.sizeThatFits(size)
     }
 }

@@ -18,12 +18,12 @@ final class ValueParameter {
 
 final class SideParameter {
 
-    let view: ViewType
+    let element: ElementType
     let value: CGFloat
     let relationType: RelationType
 
-    init(view: ViewType, value: CGFloat, relationType: RelationType) {
-        self.view = view
+    init(element: ElementType, value: CGFloat, relationType: RelationType) {
+        self.element = element
         self.value = value
         self.relationType = relationType
     }

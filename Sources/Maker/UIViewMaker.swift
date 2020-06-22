@@ -12,12 +12,9 @@ public final class UIViewMaker: Maker {
 
     unowned let uiView: UIView
 
-    override init(view: ViewType) {
-        guard case let .view(view) = view else {
-            fatalError("UIViewMaker was initialized with wrong ViewType")
-        }
+    init(view: UIView) {
         self.uiView = view
-        super.init(view: .view(view))
+        super.init(element: .view(view))
     }
 
     /// Resizes the current view so it just encloses its subviews.
@@ -69,11 +66,11 @@ public final class UIViewMaker: Maker {
                 fitWidth = parameter.value
             }
             else if let parameter = self.widthToParameter {
-                fitWidth = self.relationSize(view: parameter.view, for: parameter.relationType) * parameter.value
+                fitWidth = self.relationSize(element: parameter.element, for: parameter.relationType) * parameter.value
             }
             else if let leftParameter = self.leftParameter, let rightParameter = self.rightParameter {
-                let leftViewX = self.convertedValue(for: leftParameter.relationType, with: leftParameter.view) + leftParameter.value
-                let rightViewX = self.convertedValue(for: rightParameter.relationType, with: rightParameter.view) - rightParameter.value
+                let leftViewX = self.convertedValue(for: leftParameter.relationType, with: leftParameter.element) + leftParameter.value
+                let rightViewX = self.convertedValue(for: rightParameter.relationType, with: rightParameter.element) - rightParameter.value
 
                 fitWidth = rightViewX - leftViewX
             }
@@ -108,11 +105,11 @@ public final class UIViewMaker: Maker {
                 fitHeight = parameter.value
             }
             else if let parameter = self.heightToParameter {
-                fitHeight = self.relationSize(view: parameter.view, for: parameter.relationType) * parameter.value
+                fitHeight = self.relationSize(element: parameter.element, for: parameter.relationType) * parameter.value
             }
             else if let topParameter = self.topParameter, let bottomParameter = self.bottomParameter {
-                let topViewY = self.convertedValue(for: topParameter.relationType, with: topParameter.view) + topParameter.value
-                let bottomViewY = self.convertedValue(for: bottomParameter.relationType, with: bottomParameter.view) - bottomParameter.value
+                let topViewY = self.convertedValue(for: topParameter.relationType, with: topParameter.element) + topParameter.value
+                let bottomViewY = self.convertedValue(for: bottomParameter.relationType, with: bottomParameter.element) - bottomParameter.value
 
                 fitHeight = bottomViewY - topViewY
             }
@@ -142,12 +139,11 @@ public final class UIViewMaker: Maker {
     @available(*, deprecated, message: "Use `right(to: view.nui_safeArea.right, inset: ...)` instead")
     @discardableResult public func right(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
         if #available(iOS 11.0, *) {
-            guard let superview = view.layout.superview,
-                let layout = superview.layout as? UIViewLayout else {
+            guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a right relation to the safe area without superview.")
                 return self
             }
-            right(inset: layout.safeAreaInsets.right + inset.value)
+            right(inset: superelement.safeAreaInsets.right + inset.value)
         }
         else {
             right(inset: inset)
@@ -169,12 +165,11 @@ public final class UIViewMaker: Maker {
     @available(*, deprecated, message: "Use `left(to: view.nui_safeArea.left, inset: ...)` instead")
     @discardableResult public func left(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
         if #available(iOS 11.0, *) {
-            guard let superview = view.layout.superview,
-                let layout = superview.layout as? UIViewLayout else {
+            guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a left relation to the safe area without superview.")
                 return self
             }
-            return left(inset: layout.safeAreaInsets.left + inset.value)
+            return left(inset: superelement.safeAreaInsets.left + inset.value)
         }
         else {
             return left(inset: inset)
@@ -195,12 +190,11 @@ public final class UIViewMaker: Maker {
     @available(*, deprecated, message: "Use `top(to: view.nui_safeArea.top, inset: ...)` instead")
     @discardableResult public func top(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
         if #available(iOS 11.0, *) {
-            guard let superview = view.layout.superview,
-                let layout = superview.layout as? UIViewLayout else {
+            guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a top relation to the safe area without superview.")
                 return self
             }
-            return top(inset: layout.safeAreaInsets.top + inset.value)
+            return top(inset: superelement.safeAreaInsets.top + inset.value)
         }
         else {
             return top(inset: inset)
@@ -221,12 +215,11 @@ public final class UIViewMaker: Maker {
     @available(*, deprecated, message: "Use `bottom(to: view.nui_safeArea.bottom, inset: ...)` instead")
     @discardableResult public func bottom(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
         if #available(iOS 11.0, *) {
-            guard let superview = view.layout.superview,
-                let layout = superview.layout as? UIViewLayout else {
+            guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a bottom relation to the safe area without superview.")
                 return self
             }
-            return bottom(inset: layout.safeAreaInsets.bottom + inset.value)
+            return bottom(inset: superelement.safeAreaInsets.bottom + inset.value)
         }
         else {
             return bottom(inset: inset)

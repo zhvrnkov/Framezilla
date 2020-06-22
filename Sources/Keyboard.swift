@@ -23,7 +23,7 @@ public class Keyboard: EdgeRelationCollection {
             Maker.initializeKeyboardTracking()
         }
 
-        super.init(view: .view(KeyboardRectCloneView.shared))
+        super.init(element: .view(KeyboardRectCloneView.shared))
     }
 }
 

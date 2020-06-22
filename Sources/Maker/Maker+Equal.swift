@@ -26,11 +26,11 @@ extension Maker {
         return equal(to: .layer(layer), insets: insets)
     }
 
-    private func equal(to view: ViewType, insets: UIEdgeInsets = .zero) -> Self {
-        let topView = RelationView<VerticalRelation>(view: view, relation: .top)
-        let leftView = RelationView<HorizontalRelation>(view: view, relation: .left)
-        let bottomView = RelationView<VerticalRelation>(view: view, relation: .bottom)
-        let rightView = RelationView<HorizontalRelation>(view: view, relation: .right)
+    private func equal(to element: ElementType, insets: UIEdgeInsets = .zero) -> Self {
+        let topView = RelationView<VerticalRelation>(element: element, relation: .top)
+        let leftView = RelationView<HorizontalRelation>(element: element, relation: .left)
+        let bottomView = RelationView<VerticalRelation>(element: element, relation: .bottom)
+        let rightView = RelationView<HorizontalRelation>(element: element, relation: .right)
         
         return top(to: topView, inset: insets.top)
             .left(to: leftView, inset: insets.left)

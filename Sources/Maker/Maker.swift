@@ -43,7 +43,7 @@ public class Maker {
 
     typealias HandlerType = () -> Void
 
-    var view: ViewType
+    var element: ElementType
 
     var handlers = ContiguousArray<(priority: HandlerPriority, handler: HandlerType)>()
     var newRect: CGRect
@@ -68,9 +68,9 @@ public class Maker {
         KeyboardRectCloneView.shared.use(window)
     }
 
-    init(view: ViewType) {
-        self.view = view
-        self.newRect = view.layout.frame
+    init(element: ElementType) {
+        self.element = element
+        self.newRect = element.frame
     }
 
     // MARK: Additions
@@ -110,28 +110,28 @@ public class Maker {
         var minX: CGFloat = 0
         var minY: CGFloat = 0
 
-        for subview in view.layout.subviews {
-            if subview.layout.frame.origin.x < 0 {
-                subview.layout.frame.origin.x = 0
+        for subelement in element.subelements {
+            if subelement.frame.origin.x < 0 {
+                subelement.frame.origin.x = 0
             }
 
-            if subview.layout.frame.origin.y < 0 {
-                subview.layout.frame.origin.y = 0
+            if subelement.frame.origin.y < 0 {
+                subelement.frame.origin.y = 0
             }
 
-            if subview.layout.frame.origin.x < minX {
-                minX = subview.layout.frame.origin.x
+            if subelement.frame.origin.x < minX {
+                minX = subelement.frame.origin.x
             }
-            if subview.layout.frame.origin.y < minY {
-                minY = subview.layout.frame.origin.y
+            if subelement.frame.origin.y < minY {
+                minY = subelement.frame.origin.y
             }
         }
 
-        for subview in view.layout.subviews {
-            subview.layout.frame.origin.x -= minX
-            subview.layout.frame.origin.y -= minY
+        for subelement in element.subelements {
+            subelement.frame.origin.x -= minX
+            subelement.frame.origin.y -= minY
 
-            frame = frame.union(subview.layout.frame)
+            frame = frame.union(subelement.frame)
         }
 
         setHighPriorityValue(frame.width, for: .width)
@@ -147,7 +147,7 @@ public class Maker {
 
     @discardableResult public func cornerRadius(_ cornerRadius: Number) -> Self {
         let handler = { [unowned self] in
-            self.view.layout.cornerRadius = cornerRadius.value
+            self.element.cornerRadius = cornerRadius.value
         }
         handlers.append((.low, handler))
         return self
@@ -160,10 +160,10 @@ public class Maker {
     @discardableResult public func cornerRadius(byHalf type: Size) -> Self {
         let handler = { [unowned self] in
             if case Size.width = type {
-                self.view.layout.cornerRadius = self.newRect.width / 2
+                self.element.cornerRadius = self.newRect.width / 2
             }
             else {
-                self.view.layout.cornerRadius = self.newRect.height / 2
+                self.element.cornerRadius = self.newRect.height / 2
             }
         }
         handlers.append((.low, handler))

@@ -33,12 +33,12 @@ extension Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
     @discardableResult public func width(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) -> Self {
-        let view = relationView.view
+        let element = relationView.element
         let relationType = relationView.relationType
 
         let handler = { [unowned self] in
-            if view != self.view {
-                let width = self.relationSize(view: view, for: relationType) * multiplier.value
+            if element != self.element {
+                let width = self.relationSize(element: element, for: relationType) * multiplier.value
                 self.newRect.setValue(width, for: .width)
             }
             else {
@@ -46,7 +46,7 @@ extension Maker {
                     self.newRect.setValue(parameter.value * multiplier.value, for: .width)
                 }
                 else if let parameter = self.heightToParameter {
-                    let width = self.relationSize(view: parameter.view, for: parameter.relationType) * (parameter.value * multiplier.value)
+                    let width = self.relationSize(element: parameter.element, for: parameter.relationType) * (parameter.value * multiplier.value)
                     self.newRect.setValue(width, for: .width)
                 }
                 else {
@@ -54,15 +54,15 @@ extension Maker {
                         return
                     }
 
-                    let topViewY = self.convertedValue(for: topParameter.relationType, with: topParameter.view) + topParameter.value
-                    let bottomViewY = self.convertedValue(for: bottomParameter.relationType, with: bottomParameter.view) - bottomParameter.value
+                    let topViewY = self.convertedValue(for: topParameter.relationType, with: topParameter.element) + topParameter.value
+                    let bottomViewY = self.convertedValue(for: bottomParameter.relationType, with: bottomParameter.element) - bottomParameter.value
 
                     self.newRect.setValue((bottomViewY - topViewY) * multiplier.value, for: .width)
                 }
             }
         }
         handlers.append((.high, handler))
-        widthToParameter = SideParameter(view: view, value: multiplier.value, relationType: relationType)
+        widthToParameter = SideParameter(element: element, value: multiplier.value, relationType: relationType)
         return self
 
     }
@@ -92,12 +92,12 @@ extension Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
     @discardableResult public func height(to relationView: RelationView<SizeRelation>, multiplier: Number = 1.0) -> Self {
-        let view = relationView.view
+        let element = relationView.element
         let relationType = relationView.relationType
 
         let handler = { [unowned self] in
-            if view != self.view {
-                let height = self.relationSize(view: view, for: relationType) * multiplier.value
+            if element != self.element {
+                let height = self.relationSize(element: element, for: relationType) * multiplier.value
                 self.newRect.setValue(height, for: .height)
             }
             else {
@@ -105,7 +105,7 @@ extension Maker {
                     self.newRect.setValue(parameter.value * multiplier.value, for: .height)
                 }
                 else if let parameter = self.widthToParameter {
-                    let height = self.relationSize(view: parameter.view, for: parameter.relationType) * (parameter.value * multiplier.value)
+                    let height = self.relationSize(element: parameter.element, for: parameter.relationType) * (parameter.value * multiplier.value)
                     self.newRect.setValue(height, for: .height)
                 }
                 else {
@@ -113,15 +113,15 @@ extension Maker {
                         return
                     }
 
-                    let leftViewX = self.convertedValue(for: leftParameter.relationType, with: leftParameter.view) + leftParameter.value
-                    let rightViewX = self.convertedValue(for: rightParameter.relationType, with: rightParameter.view) - rightParameter.value
+                    let leftViewX = self.convertedValue(for: leftParameter.relationType, with: leftParameter.element) + leftParameter.value
+                    let rightViewX = self.convertedValue(for: rightParameter.relationType, with: rightParameter.element) - rightParameter.value
 
                     self.newRect.setValue((rightViewX - leftViewX) * multiplier.value, for: .height)
                 }
             }
         }
         handlers.append((.high, handler))
-        heightToParameter = SideParameter(view: view, value: multiplier.value, relationType: relationType)
+        heightToParameter = SideParameter(element: element, value: multiplier.value, relationType: relationType)
         return self
     }
 
