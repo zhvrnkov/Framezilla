@@ -12,7 +12,7 @@
 		0169D592246A920E0020F4F7 /* Maker+Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D591246A920E0020F4F7 /* Maker+Equal.swift */; };
 		0169D594246A921B0020F4F7 /* Maker+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D593246A921B0020F4F7 /* Maker+Size.swift */; };
 		0169D596246A922B0020F4F7 /* Maker+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D595246A922B0020F4F7 /* Maker+Position.swift */; };
-		01C6D8C524597CD100594F84 /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6D8C424597CD100594F84 /* ViewType.swift */; };
+		01C6D8C524597CD100594F84 /* ElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6D8C424597CD100594F84 /* ElementType.swift */; };
 		01D01485246E8C5200B6BB09 /* ViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D01484246E8C5200B6BB09 /* ViewMaker.swift */; };
 		115972191D8450F500BC5C20 /* Framezilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11FB41321D844D2C00700A40 /* Framezilla.framework */; };
 		11FB41371D844D2C00700A40 /* Framezilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 11FB41351D844D2C00700A40 /* Framezilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,7 +63,7 @@
 		0169D591246A920E0020F4F7 /* Maker+Equal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Equal.swift"; sourceTree = "<group>"; };
 		0169D593246A921B0020F4F7 /* Maker+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Size.swift"; sourceTree = "<group>"; };
 		0169D595246A922B0020F4F7 /* Maker+Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Position.swift"; sourceTree = "<group>"; };
-		01C6D8C424597CD100594F84 /* ViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
+		01C6D8C424597CD100594F84 /* ElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementType.swift; sourceTree = "<group>"; };
 		01D01484246E8C5200B6BB09 /* ViewMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMaker.swift; sourceTree = "<group>"; };
 		115972141D8450F500BC5C20 /* FramezillaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramezillaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FB41321D844D2C00700A40 /* Framezilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Framezilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,7 +170,7 @@
 				2E79EEC5231CE45C00A6C548 /* Relations.swift */,
 				2E79EECD231CF90300A6C548 /* SafeArea.swift */,
 				2E08383B230D245F007D0928 /* Weak.swift */,
-				01C6D8C424597CD100594F84 /* ViewType.swift */,
+				01C6D8C424597CD100594F84 /* ElementType.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -397,7 +397,7 @@
 				844BE8F320457634004C19A8 /* Maker+Unavailable.swift in Sources */,
 				0169D596246A922B0020F4F7 /* Maker+Position.swift in Sources */,
 				0169D590246A91FB0020F4F7 /* Maker+Edges.swift in Sources */,
-				01C6D8C524597CD100594F84 /* ViewType.swift in Sources */,
+				01C6D8C524597CD100594F84 /* ElementType.swift in Sources */,
 				11FB41491D844F8F00700A40 /* HasRelations.swift in Sources */,
 				842BB7FC1F0638E9000D1CFF /* Parameters.swift in Sources */,
 				0169D58B246A84040020F4F7 /* CALayer+Installer.swift in Sources */,
