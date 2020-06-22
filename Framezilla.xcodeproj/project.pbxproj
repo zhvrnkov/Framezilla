@@ -13,7 +13,7 @@
 		0169D594246A921B0020F4F7 /* Maker+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D593246A921B0020F4F7 /* Maker+Size.swift */; };
 		0169D596246A922B0020F4F7 /* Maker+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D595246A922B0020F4F7 /* Maker+Position.swift */; };
 		01C6D8C524597CD100594F84 /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6D8C424597CD100594F84 /* ViewType.swift */; };
-		01D01485246E8C5200B6BB09 /* UIViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D01484246E8C5200B6BB09 /* UIViewMaker.swift */; };
+		01D01485246E8C5200B6BB09 /* ViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D01484246E8C5200B6BB09 /* ViewMaker.swift */; };
 		115972191D8450F500BC5C20 /* Framezilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11FB41321D844D2C00700A40 /* Framezilla.framework */; };
 		11FB41371D844D2C00700A40 /* Framezilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 11FB41351D844D2C00700A40 /* Framezilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11FB41451D844F8F00700A40 /* Maker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41401D844F8F00700A40 /* Maker.swift */; };
@@ -64,7 +64,7 @@
 		0169D593246A921B0020F4F7 /* Maker+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Size.swift"; sourceTree = "<group>"; };
 		0169D595246A922B0020F4F7 /* Maker+Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Position.swift"; sourceTree = "<group>"; };
 		01C6D8C424597CD100594F84 /* ViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
-		01D01484246E8C5200B6BB09 /* UIViewMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewMaker.swift; sourceTree = "<group>"; };
+		01D01484246E8C5200B6BB09 /* ViewMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMaker.swift; sourceTree = "<group>"; };
 		115972141D8450F500BC5C20 /* FramezillaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramezillaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FB41321D844D2C00700A40 /* Framezilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Framezilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FB41351D844D2C00700A40 /* Framezilla.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Framezilla.h; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 				0169D591246A920E0020F4F7 /* Maker+Equal.swift */,
 				0169D593246A921B0020F4F7 /* Maker+Size.swift */,
 				0169D595246A922B0020F4F7 /* Maker+Position.swift */,
-				01D01484246E8C5200B6BB09 /* UIViewMaker.swift */,
+				01D01484246E8C5200B6BB09 /* ViewMaker.swift */,
 			);
 			path = Maker;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 			files = (
 				11FB41461D844F8F00700A40 /* Maker+Configurations.swift in Sources */,
 				2E79EECF231CF93900A6C548 /* SafeArea.swift in Sources */,
-				01D01485246E8C5200B6BB09 /* UIViewMaker.swift in Sources */,
+				01D01485246E8C5200B6BB09 /* ViewMaker.swift in Sources */,
 				11FB41451D844F8F00700A40 /* Maker.swift in Sources */,
 				85221C0022E99D4100EA9D3D /* OptionSet+ForEeach.swift in Sources */,
 				2E08383E230D2482007D0928 /* UIView+Keyboard.swift in Sources */,

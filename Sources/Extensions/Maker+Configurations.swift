@@ -45,13 +45,13 @@ public postfix func >> (maker: Maker) {
     maker.configureFrame()
 }
 
-public typealias UIViewInstallerBlock = (UIViewMaker) -> Void
+public typealias ViewInstallerBlock = (ViewMaker) -> Void
 public typealias InstallerBlock = (Maker) -> Void
 
 extension Maker {
-    class func configure(view: UIView, for state: AnyHashable, installerBlock: UIViewInstallerBlock) {
+    class func configure(view: UIView, for state: AnyHashable, installerBlock: ViewInstallerBlock) {
         if view.nx_state == state {
-            let maker = UIViewMaker(view: view)
+            let maker = ViewMaker(view: view)
 
             maker.newRect = view.frame
             installerBlock(maker)

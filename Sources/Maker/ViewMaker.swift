@@ -4,7 +4,7 @@
 
 import UIKit
 
-public final class UIViewMaker: Maker {
+public final class ViewMaker: Maker {
 
     /// Resizes the current view so it just encloses its subviews.
     ///
@@ -21,7 +21,7 @@ public final class UIViewMaker: Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func sizeToFit() -> UIViewMaker {
+    @discardableResult public func sizeToFit() -> ViewMaker {
         uiView.sizeToFit()
         setHighPriorityValue(uiView.bounds.width, for: .width)
         setHighPriorityValue(uiView.bounds.height, for: .height)
@@ -37,7 +37,7 @@ public final class UIViewMaker: Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func sizeThatFits(size: CGSize) -> UIViewMaker {
+    @discardableResult public func sizeThatFits(size: CGSize) -> ViewMaker {
         let fitSize = uiView.sizeThatFits(size)
         let width = Swift.min(size.width, fitSize.width)
         let height = Swift.min(size.height, fitSize.height)
@@ -50,7 +50,7 @@ public final class UIViewMaker: Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func heightToFit() -> UIViewMaker {
+    @discardableResult public func heightToFit() -> ViewMaker {
         return heightThatFits(maxHeight: CGFloat.greatestFiniteMagnitude)
     }
 
@@ -58,7 +58,7 @@ public final class UIViewMaker: Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func heightThatFits(maxHeight: Number) -> UIViewMaker {
+    @discardableResult public func heightThatFits(maxHeight: Number) -> ViewMaker {
         let handler = { [unowned self] in
             let fitWidth: CGFloat
 
@@ -89,7 +89,7 @@ public final class UIViewMaker: Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func widthToFit() -> UIViewMaker {
+    @discardableResult public func widthToFit() -> ViewMaker {
         return widthThatFits(maxWidth: CGFloat.greatestFiniteMagnitude)
     }
 
@@ -97,7 +97,7 @@ public final class UIViewMaker: Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
 
-    @discardableResult public func widthThatFits(maxWidth: Number) -> UIViewMaker {
+    @discardableResult public func widthThatFits(maxWidth: Number) -> ViewMaker {
         let handler = { [unowned self] in
             let fitHeight: CGFloat
 
@@ -137,7 +137,7 @@ public final class UIViewMaker: Maker {
     /// - returns: `Maker` instance for chaining relations.
 
     @available(*, deprecated, message: "Use `right(to: view.nui_safeArea.right, inset: ...)` instead")
-    @discardableResult public func right(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
+    @discardableResult public func right(to safeArea: SafeArea, inset: Number = 0.0) -> ViewMaker {
         if #available(iOS 11.0, *) {
             guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a right relation to the safe area without superview.")
@@ -163,7 +163,7 @@ public final class UIViewMaker: Maker {
     /// - returns: `Maker` instance for chaining relations.
 
     @available(*, deprecated, message: "Use `left(to: view.nui_safeArea.left, inset: ...)` instead")
-    @discardableResult public func left(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
+    @discardableResult public func left(to safeArea: SafeArea, inset: Number = 0.0) -> ViewMaker {
         if #available(iOS 11.0, *) {
             guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a left relation to the safe area without superview.")
@@ -188,7 +188,7 @@ public final class UIViewMaker: Maker {
     /// - returns: `Maker` instance for chaining relations.
 
     @available(*, deprecated, message: "Use `top(to: view.nui_safeArea.top, inset: ...)` instead")
-    @discardableResult public func top(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
+    @discardableResult public func top(to safeArea: SafeArea, inset: Number = 0.0) -> ViewMaker {
         if #available(iOS 11.0, *) {
             guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a top relation to the safe area without superview.")
@@ -213,7 +213,7 @@ public final class UIViewMaker: Maker {
     /// - returns: `Maker` instance for chaining relations.
 
     @available(*, deprecated, message: "Use `bottom(to: view.nui_safeArea.bottom, inset: ...)` instead")
-    @discardableResult public func bottom(to safeArea: SafeArea, inset: Number = 0.0) -> UIViewMaker {
+    @discardableResult public func bottom(to safeArea: SafeArea, inset: Number = 0.0) -> ViewMaker {
         if #available(iOS 11.0, *) {
             guard let superelement = element.superelement as? ViewType else {
                 assertionFailure("Can not configure a bottom relation to the safe area without superview.")
