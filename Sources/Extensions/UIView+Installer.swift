@@ -11,8 +11,8 @@ import ObjectiveC
 
 public let DEFAULT_STATE = "DEFAULT STATE"
 
-private var stateTypeAssociationKey: UInt8 = 0
-private var nxStateTypeAssociationKey: UInt8 = 1
+var stateTypeAssociationKey: UInt8 = 0
+var nxStateTypeAssociationKey: UInt8 = 1
 
 public extension UIView {
 
@@ -57,7 +57,7 @@ public extension UIView {
 public extension UIView {
 
     @available(*, deprecated, renamed: "configureFrame(state:installerBlock:)")
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: ViewInstallerBlock) {
         Maker.configure(view: self, for: state, installerBlock: installerBlock)
     }
 
@@ -68,7 +68,7 @@ public extension UIView {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    func configureFrame(state: AnyHashable = DEFAULT_STATE, installerBlock: ViewInstallerBlock) {
         guard self.superview != nil else {
             return
         }
@@ -83,7 +83,7 @@ public extension UIView {
     /// - parameter states:         The states for which you configure frame.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrame(states: [AnyHashable], installerBlock: InstallerBlock) {
+    func configureFrame(states: [AnyHashable], installerBlock: ViewInstallerBlock) {
         guard self.superview != nil else {
             return
         }
@@ -103,7 +103,7 @@ public extension Sequence where Iterator.Element: UIView {
     /// - parameter state:          The state for which you configure frame. Default value: `DEFAULT_STATE`.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: InstallerBlock) {
+    func configureFrames(state: AnyHashable = DEFAULT_STATE, installerBlock: ViewInstallerBlock) {
         for view in self {
             view.configureFrame(state: state, installerBlock: installerBlock)
         }
@@ -116,7 +116,7 @@ public extension Sequence where Iterator.Element: UIView {
     /// - parameter states:         The states for which you configure frames.
     /// - parameter installerBlock: The installer block within which you can configure frame relations.
 
-    func configureFrames(states: [AnyHashable], installerBlock: InstallerBlock) {
+    func configureFrames(states: [AnyHashable], installerBlock: ViewInstallerBlock) {
         for view in self {
             view.configureFrame(states: states, installerBlock: installerBlock)
         }
@@ -138,7 +138,7 @@ public extension Collection where Iterator.Element: UIView {
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
     ///     - `horizontal(left, right)`: The left and right insets of a container. If you specify these parameters only a dynamic height will be calculated.
-    ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
+    ///     - `vertical(top, bottom)`:   The top and bottom insets of a container. If you specify these parameters only a dynamic width will be calculated.
     /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
 
     func configure(container: UIView, relation: ContainerRelation? = nil, installerBlock: () -> Void) {
@@ -210,7 +210,7 @@ public extension Collection where Iterator.Element: UIView {
     ///     - `width`:                   The width of a container. If you specify a width only a dynamic height will be calculated.
     ///     - `height`:                  The height of a container. If you specify a height only a dynamic width will be calculated.
     ///     - `horizontal(left, right)`: The left and right insets of a container. If you specify these parameters only a dynamic height will be calculated.
-    ///     - `vertical(top, bottom)`:   The top and bototm insets of a container. If you specify these parameters only a dynamic width will be calculated.
+    ///     - `vertical(top, bottom)`:   The top and bottom insets of a container. If you specify these parameters only a dynamic width will be calculated.
     /// - parameter installerBlock:      The installer block within which you should configure frames for all subviews.
     ///
     /// - returns: Container view.

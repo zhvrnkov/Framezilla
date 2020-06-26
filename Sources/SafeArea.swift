@@ -7,13 +7,13 @@ import UIKit
 @available(iOS 11.0, *)
 public final class SafeAreaRelationCollection: EdgeRelationCollection {
 
-    override init(view: UIView) {
-        super.init(view: view)
+    override init(element: ElementType) {
+        super.init(element: element)
         
-        top = .init(view: view, relation: .safeArea(.top))
-        left = .init(view: view, relation: .safeArea(.left))
-        right = .init(view: view, relation: .safeArea(.right))
-        bottom = .init(view: view, relation: .safeArea(.bottom))
+        top = .init(element: element, relation: .safeArea(.top))
+        left = .init(element: element, relation: .safeArea(.left))
+        right = .init(element: element, relation: .safeArea(.right))
+        bottom = .init(element: element, relation: .safeArea(.bottom))
     }
 }
 

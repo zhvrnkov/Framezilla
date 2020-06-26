@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0169D58B246A84040020F4F7 /* CALayer+Installer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D58A246A84040020F4F7 /* CALayer+Installer.swift */; };
+		0169D590246A91FB0020F4F7 /* Maker+Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D58F246A91FB0020F4F7 /* Maker+Edges.swift */; };
+		0169D592246A920E0020F4F7 /* Maker+Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D591246A920E0020F4F7 /* Maker+Equal.swift */; };
+		0169D594246A921B0020F4F7 /* Maker+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D593246A921B0020F4F7 /* Maker+Size.swift */; };
+		0169D596246A922B0020F4F7 /* Maker+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169D595246A922B0020F4F7 /* Maker+Position.swift */; };
+		01C6D8C524597CD100594F84 /* ElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6D8C424597CD100594F84 /* ElementType.swift */; };
+		01D01485246E8C5200B6BB09 /* ViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D01484246E8C5200B6BB09 /* ViewMaker.swift */; };
 		115972191D8450F500BC5C20 /* Framezilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11FB41321D844D2C00700A40 /* Framezilla.framework */; };
 		11FB41371D844D2C00700A40 /* Framezilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 11FB41351D844D2C00700A40 /* Framezilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11FB41451D844F8F00700A40 /* Maker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41401D844F8F00700A40 /* Maker.swift */; };
 		11FB41461D844F8F00700A40 /* Maker+Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41411D844F8F00700A40 /* Maker+Configurations.swift */; };
 		11FB41471D844F8F00700A40 /* MakerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41421D844F8F00700A40 /* MakerHelper.swift */; };
 		11FB41481D844F8F00700A40 /* UIView+Installer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41431D844F8F00700A40 /* UIView+Installer.swift */; };
-		11FB41491D844F8F00700A40 /* UIView+Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41441D844F8F00700A40 /* UIView+Relations.swift */; };
+		11FB41491D844F8F00700A40 /* HasRelations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB41441D844F8F00700A40 /* HasRelations.swift */; };
 		2E083838230D2434007D0928 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E083837230D2434007D0928 /* Keyboard.swift */; };
 		2E08383A230D244F007D0928 /* KeyboardRectCloneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E083839230D244F007D0928 /* KeyboardRectCloneView.swift */; };
 		2E08383C230D245F007D0928 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E08383B230D245F007D0928 /* Weak.swift */; };
@@ -51,6 +58,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0169D58A246A84040020F4F7 /* CALayer+Installer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Installer.swift"; sourceTree = "<group>"; };
+		0169D58F246A91FB0020F4F7 /* Maker+Edges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Edges.swift"; sourceTree = "<group>"; };
+		0169D591246A920E0020F4F7 /* Maker+Equal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Equal.swift"; sourceTree = "<group>"; };
+		0169D593246A921B0020F4F7 /* Maker+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Size.swift"; sourceTree = "<group>"; };
+		0169D595246A922B0020F4F7 /* Maker+Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maker+Position.swift"; sourceTree = "<group>"; };
+		01C6D8C424597CD100594F84 /* ElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementType.swift; sourceTree = "<group>"; };
+		01D01484246E8C5200B6BB09 /* ViewMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMaker.swift; sourceTree = "<group>"; };
 		115972141D8450F500BC5C20 /* FramezillaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramezillaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FB41321D844D2C00700A40 /* Framezilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Framezilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FB41351D844D2C00700A40 /* Framezilla.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Framezilla.h; sourceTree = "<group>"; };
@@ -59,7 +73,7 @@
 		11FB41411D844F8F00700A40 /* Maker+Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Maker+Configurations.swift"; sourceTree = "<group>"; };
 		11FB41421D844F8F00700A40 /* MakerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakerHelper.swift; sourceTree = "<group>"; };
 		11FB41431D844F8F00700A40 /* UIView+Installer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Installer.swift"; sourceTree = "<group>"; };
-		11FB41441D844F8F00700A40 /* UIView+Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Relations.swift"; sourceTree = "<group>"; };
+		11FB41441D844F8F00700A40 /* HasRelations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasRelations.swift; sourceTree = "<group>"; };
 		11FB414B1D844FFA00700A40 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		11FB414C1D844FFA00700A40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2E083837230D2434007D0928 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
@@ -109,6 +123,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0169D58E246A91C70020F4F7 /* Maker */ = {
+			isa = PBXGroup;
+			children = (
+				11FB41401D844F8F00700A40 /* Maker.swift */,
+				0169D58F246A91FB0020F4F7 /* Maker+Edges.swift */,
+				0169D591246A920E0020F4F7 /* Maker+Equal.swift */,
+				0169D593246A921B0020F4F7 /* Maker+Size.swift */,
+				0169D595246A922B0020F4F7 /* Maker+Position.swift */,
+				01D01484246E8C5200B6BB09 /* ViewMaker.swift */,
+			);
+			path = Maker;
+			sourceTree = "<group>";
+		};
 		11FB41261D844CD800700A40 = {
 			isa = PBXGroup;
 			children = (
@@ -132,17 +159,18 @@
 		11FB413B1D844D5A00700A40 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0169D58E246A91C70020F4F7 /* Maker */,
 				2E083840230D24DF007D0928 /* Supporting */,
 				2E08383F230D249B007D0928 /* Extensions */,
 				2E083837230D2434007D0928 /* Keyboard.swift */,
 				2E083839230D244F007D0928 /* KeyboardRectCloneView.swift */,
-				11FB41401D844F8F00700A40 /* Maker.swift */,
 				11FB41421D844F8F00700A40 /* MakerHelper.swift */,
 				8497C0101E59EB7700447E2F /* Number.swift */,
 				842BB7FB1F0638E9000D1CFF /* Parameters.swift */,
 				2E79EEC5231CE45C00A6C548 /* Relations.swift */,
 				2E79EECD231CF90300A6C548 /* SafeArea.swift */,
 				2E08383B230D245F007D0928 /* Weak.swift */,
+				01C6D8C424597CD100594F84 /* ElementType.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -157,7 +185,8 @@
 				85221BFF22E99D4100EA9D3D /* OptionSet+ForEeach.swift */,
 				11FB41431D844F8F00700A40 /* UIView+Installer.swift */,
 				2E08383D230D2482007D0928 /* UIView+Keyboard.swift */,
-				11FB41441D844F8F00700A40 /* UIView+Relations.swift */,
+				0169D58A246A84040020F4F7 /* CALayer+Installer.swift */,
+				11FB41441D844F8F00700A40 /* HasRelations.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -353,6 +382,7 @@
 			files = (
 				11FB41461D844F8F00700A40 /* Maker+Configurations.swift in Sources */,
 				2E79EECF231CF93900A6C548 /* SafeArea.swift in Sources */,
+				01D01485246E8C5200B6BB09 /* ViewMaker.swift in Sources */,
 				11FB41451D844F8F00700A40 /* Maker.swift in Sources */,
 				85221C0022E99D4100EA9D3D /* OptionSet+ForEeach.swift in Sources */,
 				2E08383E230D2482007D0928 /* UIView+Keyboard.swift in Sources */,
@@ -365,9 +395,15 @@
 				11FB41481D844F8F00700A40 /* UIView+Installer.swift in Sources */,
 				853DC84223F6498300C10332 /* Maker+Relations.swift in Sources */,
 				844BE8F320457634004C19A8 /* Maker+Unavailable.swift in Sources */,
-				11FB41491D844F8F00700A40 /* UIView+Relations.swift in Sources */,
+				0169D596246A922B0020F4F7 /* Maker+Position.swift in Sources */,
+				0169D590246A91FB0020F4F7 /* Maker+Edges.swift in Sources */,
+				01C6D8C524597CD100594F84 /* ElementType.swift in Sources */,
+				11FB41491D844F8F00700A40 /* HasRelations.swift in Sources */,
 				842BB7FC1F0638E9000D1CFF /* Parameters.swift in Sources */,
+				0169D58B246A84040020F4F7 /* CALayer+Installer.swift in Sources */,
+				0169D594246A921B0020F4F7 /* Maker+Size.swift in Sources */,
 				2E08383A230D244F007D0928 /* KeyboardRectCloneView.swift in Sources */,
+				0169D592246A920E0020F4F7 /* Maker+Equal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

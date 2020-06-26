@@ -8,92 +8,77 @@
 
 import Foundation
 
-fileprivate extension UIView {
-
-    func contains(_ view: UIView) -> Bool {
-        if subviews.contains(view) {
-            return true
-        }
-        for subview in subviews {
-            if subview.contains(view) {
-                return true
-            }
-        }
-        return false
-    }
-}
-
 extension Maker {
 
-    func convertedValue(for type: RelationType, with view: UIView) -> CGFloat {
+    func convertedValue(for type: RelationType, with element: ElementType) -> CGFloat {
         var rect: CGRect {
-            if let superview = self.view.superview, superview === view {
-                return CGRect(origin: .zero, size: superview.frame.size)
+            if let superelement = self.element.superelement, superelement === element {
+                return CGRect(origin: .zero, size: superelement.frame.size)
             }
 
-            if let superview = self.view.superview {
-                return superview.convert(view.frame, from: view.superview)
+            if let superelement = self.element.superelement {
+                return superelement.convert(element.frame, from: element.superelement)
             }
-            assertionFailure("Can't configure a frame for view: \(self.view) without superview.")
+            assertionFailure("Can't configure a frame for view: \(self.element) without superview.")
             return .zero
         }
 
         var convertedRect = rect
-        if let superScrollView = self.view.superview as? UIScrollView, view is UIScrollView, superScrollView.contentSize != .zero {
+        if let superelement = self.element.superelement as? ViewType,
+            let view = element as? ViewType,
+            let superScrollView = superelement.view as? UIScrollView,
+            view.view is UIScrollView,
+            superScrollView.contentSize != .zero {
             convertedRect.size.width = superScrollView.contentSize.width
             convertedRect.size.height = superScrollView.contentSize.height
         }
 
-        return value(for: type, with: view, in: convertedRect)
+        return value(for: type, with: element, in: convertedRect)
     }
 
-    func value(for type: RelationType, with view: UIView, in rect: CGRect) -> CGFloat {
+    func value(for type: RelationType, with element: ElementType, in rect: CGRect) -> CGFloat {
         switch type {
         case .top:
             return rect.minY
         case .bottom:
             return rect.maxY
         case .centerY:
-            return view.contains(self.view) ? rect.height / 2 : rect.midY
+            return element.contains(self.element) ? rect.height / 2 : rect.midY
         case .centerX:
-            return view.contains(self.view) ? rect.width / 2 : rect.midX
+            return element.contains(self.element) ? rect.width / 2 : rect.midX
         case .right:
             return rect.maxX
         case .left:
             return rect.minX
         case .safeArea(.top):
-            if #available(iOS 11.0, *) {
+            if let view = element as? ViewType {
                 return rect.minY + view.safeAreaInsets.top
             }
-
             return rect.minY
         case .safeArea(.left):
-            if #available(iOS 11.0, *) {
+            if let view = element as? ViewType {
                 return rect.minX + view.safeAreaInsets.left
             }
-
             return rect.minX
         case .safeArea(.right):
-            if #available(iOS 11.0, *) {
+            if let view = element as? ViewType {
                 return rect.maxX - view.safeAreaInsets.right
             }
-
             return rect.maxX
         case .safeArea(.bottom):
-            if #available(iOS 11.0, *) {
+            if let view = element as? ViewType {
                 return rect.maxY - view.safeAreaInsets.bottom
             }
-
             return rect.maxY
         default:
             return 0
         }
     }
 
-    func relationSize(view: UIView, for type: RelationType) -> CGFloat {
+    func relationSize(element: ElementType, for type: RelationType) -> CGFloat {
         switch type {
-        case .width:  return view.bounds.width
-        case .height: return view.bounds.height
+        case .width:  return element.bounds.width
+        case .height: return element.bounds.height
         default:      return 0
         }
     }

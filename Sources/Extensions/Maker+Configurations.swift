@@ -20,32 +20,53 @@ postfix operator >>
 /// - returns: `Maker` instance for chaining relations.
 
 public postfix func << (view: UIView) -> Maker {
-    let maker = Maker(view: view)
+    let maker = Maker(element: .view(view))
     maker.newRect = view.frame
+    return maker
+}
+
+/// Start frame configuration for `DEFAULT_STATE` state.
+///
+/// - note: Don't forget to call `>>` operator for ending of configuration.
+///
+/// - parameter layer: The layer you are configuring.
+///
+/// - returns: `Maker` instance for chaining relations.
+
+public postfix func << (layer: CALayer) -> Maker {
+    let maker = Maker(element: .layer(layer))
+    maker.newRect = layer.frame
     return maker
 }
 
 /// End frame configuration.
 
 public postfix func >> (maker: Maker) {
-    if (maker.view.nx_state as? String) == DEFAULT_STATE {
-        maker.configureFrame()
-    }
+    maker.configureFrame()
 }
 
+public typealias ViewInstallerBlock = (ViewMaker) -> Void
 public typealias InstallerBlock = (Maker) -> Void
 
 extension Maker {
-
-    class func configure(view: UIView, for state: AnyHashable, installerBlock: InstallerBlock) {
+    class func configure(view: UIView, for state: AnyHashable, installerBlock: ViewInstallerBlock) {
         if view.nx_state == state {
-            let maker = Maker(view: view)
+            let maker = ViewMaker(view: view)
 
             maker.newRect = view.frame
             installerBlock(maker)
 
             maker.configureFrame()
         }
+    }
+
+    class func configure(layer: CALayer, installerBlock: InstallerBlock) {
+        let maker = Maker(element: .layer(layer))
+
+        maker.newRect = layer.frame
+        installerBlock(maker)
+
+        maker.configureFrame()
     }
 
     fileprivate func configureFrame() {
@@ -55,6 +76,6 @@ extension Maker {
             $0.handler()
         }
 
-        view.frame = newRect
+        element.frame = newRect
     }
 }

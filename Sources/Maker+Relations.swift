@@ -38,10 +38,10 @@ public extension Maker {
 
     private func convertedValue<Relation>(for relation: RelationView<Relation>) -> CGFloat {
         if relation.relationType.isSizeType {
-            return relationSize(view: relation.view, for: relation.relationType)
+            return relationSize(element: relation.element, for: relation.relationType)
         }
         else {
-            return convertedValue(for: relation.relationType, with: relation.view)
+            return convertedValue(for: relation.relationType, with: relation.element)
         }
     }
 }
