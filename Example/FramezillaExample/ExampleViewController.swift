@@ -6,9 +6,12 @@ import UIKit
 
 final class ExampleViewController: UIViewController {
 
-    private let features: [Feature] = [.init(title: "Edges", description: "Description", featureView: EdgesFeatureView()),
-                                       .init(title: "Side relations", description: "Description", featureView: EdgesFeatureView()),
-                                       .init(title: "Center relations", description: "Description", featureView: EdgesFeatureView()),
+    private let features: [Feature] = [.init(title: "Edges",
+                                             description: "maker.edges(insets: .init(top: 10, left: 20, bottom: 30, right: 40))",
+                                             featureView: EdgesFeatureView()),
+                                       .init(title: "Relations",
+                                             description: "Description",
+                                             featureView: SideRelationFeatureView()),
                                        .init(title: "SizeToFit and SizeThatFits", description: "Description", featureView: EdgesFeatureView()),
                                        .init(title: "Keyboard", description: "Description", featureView: EdgesFeatureView()),
                                        .init(title: "Container", description: "Description", featureView: EdgesFeatureView()),
