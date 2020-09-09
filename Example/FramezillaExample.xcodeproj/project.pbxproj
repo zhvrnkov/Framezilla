@@ -14,6 +14,7 @@
 		8442F9581EC75C9C00B72551 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8442F9561EC75C9C00B72551 /* Main.storyboard */; };
 		8442F95A1EC75C9C00B72551 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8442F9591EC75C9C00B72551 /* Assets.xcassets */; };
 		8442F95D1EC75C9C00B72551 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8442F95B1EC75C9C00B72551 /* LaunchScreen.storyboard */; };
+		8561A1B82508868200EB4F8A /* KeyboardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */; };
 		8588E99F2507835900B8DA97 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588E99E2507835900B8DA97 /* ExampleViewController.swift */; };
 		8588E9A325078CDE00B8DA97 /* FeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588E9A225078CDE00B8DA97 /* FeatureViewController.swift */; };
 		8588E9A525078DB000B8DA97 /* EdgesFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588E9A425078DB000B8DA97 /* EdgesFeatureView.swift */; };
@@ -69,6 +70,7 @@
 		8442F9591EC75C9C00B72551 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8442F95C1EC75C9C00B72551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8442F95E1EC75C9C00B72551 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFeatureView.swift; sourceTree = "<group>"; };
 		8588E99E2507835900B8DA97 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		8588E9A225078CDE00B8DA97 /* FeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewController.swift; sourceTree = "<group>"; };
 		8588E9A425078DB000B8DA97 /* EdgesFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesFeatureView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				85A128AF2507A2ED0030F6A8 /* SideRelationFeatureView.swift */,
 				85A128AA2507A27E0030F6A8 /* Feature.swift */,
 				85A128AD2507A2A30030F6A8 /* FeatureView.swift */,
+				8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				8588E9A525078DB000B8DA97 /* EdgesFeatureView.swift in Sources */,
 				8442F9531EC75C9C00B72551 /* AppDelegate.swift in Sources */,
 				8588E99F2507835900B8DA97 /* ExampleViewController.swift in Sources */,
+				8561A1B82508868200EB4F8A /* KeyboardFeatureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

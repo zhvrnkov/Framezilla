@@ -13,7 +13,7 @@ final class ExampleViewController: UIViewController {
                                              description: "Description",
                                              featureView: SideRelationFeatureView()),
                                        .init(title: "SizeToFit and SizeThatFits", description: "Description", featureView: EdgesFeatureView()),
-                                       .init(title: "Keyboard", description: "Description", featureView: EdgesFeatureView()),
+                                       .init(title: "Keyboard", description: "Description", featureView: KeyboardFeatureView()),
                                        .init(title: "Container", description: "Description", featureView: EdgesFeatureView()),
                                        .init(title: "Stack", description: "Description", featureView: EdgesFeatureView())]
 
