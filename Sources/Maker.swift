@@ -480,8 +480,8 @@ public final class Maker {
 
     @discardableResult public func sizeThatFits(size: CGSize) -> Maker {
         let fitSize = view.sizeThatFits(size)
-        let width = min(size.width, fitSize.width)
-        let height = min(size.height, fitSize.height)
+        let width = Swift.min(size.width, fitSize.width)
+        let height = Swift.min(size.height, fitSize.height)
         setHighPriorityValue(width, for: .width)
         setHighPriorityValue(height, for: .height)
         return self
@@ -520,7 +520,7 @@ public final class Maker {
             }
 
             let fitSize = self.view.sizeThatFits(CGSize(width: fitWidth, height: .greatestFiniteMagnitude))
-            self.newRect.setValue(min(maxHeight.value, fitSize.height), for: .height)
+            self.newRect.setValue(Swift.min(maxHeight.value, fitSize.height), for: .height)
         }
         handlers.append((.high, handler))
         return self
@@ -559,7 +559,7 @@ public final class Maker {
             }
 
             let fitSize = self.view.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: fitHeight))
-            self.newRect.setValue(min(maxWidth.value, fitSize.width), for: .width)
+            self.newRect.setValue(Swift.min(maxWidth.value, fitSize.width), for: .width)
         }
 
         handlers.append((.high, handler))
