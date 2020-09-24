@@ -7,15 +7,17 @@ import UIKit
 final class ExampleViewController: UIViewController {
 
     private let features: [Feature] = [.init(title: "Edges",
-                                             description: "maker.edges(insets: .init(top: 10, left: 20, bottom: 30, right: 40))",
+                                             description: "Green view is subview of purple view and related by function\nedges(insets: .init(top: 10, left: 20, bottom: 30, right: 40))",
                                              featureView: EdgesFeatureView()),
                                        .init(title: "Relations",
-                                             description: "Description",
+                                             description: "Left side of green view related to left side of purple and right side related to midX relation of purple view. For red view its same but mirrored",
                                              featureView: SideRelationFeatureView()),
-                                       .init(title: "SizeToFit and SizeThatFits", description: "Description", featureView: EdgesFeatureView()),
-                                       .init(title: "Keyboard", description: "Description", featureView: KeyboardFeatureView()),
+                                       .init(title: "Keyboard",
+                                             description: "Bottom side of text field related to top of keyboard and green and red views bottom side related to top of text field by 16",
+                                             featureView: KeyboardFeatureView()),
                                        .init(title: "Container", description: "Description", featureView: EdgesFeatureView()),
-                                       .init(title: "Stack", description: "Description", featureView: EdgesFeatureView())]
+                                       .init(title: "Stack", description: "Description", featureView: EdgesFeatureView()),
+                                       .init(title: "Safe area", description: "Description", featureView: EdgesFeatureView())]
 
     private lazy var tableView: UITableView = {
         let view = UITableView()

@@ -8,6 +8,7 @@ class FeatureViewController: UIViewController {
 
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
+        view.font = UIFont.systemFont(ofSize: 12)
         view.numberOfLines = 0
         return view
     }()
