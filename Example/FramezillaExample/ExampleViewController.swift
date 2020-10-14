@@ -17,8 +17,8 @@ final class ExampleViewController: UIViewController {
                description: "Bottom side of text field related to top of keyboard and green and red views bottom side related to top of text field by 16",
                featureView: KeyboardFeatureView()),
          .init(title: "Stack", description: "You can use stack function to layout views one after another in superview horizontally or vertically", featureView: StackFeatureView()),
-         .init(title: "Center on arc", description: "Description", featureView: ArcCenterFeature()),
-         .init(title: "Safe area", description: "You can pin relation to safe area", featureView: SafeAreaFeatureView())]
+         .init(title: "Center on arc", description: "Pin center of green view to arc of circle", featureView: ArcCenterFeature()),
+         .init(title: "Safe area", description: "Pin relation to safe area", featureView: SafeAreaFeatureView())]
     }
 
     private lazy var tableView: UITableView = {
