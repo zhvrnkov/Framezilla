@@ -4,39 +4,19 @@
 
 import UIKit
 
-final class SafeAreaFeatureView: FeatureView {
+final class SafeAreaFeatureView: SliderFeatureView {
 
     var inset: CGFloat = 0
 
-    private lazy var sliderView: UISlider = {
-        let view = UISlider()
-        view.addTarget(self, action: #selector(sliderValueDidChange), for: .valueChanged)
-        return view
-    }()
-
-    private lazy var insetLabel: UILabel = {
-        let view = UILabel()
-        view.text = "inset = 0"
-        return view
-    }()
-
     override func performAddSubviews() {
+        super.performAddSubviews()
         addSubview(purpleView)
-        addSubview(sliderView)
-        addSubview(insetLabel)
     }
 
     override func performLayout() {
+        super.performLayout()
         guard let superview = superview else {
             return
-        }
-
-        sliderView.configureFrame { maker in
-            maker.centerX().top(inset: 10).width(bounds.width - 30)
-        }
-
-        insetLabel.configureFrame { maker in
-            maker.centerX().top(to: sliderView.nui_bottom).sizeToFit()
         }
 
         purpleView.configureFrame { maker in
@@ -44,9 +24,10 @@ final class SafeAreaFeatureView: FeatureView {
         }
     }
 
-    @objc private func sliderValueDidChange(_ slider: UISlider) {
-        inset = CGFloat(slider.value) * purpleView.frame.height
-        insetLabel.text = "inset = \(inset)"
+    override func sliderValueDidChange(_ slider: UISlider) {
+        let maxInset = bounds.height - sliderValueLabel.frame.maxY - purpleView.frame.height
+        inset = CGFloat(slider.value) * maxInset
+        sliderValueLabel.text = "inset = \(inset)"
         setNeedsLayout()
         layoutIfNeeded()
     }
