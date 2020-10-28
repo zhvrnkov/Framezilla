@@ -17,13 +17,13 @@ final class ExampleViewController: UIViewController {
                description: "Bottom side of text field related to top of keyboard and green and red views bottom side related to top of text field by 16",
                featureView: KeyboardFeatureView()),
          .init(title: "Stack", description: "You can use stack function to layout views one after another in superview horizontally or vertically", featureView: StackFeatureView()),
-         .init(title: "Center on arc", description: "Pin center of green view to arc of circle", featureView: ArcCenterFeature()),
-         .init(title: "Safe area", description: "Pin relation to safe area", featureView: SafeAreaFeatureView()),
+         .init(title: "Center on arc", description: "Center of green view pinned to arc of circle", featureView: ArcCenterFeature()),
+         .init(title: "Safe area", description: "Purple view pinned to bottom safe area", featureView: SafeAreaFeatureView()),
          .init(title: "Min/Max relations",
-               description: "Automatic choosing relation min or max value",
+               description: "Purple view pined to right relation of view with minimum X value",
                featureView: MinMaxFeatureView()),
          .init(title: "SizeThatFits/ sizeToFit",
-               description: "Functions to calculate size of itself fitted in size",
+               description: "Size of label calculates of text change on fits in area from top to top of textField",
                featureView: SizeFeatureView())]
     }
 
