@@ -18,7 +18,13 @@ final class ExampleViewController: UIViewController {
                featureView: KeyboardFeatureView()),
          .init(title: "Stack", description: "You can use stack function to layout views one after another in superview horizontally or vertically", featureView: StackFeatureView()),
          .init(title: "Center on arc", description: "Pin center of green view to arc of circle", featureView: ArcCenterFeature()),
-         .init(title: "Safe area", description: "Pin relation to safe area", featureView: SafeAreaFeatureView())]
+         .init(title: "Safe area", description: "Pin relation to safe area", featureView: SafeAreaFeatureView()),
+         .init(title: "Min/Max relations",
+               description: "Automatic choosing relation min or max value",
+               featureView: MinMaxFeatureView()),
+         .init(title: "SizeThatFits/ sizeToFit",
+               description: "Functions to calculate size of itself fitted in size",
+               featureView: SizeFeatureView())]
     }
 
     private lazy var tableView: UITableView = {

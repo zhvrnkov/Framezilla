@@ -19,6 +19,8 @@
 		850401E4253700E900B5D6C1 /* SliderFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850401E3253700E900B5D6C1 /* SliderFeatureView.swift */; };
 		850401E6253702DC00B5D6C1 /* ArcCenterFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850401E5253702DC00B5D6C1 /* ArcCenterFeature.swift */; };
 		8561A1B82508868200EB4F8A /* KeyboardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */; };
+		85647C862549A3A800D2CA42 /* SizeFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85647C852549A3A800D2CA42 /* SizeFeatureView.swift */; };
+		85647C892549A3B600D2CA42 /* MinMaxFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85647C882549A3B600D2CA42 /* MinMaxFeatureView.swift */; };
 		8588E99F2507835900B8DA97 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588E99E2507835900B8DA97 /* ExampleViewController.swift */; };
 		8588E9A325078CDE00B8DA97 /* FeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588E9A225078CDE00B8DA97 /* FeatureViewController.swift */; };
 		8588E9A525078DB000B8DA97 /* EdgesFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588E9A425078DB000B8DA97 /* EdgesFeatureView.swift */; };
@@ -79,6 +81,8 @@
 		850401E3253700E900B5D6C1 /* SliderFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderFeatureView.swift; sourceTree = "<group>"; };
 		850401E5253702DC00B5D6C1 /* ArcCenterFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcCenterFeature.swift; sourceTree = "<group>"; };
 		8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFeatureView.swift; sourceTree = "<group>"; };
+		85647C852549A3A800D2CA42 /* SizeFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeFeatureView.swift; sourceTree = "<group>"; };
+		85647C882549A3B600D2CA42 /* MinMaxFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxFeatureView.swift; sourceTree = "<group>"; };
 		8588E99E2507835900B8DA97 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		8588E9A225078CDE00B8DA97 /* FeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewController.swift; sourceTree = "<group>"; };
 		8588E9A425078DB000B8DA97 /* EdgesFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesFeatureView.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 				850401E02536F8F400B5D6C1 /* SafeAreaFeatureView.swift */,
 				850401E5253702DC00B5D6C1 /* ArcCenterFeature.swift */,
 				8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */,
+				85647C852549A3A800D2CA42 /* SizeFeatureView.swift */,
+				85647C882549A3B600D2CA42 /* MinMaxFeatureView.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 			files = (
 				85A128AE2507A2A30030F6A8 /* FeatureView.swift in Sources */,
 				85A128AB2507A27E0030F6A8 /* Feature.swift in Sources */,
+				85647C862549A3A800D2CA42 /* SizeFeatureView.swift in Sources */,
 				850401DE2536EC0600B5D6C1 /* StackFeatureView.swift in Sources */,
 				85A128B02507A2ED0030F6A8 /* SideRelationFeatureView.swift in Sources */,
 				850401E4253700E900B5D6C1 /* SliderFeatureView.swift in Sources */,
@@ -275,6 +282,7 @@
 				8442F9531EC75C9C00B72551 /* AppDelegate.swift in Sources */,
 				8588E99F2507835900B8DA97 /* ExampleViewController.swift in Sources */,
 				8561A1B82508868200EB4F8A /* KeyboardFeatureView.swift in Sources */,
+				85647C892549A3B600D2CA42 /* MinMaxFeatureView.swift in Sources */,
 				850401E12536F8F400B5D6C1 /* SafeAreaFeatureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
