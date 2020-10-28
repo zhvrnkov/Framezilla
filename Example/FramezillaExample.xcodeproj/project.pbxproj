@@ -10,7 +10,6 @@
 		841354611FCFEC02009F2947 /* Framezilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8413545E1FCFEA51009F2947 /* Framezilla.framework */; };
 		841354621FCFEC02009F2947 /* Framezilla.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8413545E1FCFEA51009F2947 /* Framezilla.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8442F9531EC75C9C00B72551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442F9521EC75C9C00B72551 /* AppDelegate.swift */; };
-		8442F9551EC75C9C00B72551 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442F9541EC75C9C00B72551 /* ViewController.swift */; };
 		8442F9581EC75C9C00B72551 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8442F9561EC75C9C00B72551 /* Main.storyboard */; };
 		8442F95A1EC75C9C00B72551 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8442F9591EC75C9C00B72551 /* Assets.xcassets */; };
 		8442F95D1EC75C9C00B72551 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8442F95B1EC75C9C00B72551 /* LaunchScreen.storyboard */; };
@@ -71,7 +70,6 @@
 		841354581FCFEA51009F2947 /* Framezilla.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Framezilla.xcodeproj; path = ../Framezilla.xcodeproj; sourceTree = "<group>"; };
 		8442F94F1EC75C9C00B72551 /* FramezillaExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FramezillaExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8442F9521EC75C9C00B72551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8442F9541EC75C9C00B72551 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8442F9571EC75C9C00B72551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8442F9591EC75C9C00B72551 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8442F95C1EC75C9C00B72551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				8588E9A12507891000B8DA97 /* Features */,
 				8442F9521EC75C9C00B72551 /* AppDelegate.swift */,
 				8588E9A225078CDE00B8DA97 /* FeatureViewController.swift */,
-				8442F9541EC75C9C00B72551 /* ViewController.swift */,
 				8588E99E2507835900B8DA97 /* ExampleViewController.swift */,
 				8442F9561EC75C9C00B72551 /* Main.storyboard */,
 				8442F9591EC75C9C00B72551 /* Assets.xcassets */,
@@ -276,7 +273,6 @@
 				85A128B02507A2ED0030F6A8 /* SideRelationFeatureView.swift in Sources */,
 				850401E4253700E900B5D6C1 /* SliderFeatureView.swift in Sources */,
 				850401E6253702DC00B5D6C1 /* ArcCenterFeature.swift in Sources */,
-				8442F9551EC75C9C00B72551 /* ViewController.swift in Sources */,
 				8588E9A325078CDE00B8DA97 /* FeatureViewController.swift in Sources */,
 				8588E9A525078DB000B8DA97 /* EdgesFeatureView.swift in Sources */,
 				8442F9531EC75C9C00B72551 /* AppDelegate.swift in Sources */,
