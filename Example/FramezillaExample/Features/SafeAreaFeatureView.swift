@@ -6,7 +6,7 @@ import UIKit
 
 final class SafeAreaFeatureView: SliderFeatureView {
 
-    var inset: CGFloat = 0
+    private var inset: CGFloat = 0
 
     override func performAddSubviews() {
         super.performAddSubviews()
@@ -15,11 +15,11 @@ final class SafeAreaFeatureView: SliderFeatureView {
 
     override func performLayout() {
         super.performLayout()
-        guard let superview = superview else {
-            return
-        }
 
         purpleView.configureFrame { maker in
+            guard let superview = superview else {
+                return
+            }
             maker.bottom(to: superview.nui_safeArea.bottom, inset: inset)
         }
     }

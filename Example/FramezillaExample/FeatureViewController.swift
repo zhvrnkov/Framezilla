@@ -8,7 +8,7 @@ class FeatureViewController: UIViewController {
 
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 12)
+        view.adjustsFontSizeToFitWidth = true
         view.numberOfLines = 0
         return view
     }()
@@ -41,7 +41,7 @@ class FeatureViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
         descriptionLabel.configureFrame { maker in
-            maker.left(inset: 16).right(inset: 16).top(to: view.nui_safeArea.top, inset: 30).heightToFit()
+            maker.left(inset: 16).right(inset: 16).top(to: view.nui_safeArea.top, inset: 30).height(50)
         }
 
         featureView.configureFrame { maker in

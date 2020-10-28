@@ -7,7 +7,7 @@ import Framezilla
 
 final class ArcCenterFeature: SliderFeatureView {
 
-    var angle: CGFloat = 0
+    private var angle: CGFloat = 0
 
     private lazy var lineView: UIView = {
         let view = UIView()
