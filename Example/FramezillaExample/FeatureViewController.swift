@@ -6,6 +6,8 @@ import UIKit
 
 class FeatureViewController: UIViewController {
 
+    // MARK: - Subviews
+
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
         view.adjustsFontSizeToFitWidth = true
@@ -14,6 +16,8 @@ class FeatureViewController: UIViewController {
     }()
 
     private let featureView: UIView
+
+    // MARK: - Lifecycle
 
     init(feature: Feature) {
         self.featureView = feature.featureView

@@ -11,6 +11,8 @@ final class MinMaxFeatureView: SliderFeatureView {
 
     private let viewSize: CGSize = .init(width: 100, height: 100)
 
+    // MARK: - Lifecycle
+
     override func performAddSubviews() {
         super.performAddSubviews()
         sliderValueLabel.text = "Green view left inset = 0"

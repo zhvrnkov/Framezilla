@@ -9,6 +9,8 @@ final class StackFeatureView: FeatureView {
 
     private var isHorizontal: Bool = true
 
+    // MARK: - Subviews
+
     private lazy var addSubviewButton: UIButton = {
         let view = UIButton()
         view.backgroundColor = .purple
@@ -26,6 +28,8 @@ final class StackFeatureView: FeatureView {
     }()
 
     private lazy var stackView: UIView = .init()
+
+    // MARK: - Lifecycle
 
     override func performAddSubviews() {
         addSubview(addSubviewButton)
@@ -48,6 +52,8 @@ final class StackFeatureView: FeatureView {
 
         stackView.subviews.stack(axis: isHorizontal ? .horizontal : .vertical)
     }
+
+    // MARK: - Private
 
     @objc private func addSubviewButtonPressed() {
         let view = UIView()

@@ -6,6 +6,8 @@ import UIKit
 
 final class EdgesFeatureView: FeatureView {
 
+    // MARK: - Lifecycle
+
     override func performAddSubviews() {
         purpleView.addSubview(greenView)
         addSubview(purpleView)

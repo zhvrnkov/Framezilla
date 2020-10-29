@@ -6,6 +6,8 @@ import Framezilla
 
 final class SizeFeatureView: FeatureView {
 
+    // MARK: - Subviews
+
     private lazy var exampleLabel: UILabel = {
         let view = UILabel()
         view.numberOfLines = 0
@@ -26,6 +28,8 @@ final class SizeFeatureView: FeatureView {
     }()
 
     private lazy var labelContainerView: UIView = .init()
+
+    // MARK: - Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,12 +78,16 @@ final class SizeFeatureView: FeatureView {
         }
     }
 
+    // MARK: - Private
+
     @objc private func textDidChange() {
         exampleLabel.text = textField.text
         setNeedsLayout()
         layoutIfNeeded()
     }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension SizeFeatureView: UITextFieldDelegate {
 

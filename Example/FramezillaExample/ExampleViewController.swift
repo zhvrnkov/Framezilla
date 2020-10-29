@@ -27,12 +27,16 @@ final class ExampleViewController: UIViewController {
                featureView: SizeFeatureView())]
     }
 
+    // MARK: - Subviews
+
     private lazy var tableView: UITableView = {
         let view = UITableView()
         view.delegate = self
         view.dataSource = self
         return view
     }()
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +60,8 @@ final class ExampleViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension ExampleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feature = features[indexPath.row]
@@ -64,13 +70,15 @@ extension ExampleViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ExampleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return features.count
+        features.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return dequeueCell(with: features[indexPath.row].title, for: indexPath)
+        dequeueCell(with: features[indexPath.row].title, for: indexPath)
     }
 
     private func dequeueCell(with title: String, for indexPath: IndexPath) -> UITableViewCell {

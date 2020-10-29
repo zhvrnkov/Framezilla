@@ -6,6 +6,8 @@ import UIKit
 
 class SliderFeatureView: FeatureView {
 
+    // MARK: - Subviews
+
     private(set) lazy var sliderView: UISlider = {
         let view = UISlider()
         view.addTarget(self, action: #selector(sliderValueDidChange), for: .valueChanged)
@@ -17,6 +19,8 @@ class SliderFeatureView: FeatureView {
         view.text = "value = 0"
         return view
     }()
+
+    // MARK: - Lifecycle
 
     override func performAddSubviews() {
         super.performAddSubviews()

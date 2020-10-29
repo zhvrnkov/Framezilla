@@ -7,12 +7,16 @@ import Framezilla
 
 final class KeyboardFeatureView: FeatureView {
 
+    // MARK: - Subviews
+
     private lazy var textField: UITextField = {
         let view = UITextField()
         view.delegate = self
         view.borderStyle = .roundedRect
         return view
     }()
+
+    // MARK: - Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,6 +62,8 @@ final class KeyboardFeatureView: FeatureView {
         }
     }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension KeyboardFeatureView: UITextFieldDelegate {
 

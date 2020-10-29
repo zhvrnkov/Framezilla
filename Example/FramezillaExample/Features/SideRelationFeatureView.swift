@@ -6,6 +6,8 @@ import UIKit
 
 final class SideRelationFeatureView: FeatureView {
 
+    // MARK: - Lifecycle
+
     override func performLayout() {
         greenView.configureFrame { maker in
             maker.bottom(to: purpleView.nui_top, inset: 20)

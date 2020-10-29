@@ -9,6 +9,8 @@ final class ArcCenterFeature: SliderFeatureView {
 
     private var angle: CGFloat = 0
 
+    // MARK: - Subviews
+
     private lazy var lineView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGreen
@@ -16,6 +18,8 @@ final class ArcCenterFeature: SliderFeatureView {
         return view
     }()
 
+    // MARK: - Lifecycle
+    
     override func performAddSubviews() {
         super.performAddSubviews()
         addSubview(lineView)

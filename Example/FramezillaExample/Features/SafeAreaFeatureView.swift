@@ -8,6 +8,8 @@ final class SafeAreaFeatureView: SliderFeatureView {
 
     private var inset: CGFloat = 0
 
+    // MARK: - Lifecycle
+
     override func performAddSubviews() {
         super.performAddSubviews()
         addSubview(purpleView)

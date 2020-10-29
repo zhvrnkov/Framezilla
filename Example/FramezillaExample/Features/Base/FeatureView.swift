@@ -6,6 +6,8 @@ import UIKit
 
 class FeatureView: UIView {
 
+    // MARK: - Subviews
+
     private(set) lazy var purpleView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemPurple
@@ -24,6 +26,8 @@ class FeatureView: UIView {
         return view
     }()
 
+    // MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemGray
