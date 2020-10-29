@@ -46,10 +46,9 @@ final class ArcCenterFeature: SliderFeatureView {
     override func sliderValueDidChange(_ slider: UISlider) {
         angle = 2 * .pi * CGFloat(slider.value)
         sliderValueLabel.text = "angle = \(angle * 180 / .pi)"
-        if angle.isFinite {
-            setNeedsLayout()
-            layoutIfNeeded()
-            lineView.transform = CGAffineTransform.identity.rotated(by: angle)
-        }
+
+        setNeedsLayout()
+        layoutIfNeeded()
+        lineView.transform = CGAffineTransform.identity.rotated(by: angle)
     }
 }
