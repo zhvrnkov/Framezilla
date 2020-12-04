@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Framezilla
 
 class MakerCenterTests: BaseTest {
     

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Framezilla
+import Framezilla
 
 class StateTests: BaseTest {
 

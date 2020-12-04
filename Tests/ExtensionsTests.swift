@@ -3,6 +3,7 @@
 //
 
 import XCTest
+import Framezilla
 
 final class ExtensionsTests: BaseTest {
 

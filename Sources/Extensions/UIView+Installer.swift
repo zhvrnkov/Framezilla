@@ -8,6 +8,8 @@
 
 import Foundation
 import ObjectiveC
+import class UIKit.UIView
+import struct CoreGraphics.CGFloat
 
 public let DEFAULT_STATE = "DEFAULT STATE"
 

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Framezilla
 
 final class ScrollViewTests: XCTestCase {
     

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Framezilla
+import Framezilla
 
 class MakerStackTests: BaseTest {
     

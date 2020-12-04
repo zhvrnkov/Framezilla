@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import struct CoreGraphics.CGFloat
 
 public protocol Number {
     var value: CGFloat { get }
