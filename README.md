@@ -385,16 +385,14 @@ view1.configureFrame(states: [3, "state"]) { maker in
 }
 ```
 
-# Author :muscle:
+## About
 
-Nikita Ermolenko, nikita.ermolenko@rosberry.com
+<img src="https://github.com/rosberry/Foundation/blob/master/Assets/full_logo.png?raw=true" height="100" />
 
-# Thanks :+1:
-Thanks [Artem Novichkov](https://github.com/artemnovichkov) for the name of the library!
+This project is owned and maintained by Rosberry. We build mobile apps for users worldwide 🌏.
 
-Thanks [Evgeny Mikhaylov](https://github.com/medvedzzz) for 'state' feature!
+Check out our [open source projects](https://github.com/rosberry), read [our blog](https://medium.com/@Rosberry) or give us a high-five on 🐦 [@rosberryapps](http://twitter.com/RosberryApps).
 
-Thanks [Anton Kovalev](https://github.com/Antowkos) for improving library!
 
 ## Contribute :pray:
 
