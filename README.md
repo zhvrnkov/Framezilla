@@ -14,7 +14,7 @@
 
 ### Depo
 
-[Depo](https://github.com/rosberry/depo) is a universal dependency manager that combine CocoaPods, Carthage and SPM.
+[Depo](https://github.com/rosberry/depo) is a universal dependency manager that combines CocoaPods, Carthage and SPM.
 
 You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
 
