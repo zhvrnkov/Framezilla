@@ -12,6 +12,25 @@
 
 # Installation :fire:
 
+### Depo
+
+[Depo](https://github.com/rosberry/depo) is a universal dependency manager that combine CocoaPods, Carthage and SPM.
+
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+
+```bash
+brew install rosberry/tap/depo
+```
+
+To integrate Framezilla into your Xcode project using Depo, specify it in your `Depofile`:
+```yaml
+carts:
+  - kind: github
+    identifier: rosberry/Framezilla
+```
+
+Run `depo update` to build the framework and drag the built `Framezilla.framework` into your Xcode project.
+
 ### Carthage
 
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
