@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectiveC
+import UIKit
 
 public let DEFAULT_STATE = "DEFAULT STATE"
 

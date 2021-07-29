@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 postfix operator <<
 postfix operator >>

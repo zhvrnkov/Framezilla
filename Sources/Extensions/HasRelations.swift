@@ -6,6 +6,8 @@
 //  Copyright © 2016 Nikita. All rights reserved.
 //
 
+import UIKit
+
 public protocol HasElement {
     var element: ElementType { get }
 }
