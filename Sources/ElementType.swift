@@ -119,6 +119,24 @@ public class ViewType: ElementType {
         }
     }
 
+    override var frame: CGRect {
+        get {
+            view.frame
+        }
+        set {
+            view.frame = newValue
+        }
+    }
+
+    override var bounds: CGRect {
+        get {
+            view.bounds
+        }
+        set {
+            view.bounds = newValue
+        }
+    }
+
     var safeAreaInsets: UIEdgeInsets {
         if #available(iOS 11.0, *) {
             return view.safeAreaInsets
