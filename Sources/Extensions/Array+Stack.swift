@@ -25,6 +25,7 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
 
     func stack(axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE) {
         for view in self {
+            view.frame = .zero
             guard view.superview != nil else {
                 assertionFailure("Can not configure stack relation without superview.")
                 return
@@ -78,5 +79,59 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
             }
 
         }
+    }
+
+    func stackToContainer(in view: UIView, axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE, installerBlock: (ViewMaker) -> Void) -> UIView {
+        let containerView = UIView()
+        view.addSubview(containerView)
+        Maker.configure(view: containerView, for: state, installerBlock: installerBlock)
+
+        for view in self {
+            view.frame = .zero
+            containerView.addSubview(view)
+        }
+
+        guard containerView.nx_state == state else {
+            return containerView
+        }
+
+        let count = CGFloat(self.count)
+        var prevView = self[0]
+
+        switch axis {
+        case .horizontal:
+            let width = (containerView.bounds.width - (count - 1) * spacing.value) / count
+            let height = containerView.bounds.height
+
+            for (index, view) in self.enumerated() {
+                view.configureFrame { maker in
+                    maker.size(width: width, height: height)
+                    if index == 0 {
+                        maker.left()
+                    }
+                    else {
+                        maker.left(to: prevView.nui_right, inset: spacing)
+                    }
+                }
+                prevView = view
+            }
+        case .vertical:
+            let width = containerView.bounds.width
+            let height = (containerView.bounds.height - (count - 1) * spacing.value) / count
+
+            for (index, view) in self.enumerated() {
+                view.configureFrame { maker in
+                    maker.size(width: width, height: height)
+                    if index == 0 {
+                        maker.top()
+                    }
+                    else {
+                        maker.top(to: prevView.nui_bottom, inset: spacing)
+                    }
+                }
+                prevView = view
+            }
+        }
+        return containerView
     }
 }
