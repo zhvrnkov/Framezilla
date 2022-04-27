@@ -81,18 +81,24 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
         }
     }
 
-    func stackToContainer(in view: UIView, axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE, installerBlock: (ViewMaker) -> Void) -> UIView {
-        let containerView = UIView()
-        view.addSubview(containerView)
-        Maker.configure(view: containerView, for: state, installerBlock: installerBlock)
+    func stackContainer(in view: UIView, axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE, installerBlock: (ViewMaker) -> Void) -> UIView {
+        let container: UIView
+        if let superView = self.first?.superview {
+            container = superView
+        }
+        else {
+            container = UIView()
+        }
+        view.addSubview(container)
+        Maker.configure(view: container, for: state, installerBlock: installerBlock)
 
         for view in self {
             view.frame = .zero
-            containerView.addSubview(view)
+            container.addSubview(view)
         }
 
-        guard containerView.nx_state == state else {
-            return containerView
+        guard container.nx_state == state else {
+            return container
         }
 
         let count = CGFloat(self.count)
@@ -100,8 +106,8 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
 
         switch axis {
         case .horizontal:
-            let width = (containerView.bounds.width - (count - 1) * spacing.value) / count
-            let height = containerView.bounds.height
+            let width = (container.bounds.width - (count - 1) * spacing.value) / count
+            let height = container.bounds.height
 
             for (index, view) in self.enumerated() {
                 view.configureFrame { maker in
@@ -116,8 +122,8 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
                 prevView = view
             }
         case .vertical:
-            let width = containerView.bounds.width
-            let height = (containerView.bounds.height - (count - 1) * spacing.value) / count
+            let width = container.bounds.width
+            let height = (container.bounds.height - (count - 1) * spacing.value) / count
 
             for (index, view) in self.enumerated() {
                 view.configureFrame { maker in
@@ -132,6 +138,6 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
                 prevView = view
             }
         }
-        return containerView
+        return container
     }
 }
