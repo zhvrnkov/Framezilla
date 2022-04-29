@@ -25,11 +25,11 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
 
     func stack(axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE) {
         for view in self {
-            view.frame = .zero
             guard view.superview != nil else {
                 assertionFailure("Can not configure stack relation without superview.")
                 return
             }
+            view.frame = .zero
         }
 
         let superview = self[0].superview!
@@ -81,7 +81,7 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
         }
     }
 
-    func stackContainer(in view: UIView, axis: StackAxis, spacing: Number = 0.0, state: AnyHashable = DEFAULT_STATE, installerBlock: (ViewMaker) -> Void) -> UIView {
+    func stackContainer(in view: UIView, axis: StackAxis, spacing: Number = 0.0, installerBlock: (ViewMaker) -> Void) -> UIView {
         let container: UIView
         if let superView = self.first?.superview {
             container = superView
@@ -90,15 +90,11 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
             container = UIView()
         }
         view.addSubview(container)
-        Maker.configure(view: container, for: state, installerBlock: installerBlock)
+        Maker.configure(view: container, for: DEFAULT_STATE, installerBlock: installerBlock)
 
         for view in self {
             view.frame = .zero
             container.addSubview(view)
-        }
-
-        guard container.nx_state == state else {
-            return container
         }
 
         let count = CGFloat(self.count)
