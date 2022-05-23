@@ -29,6 +29,7 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
                 assertionFailure("Can not configure stack relation without superview.")
                 return
             }
+            view.frame = .zero
         }
 
         let superview = self[0].superview!
@@ -78,5 +79,61 @@ public extension Collection where Iterator.Element: UIView, Self.Index == Int {
             }
 
         }
+    }
+
+    func stackContainer(in view: UIView, axis: StackAxis, spacing: Number = 0.0, installerBlock: (ViewMaker) -> Void) -> UIView {
+        let container: UIView
+        if let superView = self.first?.superview {
+            container = superView
+        }
+        else {
+            container = UIView()
+        }
+        view.addSubview(container)
+        Maker.configure(view: container, for: DEFAULT_STATE, installerBlock: installerBlock)
+
+        for view in self {
+            view.frame = .zero
+            container.addSubview(view)
+        }
+
+        let count = CGFloat(self.count)
+        var prevView = self[0]
+
+        switch axis {
+        case .horizontal:
+            let width = (container.bounds.width - (count - 1) * spacing.value) / count
+            let height = container.bounds.height
+
+            for (index, view) in self.enumerated() {
+                view.configureFrame { maker in
+                    maker.size(width: width, height: height)
+                    if index == 0 {
+                        maker.left()
+                    }
+                    else {
+                        maker.left(to: prevView.nui_right, inset: spacing)
+                    }
+                }
+                prevView = view
+            }
+        case .vertical:
+            let width = container.bounds.width
+            let height = (container.bounds.height - (count - 1) * spacing.value) / count
+
+            for (index, view) in self.enumerated() {
+                view.configureFrame { maker in
+                    maker.size(width: width, height: height)
+                    if index == 0 {
+                        maker.top()
+                    }
+                    else {
+                        maker.top(to: prevView.nui_bottom, inset: spacing)
+                    }
+                }
+                prevView = view
+            }
+        }
+        return container
     }
 }
