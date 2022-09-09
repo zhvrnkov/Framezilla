@@ -3,12 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		841354611FCFEC02009F2947 /* Framezilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8413545E1FCFEA51009F2947 /* Framezilla.framework */; };
-		841354621FCFEC02009F2947 /* Framezilla.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8413545E1FCFEA51009F2947 /* Framezilla.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8442F9531EC75C9C00B72551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442F9521EC75C9C00B72551 /* AppDelegate.swift */; };
 		8442F9581EC75C9C00B72551 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8442F9561EC75C9C00B72551 /* Main.storyboard */; };
 		8442F95A1EC75C9C00B72551 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8442F9591EC75C9C00B72551 /* Assets.xcassets */; };
@@ -17,6 +15,7 @@
 		850401E12536F8F400B5D6C1 /* SafeAreaFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850401E02536F8F400B5D6C1 /* SafeAreaFeatureView.swift */; };
 		850401E4253700E900B5D6C1 /* SliderFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850401E3253700E900B5D6C1 /* SliderFeatureView.swift */; };
 		850401E6253702DC00B5D6C1 /* ArcCenterFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850401E5253702DC00B5D6C1 /* ArcCenterFeature.swift */; };
+		85259CF728CB244D0083DEC5 /* Framezilla in Frameworks */ = {isa = PBXBuildFile; productRef = 85259CF628CB244D0083DEC5 /* Framezilla */; };
 		8561A1B82508868200EB4F8A /* KeyboardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */; };
 		85647C862549A3A800D2CA42 /* SizeFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85647C852549A3A800D2CA42 /* SizeFeatureView.swift */; };
 		85647C892549A3B600D2CA42 /* MinMaxFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85647C882549A3B600D2CA42 /* MinMaxFeatureView.swift */; };
@@ -28,46 +27,7 @@
 		85A128B02507A2ED0030F6A8 /* SideRelationFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A128AF2507A2ED0030F6A8 /* SideRelationFeatureView.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8413545D1FCFEA51009F2947 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 841354581FCFEA51009F2947 /* Framezilla.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 11FB41321D844D2C00700A40;
-			remoteInfo = "Framezilla iOS";
-		};
-		8413545F1FCFEA51009F2947 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 841354581FCFEA51009F2947 /* Framezilla.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 115972141D8450F500BC5C20;
-			remoteInfo = FramezillaTests;
-		};
-		841354631FCFEC02009F2947 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 841354581FCFEA51009F2947 /* Framezilla.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 11FB41311D844D2B00700A40;
-			remoteInfo = "Framezilla iOS";
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		8442F96D1EC75CC400B72551 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				841354621FCFEC02009F2947 /* Framezilla.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		841354581FCFEA51009F2947 /* Framezilla.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Framezilla.xcodeproj; path = ../Framezilla.xcodeproj; sourceTree = "<group>"; };
 		8442F94F1EC75C9C00B72551 /* FramezillaExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FramezillaExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8442F9521EC75C9C00B72551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8442F9571EC75C9C00B72551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +38,7 @@
 		850401E02536F8F400B5D6C1 /* SafeAreaFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaFeatureView.swift; sourceTree = "<group>"; };
 		850401E3253700E900B5D6C1 /* SliderFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderFeatureView.swift; sourceTree = "<group>"; };
 		850401E5253702DC00B5D6C1 /* ArcCenterFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcCenterFeature.swift; sourceTree = "<group>"; };
+		85259CF428CB24300083DEC5 /* Framezilla */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Framezilla; path = ..; sourceTree = "<group>"; };
 		8561A1B72508868200EB4F8A /* KeyboardFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFeatureView.swift; sourceTree = "<group>"; };
 		85647C852549A3A800D2CA42 /* SizeFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeFeatureView.swift; sourceTree = "<group>"; };
 		85647C882549A3B600D2CA42 /* MinMaxFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxFeatureView.swift; sourceTree = "<group>"; };
@@ -94,28 +55,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				841354611FCFEC02009F2947 /* Framezilla.framework in Frameworks */,
+				85259CF728CB244D0083DEC5 /* Framezilla in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		841354591FCFEA51009F2947 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8413545E1FCFEA51009F2947 /* Framezilla.framework */,
-				841354601FCFEA51009F2947 /* FramezillaTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		8442F9461EC75C9C00B72551 = {
 			isa = PBXGroup;
 			children = (
-				841354581FCFEA51009F2947 /* Framezilla.xcodeproj */,
+				85259CF328CB24300083DEC5 /* Packages */,
 				8442F9511EC75C9C00B72551 /* FramezillaExample */,
 				8442F9501EC75C9C00B72551 /* Products */,
+				85259CF528CB244D0083DEC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,6 +105,21 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		85259CF328CB24300083DEC5 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				85259CF428CB24300083DEC5 /* Framezilla */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		85259CF528CB244D0083DEC5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8588E9A12507891000B8DA97 /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,14 +146,15 @@
 				8442F94B1EC75C9C00B72551 /* Sources */,
 				8442F94C1EC75C9C00B72551 /* Frameworks */,
 				8442F94D1EC75C9C00B72551 /* Resources */,
-				8442F96D1EC75CC400B72551 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				841354641FCFEC02009F2947 /* PBXTargetDependency */,
 			);
 			name = FramezillaExample;
+			packageProductDependencies = (
+				85259CF628CB244D0083DEC5 /* Framezilla */,
+			);
 			productName = FramezillaExample;
 			productReference = 8442F94F1EC75C9C00B72551 /* FramezillaExample.app */;
 			productType = "com.apple.product-type.application";
@@ -218,35 +187,12 @@
 			mainGroup = 8442F9461EC75C9C00B72551;
 			productRefGroup = 8442F9501EC75C9C00B72551 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 841354591FCFEA51009F2947 /* Products */;
-					ProjectRef = 841354581FCFEA51009F2947 /* Framezilla.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8442F94E1EC75C9C00B72551 /* FramezillaExample */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		8413545E1FCFEA51009F2947 /* Framezilla.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Framezilla.framework;
-			remoteRef = 8413545D1FCFEA51009F2947 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		841354601FCFEA51009F2947 /* FramezillaTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = FramezillaTests.xctest;
-			remoteRef = 8413545F1FCFEA51009F2947 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8442F94D1EC75C9C00B72551 /* Resources */ = {
@@ -284,14 +230,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		841354641FCFEC02009F2947 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Framezilla iOS";
-			targetProxy = 841354631FCFEC02009F2947 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8442F9561EC75C9C00B72551 /* Main.storyboard */ = {
@@ -420,7 +358,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -429,14 +368,16 @@
 		8442F9621EC75C9C00B72551 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GPVA8JVMU3;
 				INFOPLIST_FILE = FramezillaExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.FramezillaExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -447,14 +388,16 @@
 		8442F9631EC75C9C00B72551 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GPVA8JVMU3;
 				INFOPLIST_FILE = FramezillaExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.otbivnoe.FramezillaExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -484,6 +427,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		85259CF628CB244D0083DEC5 /* Framezilla */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Framezilla;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8442F9471EC75C9C00B72551 /* Project object */;
 }
