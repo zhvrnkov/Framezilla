@@ -24,10 +24,10 @@ extension Maker {
     ///
     /// - returns: `Maker` instance for chaining relations.
     @discardableResult public func edges(top: Number? = nil, left: Number? = nil, bottom: Number? = nil, right: Number? = nil) -> Self {
-        _ = apply(self.top, top)
-        _ = apply(self.left, left)
-        _ = apply(self.bottom, bottom)
-        _ = apply(self.right, right)
+        apply(self.top, top)
+        apply(self.left, left)
+        apply(self.bottom, bottom)
+        apply(self.right, right)
         return self
     }
 
