@@ -171,7 +171,7 @@ public class Maker {
         return self
     }
 
-    func apply(_ f: ((Number) -> Self), _ inset: Number?) {
+    @discardableResult func apply(_ f: ((Number) -> Self), _ inset: Number?) {
         if let inset = inset {
             _ = f(inset)
         }
